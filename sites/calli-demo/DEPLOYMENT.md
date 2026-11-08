@@ -19,3 +19,6 @@ Verification: 44 automated tests; browser checks for one event per view per docu
 Version 11 consolidates the public mode explanation under “À propos de cet espace”, removes redundant demo labels, and links the final narrated YouTube film. No execution or permission boundary changed.
 
 The captured workspace script URL is versioned so returning browsers receive the updated copy as well. Production browser verification confirmed the workspace loads and displays “Espace de travail”.
+
+
+Version 12 adds the school-pilot interest form and anonymous map in both languages, published at 13:29 UTC on 8 November 2026 (source `59df1a7d8e6c1296fc5838fc192f179fd4406ce0`). A schema-only migration creates the private `pilot_interest` table. POST `/pilot/interest` collects explicit interest, not product accounts; native actions remain disabled. [Operational details](docs-pilot.md). 49 tests pass, including real SQLite.

@@ -4,7 +4,7 @@ A read-only, interactive preview of the New Pronote + Calli workspace for the ha
 Visitors explore saved outputs of real recorded runs with fictional data. Nothing in this package starts an
 agent, calls a provider, writes to PRONOTE, records the microphone, uploads a file or charges a payment.
 
-Demo video (final accepted cut, hosted on YouTube; MP4 not stored in Git): https://www.youtube.com/watch?v=mILSh_vLQck
+Demo video (unlisted, accepted v5 cut, not included in this package): https://youtu.be/RR6lmlj4aHA
 
 ## Hosting format
 
@@ -50,7 +50,7 @@ Everything else is refused by the Worker:
 Injected before the product scripts on `/app`, `/workspace` and `/calli/workspace`. It answers every
 non-GET fetch/XHR locally with a 403 and a short French note, disables WebSocket, getUserMedia and sendBeacon,
 preselects the saved outing, and, when the teacher opens the copy (the product's H trigger), attaches the saved
-H run instead of starting one. A small "À propos de cet espace" chip (bottom left) opens a details panel
+H run instead of starting one. A small "Public preview · saved runs" chip (bottom left) opens a details panel
 with the saved runs and the video. No banner, no mandatory dialog.
 
 ## Provenance
@@ -71,7 +71,7 @@ with the saved runs and the video. No banner, no mandatory dialog.
     No booking, no payment, no Stripe call.
   - Family: Grégory Martin with Alex Martin and Lucas Martin and their fictional sources.
   - Appreciations: fictional 3A roster and AI-generated fictional portraits. The native PRONOTE write and
-    read-back are recorded evidence only: https://www.youtube.com/watch?v=mILSh_vLQck&t=33s
+    read-back are recorded evidence only: https://youtu.be/RR6lmlj4aHA?t=33
 - **Sanitization** (`dist/sanitization-report.json`, 49 values): local paths removed, server-only hints
   replaced, provider session IDs replaced by `saved-session-N` pseudonyms, the private Devin session link removed.
 - **Size optimization** (`src/media/manifest.json`, `capture/optimize_media.sh`): the portrait sprite is a WebP
@@ -92,3 +92,8 @@ visible in the product UI but answer with the read-only note.
 
 `qa/` holds the browser check (`browser-check.js`, 38 checks, Chrome headless against `npm run serve`), its log
 and results, and screenshots. Unit test output: `qa/unit-tests.log`.
+
+
+## Pilot interest
+
+The bilingual landing now collects school interest in a separate private table. It does not create product accounts or enable native actions. [Data and operational notes](docs-pilot.md).

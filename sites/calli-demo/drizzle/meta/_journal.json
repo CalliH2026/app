@@ -8,6 +8,13 @@
       "when": 1794137400000,
       "tag": "0000_daily_metrics",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1794144600000,
+      "tag": "0001_pilot_interest",
+      "breakpoints": true
     }
   ]
 }

@@ -1,5 +1,5 @@
 // Read-only Cloudflare Worker for the Calli public preview.
-// Serves only the allowlisted GET routes in routes.js; everything else is rejected.
+// Product data stays read-only. Two bounded POST routes record aggregate metrics and pilot interest.
 import ROUTES from './routes.js';
 
 export const READ_ONLY_DETAIL =
@@ -76,11 +76,54 @@ async function recordMetric(request, env) {
   return empty();
 }
 
+// A separate, bounded lead form; it never grants product or native-desktop access.
+async function registerPilot(request, env) {
+  if (request.method !== 'POST') return json(405, {error: 'method_not_allowed'}, {allow: 'POST'});
+  if (request.headers.get('origin') !== new URL(request.url).origin) return json(403, {error: 'origin_not_allowed'});
+  if (!request.headers.get('content-type')?.startsWith('application/json')) return json(415, {error: 'json_required'});
+  if (Number(request.headers.get('content-length') || 0) > 2048) return json(413, {error: 'too_large'});
+  let body;
+  try {
+    const reader = request.body?.getReader();
+    if (!reader) return json(400, {error: 'invalid_request'});
+    let bytes = 0, text = '';
+    const decoder = new TextDecoder();
+    while (true) {
+      const {done, value} = await reader.read();
+      if (done) break;
+      bytes += value.length;
+      if (bytes > 2048) { await reader.cancel(); return json(413, {error: 'too_large'}); }
+      text += decoder.decode(value, {stream: true});
+    }
+    body = JSON.parse(text + decoder.decode());
+  } catch { return json(400, {error: 'invalid_request'}); }
+  const fields = new Set(['email', 'school', 'role', 'consent', 'website', 'language']);
+  if (!body || Array.isArray(body) || typeof body !== 'object' || Object.keys(body).some(k => !fields.has(k))) return json(400, {error: 'invalid_request'});
+  const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
+  const school = typeof body.school === 'string' ? body.school.trim() : '';
+  if (!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email) || email.length > 254 ||
+      !school || school.length > 160 || /[\u0000-\u001f\u007f]/.test(school) ||
+      !['teacher','leader','administrator','other'].includes(body.role) || body.consent !== true ||
+      (body.website !== undefined && body.website !== '') || !['en','fr'].includes(body.language)) return json(400, {error: 'invalid_request'});
+  if (!env?.DB) return json(503, {error: 'temporarily_unavailable'});
+  try {
+    const now = new Date().toISOString();
+    const row = await env.DB.prepare('SELECT COUNT(*) AS count FROM pilot_interest WHERE created_at >= ?').bind(now.slice(0, 10)).first();
+    if (row.count >= 250) return json(429, {error: 'try_later'}, {'retry-after': '3600'});
+    const result = await env.DB.prepare('INSERT INTO pilot_interest (id, email, school, role, language, consent_version, created_at) VALUES (?, ?, ?, ?, ?, ?, ?) ON CONFLICT(email) DO NOTHING')
+      .bind(crypto.randomUUID(), email, school, body.role, body.language, 'pilot-v1', now).run();
+    if (result.success !== true) return json(503, {error: 'temporarily_unavailable'});
+    // Same response for new and existing contacts. No public contact lookup.
+    return json(201, {ok: true});
+  } catch { return json(503, {error: 'temporarily_unavailable'}); }
+}
+
 export async function handle(request, env) {
   const method = request.method.toUpperCase();
   const rawPath = request.url.replace(/^[a-z][a-z0-9+.-]*:\/\/[^/?#]*/i, '').split(/[?#]/)[0] || '/';
   const path = new URL(request.url).pathname;
   const upgrade = (request.headers.get('upgrade') || '').toLowerCase();
+  if (path === '/pilot/interest' && rawPath === path) return registerPilot(request, env);
   if (path === '/metrics/event' && rawPath === path) return recordMetric(request, env);
   if (upgrade === 'websocket') {
     return json(403, {error: 'websocket_disabled', detail: 'Aperçu public : la dictée en direct et le micro sont désactivés.'});
