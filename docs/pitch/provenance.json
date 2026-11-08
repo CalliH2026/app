@@ -1,0 +1,165 @@
+{
+  "generator": "docs/pitch/build_deck.py",
+  "python_pptx": "1.0.2",
+  "font": "Plus Jakarta Sans",
+  "positioning": {
+    "promise": "An assistant that works alongside you",
+    "mechanism": "Observe context, prepare useful work in parallel, act through tools and computer use",
+    "first_demonstrated_application": "Education / New Pronote",
+    "observation_scope": "Registered document openings inside Calli",
+    "core_slide_order": [
+      "promise",
+      "mechanism",
+      "native proof",
+      "parallel tools",
+      "roles",
+      "time estimate",
+      "measured evidence",
+      "links and team"
+    ]
+  },
+  "images": {
+    "graph": {
+      "path": "video/calli-orchestration/stills/graph-2475.png",
+      "sha256": "bbe634cbf791eae3363abbac675e4da984800c7cdfe772340935f87786d94720"
+    },
+    "logo": {
+      "path": "video/calli-presentation/evidence/calli-logo-transparent.png",
+      "sha256": "e0671e9846eff899b3dd7c05f22a9dea0832ec028fefef8589a456e7968db724"
+    },
+    "parent": {
+      "path": "video/calli-v10/evidence/family/family.png",
+      "sha256": "84f036586d6a139a4792df767edd51b19be022e9b1e2830539c9c8cf20cab150"
+    },
+    "pronote": {
+      "path": "video/explainer/public/calli-presentation/arch/pronote-desktop-take2-t4.5.png",
+      "sha256": "77dba8f8036ea3bf33785f3c10fa5990ec535191b6dad7937739a021f0e8ccc7"
+    },
+    "student": {
+      "path": "video/calli-v10/evidence/exercise/wrong.png",
+      "sha256": "2b12521fbbfc8b0d8642f897d2590047eea832ded195b4b6b29163d2e51f85f4"
+    },
+    "teacher": {
+      "path": "video/explainer/public/calli-presentation/capture/np-appreciations-lucas-2c1f5a4.png",
+      "sha256": "2926bd11a79586ca14314be68ed6a6a3ee38459ebdad3acdb04e9faf7efedf15"
+    },
+    "today": {
+      "path": "video/explainer/public/calli-presentation/capture/np-today-2c1f5a4.png",
+      "sha256": "7e49671d4bc1195edb86970b48799f6b3402b87b89d95ce3e3b9b00b550726ca"
+    }
+  },
+  "facts": {
+    "national_scenario": {
+      "classification": "Full-adoption scenario: gross value of time freed, not measured savings or net fiscal savings",
+      "official_source": {
+        "url": "https://www.education.gouv.fr/depp/l-education-nationale-en-chiffres-edition-2026-505326",
+        "publication_date": "2026-08-25",
+        "reference_school_year": "2025-2026",
+        "schools": 47000,
+        "colleges": 7000,
+        "lycees": 3700,
+        "all_establishments": 57700,
+        "secondary_teachers": 485450
+      },
+      "assumptions": {
+        "adoption": 1,
+        "value_per_hour_eur": 40,
+        "hourly_value_sensitivity_eur": [
+          25,
+          40,
+          60
+        ],
+        "teacher_workload": "video/calli-v8/annual-estimates.json",
+        "teacher_hours_p50": 6.055537943153573,
+        "scope": "Secondary teachers only; all modelled tasks adopted; primary/admin/local-authority/parent gains excluded"
+      },
+      "annual": {
+        "hours_p50": 2939660.894503902,
+        "gross_time_value_eur": 117586435.78015609,
+        "hours_model_p10": 2250005.8200049307,
+        "hours_model_p90": 3657676.7219485086,
+        "display_hours": "~3M",
+        "display_eur": "~€120M"
+      },
+      "adoption_sensitivity": [
+        {
+          "adoption": 0.1,
+          "hours": 293966.08945039025,
+          "gross_time_value_eur": 11758643.57801561
+        },
+        {
+          "adoption": 0.25,
+          "hours": 734915.2236259755,
+          "gross_time_value_eur": 29396608.945039023
+        },
+        {
+          "adoption": 1,
+          "hours": 2939660.894503902,
+          "gross_time_value_eur": 117586435.78015609
+        }
+      ],
+      "valuation_sensitivity": [
+        {
+          "eur_per_hour": 25,
+          "gross_time_value_eur": 73491522.36259755
+        },
+        {
+          "eur_per_hour": 40,
+          "gross_time_value_eur": 117586435.78015609
+        },
+        {
+          "eur_per_hour": 60,
+          "gross_time_value_eur": 176379653.67023414
+        }
+      ],
+      "limitations": [
+        "School counts are context, not the multiplier. The multiplier is secondary-teacher headcount.",
+        "No 43% reduction of annual working time is claimed.",
+        "Time saved has not been measured against human participants.",
+        "Rate of €40/h is an explicit analyst assumption, not an official salary or marginal cost.",
+        "Agent, infrastructure, deployment, support, maintenance costs excluded; no ROI or cash savings established.",
+        "Other actors are not added without a separate validated workload model.",
+        "Adoption and task fit must be validated; the nationally scaled scenario is not a forecast."
+      ]
+    },
+    "current_entry_reduction_percent": 43,
+    "historical_base_time_model": {
+      "path": "video/inserts/calli-time-estimate/model.json",
+      "scenario_cpm": 225,
+      "manual_s": 464.267,
+      "calli_s": 239.0,
+      "saved_percent": 48.521,
+      "classification": "scenario_estimate_not_human_benchmark"
+    },
+    "native_queue_to_verified_s": {
+      "value": 25.57,
+      "source": "docs/calli-api-and-architecture.md"
+    },
+    "native_item_s": {
+      "value": 12.3,
+      "source": "video/calli-ui-demo/timeline.json"
+    },
+    "h_preparation_s": {
+      "value": 97.31,
+      "source": "video/calli-presentation/provenance.json (H session e1f16a50)"
+    },
+    "devin_generation_s": {
+      "value": 565,
+      "source": "video/calli-v10/evidence/exercise/practice-state.json (session 71991d82, rounded)"
+    },
+    "outing_partial_s": {
+      "value": 90.22,
+      "source": "video/calli-ui-demo/provenance.json (run 23025b24ce29)"
+    },
+    "video": {
+      "url": "https://www.youtube.com/watch?v=mILSh_vLQck",
+      "duration": "1:59.8",
+      "file": null,
+      "sha256": "c9bc36fa842ebae5607b0ecfdd39cfb369d15595e2598cb8b7e2d8ba3fed65e0"
+    },
+    "explore_saved_runs": {
+      "url": "https://calli-demo.leisurelychestnut.chatgpt.site",
+      "scope": "saved runs only, no new provider or native execution"
+    }
+  }
+}

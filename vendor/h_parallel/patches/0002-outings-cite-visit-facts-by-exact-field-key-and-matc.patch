@@ -1,0 +1,224 @@
+From 40887580c162818fa0e0178c94b9b811ffae2d86 Mon Sep 17 00:00:00 2001
+From: "wilfred.dore" <wilfred.dore@telecom-paristech.org>
+Date: Sat, 7 Nov 2026 17:47:42 +0000
+Subject: [PATCH 2/9] outings: cite visit facts by exact field key and matching
+ value
+
+Linkup returned facts labelled in natural French ("effectif maximal
+groupe scolaire", ...). _search_visit only kept a top-level value when
+a citation's field equalled its English key, so all seven values became
+null even though eight official excerpts were present. A value was also
+kept when any citation named its key, whatever the cited value.
+
+- VisitFact.field is now an enum of the seven top-level keys, and the
+  query asks for exact keys and values.
+- A returned fact with another label stays as a source but supports no
+  field. Labels are never mapped by guesswork.
+- A value is kept only if every official citation of its key states that
+  same value (strict types; prices compared as decimal EUR). Otherwise it
+  stays unknown and is listed in unsupported_fields; never zero.
+- Tests: the schema enum, a real-shape French-labelled answer, and
+  matching vs contradictory values.
+
+Co-Authored-By: Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>
+---
+ mvp/outings.py      | 78 +++++++++++++++++++++++++++++++++++++++------
+ mvp/test_outings.py | 57 +++++++++++++++++++++++++++++++++
+ 2 files changed, 125 insertions(+), 10 deletions(-)
+
+diff --git a/mvp/outings.py b/mvp/outings.py
+index 1dc46c2..c515250 100644
+--- a/mvp/outings.py
++++ b/mvp/outings.py
+@@ -18,6 +18,8 @@ from urllib.parse import urlencode, urlparse
+ from zoneinfo import ZoneInfo
+ 
+ import httpx
++from typing import Literal
++
+ from pydantic import BaseModel, Field
+ 
+ from .engine import DATA, finish_session_safely
+@@ -253,13 +255,46 @@ def start(payload):
+         return deepcopy(job)
+ 
+ 
++FACT_FIELDS = ('opening_time', 'closing_time', 'closed_on_date', 'student_unit_price', 'adult_unit_price',
++               'group_fee', 'max_group_size')
++
++
+ class VisitFact(BaseModel):
+-    field: str
+-    value: str | int | float | bool | None
++    field: Literal['opening_time', 'closing_time', 'closed_on_date', 'student_unit_price', 'adult_unit_price',
++                   'group_fee', 'max_group_size'] = Field(
++        description='Clé exacte du champ de premier niveau que cette citation établit')
++    value: str | int | float | bool | None = Field(
++        description='Exactement la valeur donnée à ce champ de premier niveau, au même format')
+     quote: str
+     url: str
+ 
+ 
++class _CitedFact(BaseModel):
++    """Lenient parse of a returned fact: an unexpected label is kept as a source but supports no field."""
++    field: str
++    value: str | int | float | bool | None = None
++    quote: str = ''
++    url: str = ''
++
++
++def _same_fact(field, cited, value):
++    """True only if a citation states exactly the value retained for its field (types not coerced)."""
++    if value is None or cited is None:
++        return False
++    if field in ('closed_on_date',):
++        return isinstance(cited, bool) and cited is value
++    if field == 'max_group_size':
++        return isinstance(cited, int) and not isinstance(cited, bool) and cited == value
++    if field in ('opening_time', 'closing_time'):
++        return isinstance(cited, str) and cited.strip() == value
++    if isinstance(cited, bool):
++        return False
++    try:
++        return _money(cited) == _money(value)
++    except ValueError:
++        return False
++
++
+ class VisitFacts(BaseModel):
+     opening_time: str | None = Field(description='HH:MM applicable à la date choisie, sinon null')
+     closing_time: str | None
+@@ -279,6 +314,9 @@ def _search_visit(value):
+              "d’ouverture applicables, fermeture éventuelle, tarifs élèves et accompagnateurs, frais de réservation, "
+              "effectif maximal et conditions. Seulement pages officielles actuelles. Pour chaque donnée retournée, "
+              "fournir une citation exacte et l’URL dans facts. Si inconnue ou condition non satisfaite, null. "
++             "Dans facts, field est exactement l’une des clés opening_time, closing_time, closed_on_date, "
++             "student_unit_price, adult_unit_price, group_fee, max_group_size, et value est exactement la valeur "
++             "donnée à cette clé, au même format. "
+              "Ne pas confondre gratuité d’entrée individuelle et frais groupe/réservation. Les prix sont des nombres décimaux EUR.")
+     schema = VisitFacts.model_json_schema()
+     response = httpx.post('https://api.linkup.so/v1/search',
+@@ -290,20 +328,38 @@ def _search_visit(value):
+     raw = response.json()
+     if 'data' in raw and isinstance(raw['data'], dict):
+         raw = raw['data']
+-    facts = VisitFacts.model_validate(raw).model_dump()
++    returned = raw.get('facts') if isinstance(raw, dict) else None
++    cited = []
++    for item in returned if isinstance(returned, list) else []:
++        try:
++            cited.append(_CitedFact.model_validate(item).model_dump())
++        except ValueError:
++            continue
++    facts = VisitFacts.model_validate({**raw, 'facts': []}).model_dump()
++    facts.pop('facts')
+     sources = []
+-    supported = set()
+-    for evidence in facts.pop('facts'):
++    citations = {}
++    for evidence in cited:
+         url = evidence.get('url', '')
+         host = (urlparse(url).hostname or '').lower()
+         quote = evidence.get('quote', '').strip()
+         if urlparse(url).scheme == 'https' and (host == destination['domain'] or host.endswith('.' + destination['domain'])) and quote:
+-            sources.append({'title': destination['name'] + ' · ' + evidence.get('field', 'Informations scolaires'),
++            sources.append({'title': destination['name'] + ' · ' + (evidence.get('field') or 'Informations scolaires'),
+                             'url': url, 'excerpt': quote[:1800], 'field': evidence.get('field'), 'value': evidence.get('value')})
+-            supported.add(evidence.get('field'))
+-    # Missing citations cannot become reliable arithmetic/schedule inputs.
+-    for field in ('opening_time', 'closing_time', 'closed_on_date', 'student_unit_price', 'adult_unit_price', 'group_fee', 'max_group_size'):
+-        if field not in supported:
++            if evidence['field'] in FACT_FIELDS:
++                citations.setdefault(evidence['field'], []).append(evidence.get('value'))
++    # A value is kept only if every official citation of its exact key states that same value. A missing,
++    # unlabelled or contradictory citation leaves it unknown: never guessed from a label, never zero.
++    unsupported = {}
++    for field in FACT_FIELDS:
++        values = citations.get(field, [])
++        if facts[field] is None:
++            continue
++        if not values:
++            unsupported[field] = 'aucune citation officielle avec cette clé'
++        elif not all(_same_fact(field, v, facts[field]) for v in values):
++            unsupported[field] = 'citation officielle différente de la valeur'
++        if field in unsupported:
+             facts[field] = None
+     for field in ('student_unit_price', 'adult_unit_price', 'group_fee'):
+         if facts[field] is not None:
+@@ -314,6 +370,8 @@ def _search_visit(value):
+     if facts['max_group_size'] is not None and not 1 <= facts['max_group_size'] <= 1000:
+         facts['max_group_size'] = None
+     return {**facts, 'provider': 'Linkup', 'query': query, 'sources': sources, 'checked_at': now(),
++            'unsupported_fields': unsupported,
++            'unlabelled_facts': sum(1 for evidence in cited if evidence['field'] not in FACT_FIELDS),
+             'name': destination['name'], 'official_url': destination['official_url'],
+             'verification': 'Informations extraites par Linkup des sources officielles, à relire avant réservation.'}
+ 
+diff --git a/mvp/test_outings.py b/mvp/test_outings.py
+index cd8d03e..4ea6b6e 100644
+--- a/mvp/test_outings.py
++++ b/mvp/test_outings.py
+@@ -187,3 +187,60 @@ def test_closure_and_overnight_visits_are_not_marked_valid(store, destination):
+     job['visit']['opening_time'] = None
+     job.update(budget={'complete': True}, warnings=[])
+     assert outings._incomplete(job) is True
++
++
++def _linkup(monkeypatch, destination, facts):
++    sent = {}
++    monkeypatch.setattr(outings, 'key', lambda _: 'test-key')
++
++    def fake_post(url, **kwargs):
++        sent.update(kwargs['json'])
++        return httpx.Response(200, json=facts, request=httpx.Request('POST', url))
++    monkeypatch.setattr(outings.httpx, 'post', fake_post)
++    return sent
++
++
++def test_schema_asks_for_exact_field_keys(store, monkeypatch):
++    destination = outings.DESTINATIONS[0]
++    sent = _linkup(monkeypatch, destination, {**visit(), 'facts': []})
++    outings._search_visit(store)
++    schema = json.loads(sent['structuredOutputSchema'])
++    assert schema['$defs']['VisitFact']['properties']['field']['enum'] == list(outings.FACT_FIELDS)
++    assert 'max_group_size' in sent['q'] and 'exactement' in sent['q']
++
++
++def test_french_labels_from_a_real_linkup_answer_support_no_field(store, monkeypatch):
++    destination = outings.DESTINATIONS[0]
++    url = destination['official_url']
++    facts = {**visit(), 'facts': [
++        {'field': 'effectif maximal groupe scolaire', 'value': 30, 'quote': 'Groupes de 30 élèves maximum', 'url': url},
++        {'field': 'tarifs et réservation des groupes scolaires', 'value': 'Gratuit', 'quote': 'Gratuit pour les scolaires', 'url': url},
++        {'field': 'admission des groupes scolaires', 'value': None, 'quote': 'Sur réservation', 'url': url}]}
++    facts.pop('sources')
++    _linkup(monkeypatch, destination, facts)
++    result = outings._search_visit(store)
++    assert all(result[field] is None for field in outings.FACT_FIELDS)
++    assert result['unlabelled_facts'] == 3 and len(result['sources']) == 3
++    assert result['unsupported_fields']['max_group_size'] == 'aucune citation officielle avec cette clé'
++
++
++@pytest.mark.parametrize('field, top, cited, kept', [
++    ('student_unit_price', '12.00', ['12', 12.0], '12.00'),
++    ('student_unit_price', '12.00', ['12', '15'], None),
++    ('max_group_size', 30, [30], 30),
++    ('max_group_size', 30, ['30'], None),
++    ('max_group_size', 30, [True], None),
++    ('closed_on_date', False, [False], False),
++    ('closed_on_date', False, ['non'], None),
++    ('opening_time', '09:30', ['09:30'], '09:30'),
++    ('opening_time', '09:30', ['10:00'], None),
++])
++def test_value_is_kept_only_when_every_citation_states_it(store, monkeypatch, field, top, cited, kept):
++    destination = outings.DESTINATIONS[0]
++    facts = {**visit(), field: top,
++             'facts': [{'field': field, 'value': v, 'quote': 'extrait', 'url': destination['official_url']} for v in cited]}
++    facts.pop('sources')
++    _linkup(monkeypatch, destination, facts)
++    result = outings._search_visit(store)
++    assert result[field] == kept
++    assert (field in result['unsupported_fields']) is (kept is None)
+-- 
+2.56.0
+

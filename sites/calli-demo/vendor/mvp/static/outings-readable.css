@@ -1,0 +1,100 @@
+/* Readable workspace layer for the outing preparation dialog, loaded after outings.css.
+   ID scope outranks the earlier class overrides; sizes and colours come from h-kit tokens. */
+#outing-live-dialog{--o-ink:#23222a;--o-muted:#4a4a58;--o-line:#e2dfe8;--o-soft:#f1ecf9;--o-iris:#5a04bc;--o-ok:#1e7a52;--o-warn:#8a3c0a;font-size:14px;line-height:20px;color:var(--o-ink);background:var(--color-grey-100,#f9f9fb);width:min(1280px,calc(100vw - 32px));height:auto;max-height:calc(100dvh - 32px);border:1px solid var(--o-line);border-radius:12px}
+#outing-live-dialog[open]{display:flex;flex-direction:column}
+#outing-live-dialog *{font-size:inherit;line-height:inherit;letter-spacing:normal}
+#outing-live-dialog :is(small,time,code,kbd){font-size:12px;line-height:16px}
+#outing-live-dialog :focus-visible{outline:3px solid #9a5bec;outline-offset:2px}
+#outing-live-dialog .outing-live-shell{display:flex;flex-direction:column;flex:1 1 auto;min-height:0;height:auto;max-height:100%;overflow:hidden}
+#outing-live-dialog :is(.outing-live-head,.outing-live-phasebar,.outing-ops-simulation,.outing-live-footer){flex:none}
+#outing-live-dialog :is(.outing-live-body,.outing-live-operations-body){flex:1 1 auto;min-height:0;overflow:auto;padding:16px 20px;gap:16px;grid-template-rows:none;grid-auto-rows:auto;align-items:start}
+#outing-live-dialog .outing-live-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;padding:18px 20px 16px;background:#fff;border-bottom:1px solid var(--o-line)}
+#outing-live-dialog .outing-live-head>div:first-of-type{flex:1 1 320px;min-width:0;padding:0}
+#outing-live-dialog .outing-live-brand{order:0;width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid var(--o-line);border-radius:10px;background:#fff}
+#outing-live-dialog .outing-live-brand img{width:30px;height:auto;display:block}
+#outing-live-dialog .outing-live-head .overline{display:block;font-family:var(--mono,'Fira Code',monospace);font-size:12px;line-height:16px;letter-spacing:.04em;text-transform:uppercase;color:var(--o-muted)}
+#outing-live-dialog .outing-live-head h2{font-size:26px;line-height:32px;font-weight:600;letter-spacing:-.02em;margin:4px 0 2px;color:var(--o-ink)}
+#outing-live-dialog .outing-live-head p{font-size:14px;line-height:20px;color:var(--o-muted);margin:0}
+#outing-live-dialog .outing-live-head-metrics{position:static;display:flex;flex-direction:column;align-items:flex-end;gap:4px;max-width:none;margin:0 0 0 auto}
+#outing-live-dialog .outing-live-head-metrics>span{font-size:12px;line-height:16px;color:var(--o-muted);white-space:normal;text-align:right}
+#outing-live-dialog .outing-live-state{font-size:14px;line-height:20px;font-weight:600;color:var(--o-ink)}
+#outing-live-dialog .outing-live-head-metrics b{font-size:14px;color:var(--o-iris)}
+#outing-live-dialog .outing-live-close{position:static;width:40px;height:40px;flex:none;border:1px solid var(--o-line);border-radius:8px;background:#fff;color:var(--o-ink)}
+#outing-live-dialog .outing-live-phasebar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 20px;background:#fff;border-bottom:1px solid var(--o-line)}
+#outing-live-dialog .outing-live-phasebar>[role=tab]{font-size:14px;line-height:20px;padding:8px 12px;min-height:40px;border-radius:8px;color:var(--o-muted)}
+#outing-live-dialog .outing-live-phasebar>[role=tab][aria-selected=true]{background:var(--o-soft);color:var(--o-iris);font-weight:600}
+#outing-live-dialog .outing-ops-play{font-size:14px;line-height:20px;min-height:40px;padding:8px 14px;max-width:100%;white-space:normal;margin-left:auto;border:1px solid var(--o-line);border-radius:8px;background:#fff;color:var(--o-iris);font-weight:600}
+#outing-live-dialog .outing-ops-simulation{font-size:12px;line-height:16px;padding:8px 20px;letter-spacing:.02em;color:var(--o-warn);background:#fff6f0;border-bottom:1px solid #ffd0a8}
+#outing-live-dialog .outing-live-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+#outing-live-dialog :is(.outing-live-functions,.outing-live-output){display:block;flex:none;height:auto;min-height:0;max-height:none;overflow:visible;margin:0}
+#outing-live-dialog .outing-live-section-heading{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 10px}
+#outing-live-dialog .outing-live-section-heading h3{font-size:16px;line-height:24px;font-weight:600;margin:0;color:var(--o-ink)}
+#outing-live-dialog .outing-live-section-heading>span{font-size:12px;line-height:16px;color:var(--o-muted)}
+#outing-live-dialog .outing-live-call-stack{display:grid;grid-template-rows:none;grid-auto-rows:auto;gap:8px;height:auto;min-height:0;max-height:none;overflow:visible;padding:0}
+#outing-live-dialog .outing-live-tool{min-height:auto;height:auto;flex:none;align-items:flex-start;gap:12px;padding:12px 14px;border:1px solid var(--o-line);border-radius:12px;background:#fff;opacity:1}
+#outing-live-dialog .outing-live-tool-icon{width:32px;height:32px;border-radius:8px;border-color:var(--o-line);background:var(--o-soft);color:var(--o-iris)}
+#outing-live-dialog .outing-live-tool-icon svg{width:16px;height:16px}
+#outing-live-dialog .outing-live-tool-main>div{margin:0 0 2px;align-items:baseline}
+#outing-live-dialog .outing-live-tool strong{font-size:14px;line-height:20px;font-weight:600;color:var(--o-ink)}
+#outing-live-dialog .outing-live-tool-state{font-size:12px;line-height:16px;font-weight:600;color:var(--o-muted)}
+#outing-live-dialog .outing-live-tool code{font-size:12px;line-height:16px;color:var(--o-muted)}
+#outing-live-dialog .outing-live-tool p{display:block;-webkit-line-clamp:unset;overflow:visible;font-size:14px;line-height:20px;color:var(--o-muted);margin:4px 0 0}
+#outing-live-dialog .outing-live-provider{font-size:12px;line-height:16px;color:var(--o-muted)}
+#outing-live-dialog .outing-live-tool-time{max-width:none;color:var(--o-muted)}
+#outing-live-dialog .outing-live-tool-time>span{font-size:12px;line-height:16px}
+#outing-live-dialog .outing-live-tool-time small{font-size:12px;line-height:16px;color:var(--o-muted)}
+#outing-live-dialog .outing-live-tool.is-done{border-color:#a8e4c8}
+#outing-live-dialog .outing-live-tool.is-done .outing-live-tool-state{color:var(--o-ok)}
+#outing-live-dialog .outing-live-tool.is-done .outing-live-tool-icon{background:#f0fbf6;border-color:#a8e4c8;color:var(--o-ok)}
+#outing-live-dialog .outing-live-tool.is-running{border-color:#c2a0ee;background:#fff}
+#outing-live-dialog .outing-live-tool.is-running .outing-live-tool-state{color:var(--o-iris)}
+#outing-live-dialog .outing-live-tool.is-error{border-color:#ffd0a8}
+#outing-live-dialog .outing-live-tool.is-error .outing-live-tool-state{color:var(--o-warn)}
+#outing-live-dialog .outing-live-concurrency{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-top:10px;font-size:12px;line-height:16px;color:var(--o-muted)}
+#outing-live-dialog .outing-live-legend{font-size:12px;color:var(--o-muted)}
+#outing-live-dialog .outing-live-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+#outing-live-dialog .outing-live-result{min-height:auto;height:auto;padding:12px 14px;border:1px solid var(--o-line);border-radius:12px;background:#fff}
+#outing-live-dialog .outing-live-result>span{font-size:12px;line-height:16px;color:var(--o-muted)}
+#outing-live-dialog .outing-live-result strong{display:block;font-size:22px;line-height:28px;font-weight:600;color:var(--o-ink);margin:4px 0}
+#outing-live-dialog .outing-live-result p{font-size:12px;line-height:16px;color:var(--o-muted);margin:0}
+#outing-live-dialog .outing-live-paper{margin-top:12px;border:1px solid var(--o-line);border-radius:12px;background:#fff;min-height:auto}
+#outing-live-dialog .outing-live-paper header{font-size:12px;line-height:16px;color:var(--o-muted);padding:10px 14px}
+#outing-live-dialog .outing-live-paper pre{font-family:inherit;font-size:14px;line-height:22px;color:var(--o-ink);max-height:320px;overflow:auto;padding:12px 14px;margin:0;white-space:pre-wrap}
+#outing-live-dialog .outing-live-objective{display:block;margin-top:12px}
+#outing-live-dialog .outing-live-objective>span{display:flex;justify-content:space-between;gap:8px;font-size:14px;font-weight:600;margin-bottom:6px}
+#outing-live-dialog .outing-live-objective small{font-weight:400;color:var(--o-muted)}
+#outing-live-dialog .outing-live-objective textarea{width:100%;font-size:14px;line-height:20px;padding:10px 12px;border:1px solid var(--o-line);border-radius:8px;color:var(--o-ink);background:#fff}
+#outing-live-dialog .outing-live-footer{padding:10px 20px 12px;background:#fff;border-top:1px solid var(--o-line)}
+#outing-live-dialog .outing-live-feed-label{font-family:var(--mono,'Fira Code',monospace);font-size:12px;line-height:16px;color:var(--o-muted)}
+#outing-live-dialog .outing-live-events{gap:6px 16px}
+#outing-live-dialog .outing-live-event{min-height:auto;align-items:baseline;gap:8px}
+#outing-live-dialog .outing-live-event time{font-size:12px;color:var(--o-muted);flex:none}
+#outing-live-dialog .outing-live-event p{font-size:14px;line-height:20px;color:var(--o-ink);-webkit-line-clamp:2}
+#outing-live-dialog #outing-live-error{font-size:14px;color:var(--color-red-700,#8f3040)}
+@media (max-width:1000px){
+  #outing-live-dialog .outing-live-body{display:block}
+  #outing-live-dialog .outing-live-functions{margin-bottom:20px}
+}
+@media (max-width:900px){
+  #outing-live-dialog .outing-live-head>div:first-of-type{flex:1 1 0;order:1}
+  #outing-live-dialog .outing-live-close{order:2}
+  #outing-live-dialog .outing-live-head-metrics{order:3;flex-basis:100%;flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0}
+  #outing-live-dialog .outing-live-head-metrics>span{text-align:left}
+}
+@media (max-width:600px){
+  #outing-live-dialog{width:calc(100vw - 16px);max-height:calc(100dvh - 16px)}
+  #outing-live-dialog .outing-live-head{padding:14px 14px 12px}
+  #outing-live-dialog .outing-live-head h2{font-size:22px;line-height:28px}
+  #outing-live-dialog :is(.outing-live-body,.outing-live-operations-body){padding:12px 14px}
+  #outing-live-dialog .outing-live-phasebar{padding:8px 14px}
+  #outing-live-dialog .outing-ops-play{margin-left:0;flex-basis:100%}
+  #outing-live-dialog .outing-live-footer{padding:10px 14px}
+}
+@media (max-height:620px){
+  #outing-live-dialog{max-height:calc(100dvh - 12px)}
+  #outing-live-dialog .outing-live-shell{overflow:auto}
+  #outing-live-dialog :is(.outing-live-body,.outing-live-operations-body){flex:none;overflow:visible}
+}
+@media (prefers-reduced-motion:reduce){
+  #outing-live-dialog *,#outing-live-dialog *::before,#outing-live-dialog *::after{animation:none!important;transition:none!important}
+}

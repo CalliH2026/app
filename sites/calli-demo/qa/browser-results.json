@@ -1,0 +1,198 @@
+{
+ "results": [
+  {
+   "name": "landing shows Try the workspace",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "landing video links to YouTube",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "Today greets Mme Laurent",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "preview status chip present",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "page classes renders",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "page evaluations renders",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "page documents renders",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "page messages renders",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "page agenda renders",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "page agent renders",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "page reports renders",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "page management renders",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "copy document opens with source details",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "opening the copy attaches the saved H run (no new run)",
+   "pass": true,
+   "info": "Aperçu public : aucune nouvelle session H n’est lancée. Le rapport enregistré du 7 novembre 2026 est affiché."
+  },
+  {
+   "name": "marking scheme opens",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "saved H report renders",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "practice card shows the saved Devin exercise",
+   "pass": true,
+   "info": "Un entraînement pour progresser Pythagore · trois étapes · à essayer en autonomie Devin Création avec API Analyse de la copie par H. L’activité travaille le repérage, la justification et la conclusion. Activité produite par Devin, à tester et valider par le professeur. Prévisualiser l’entraînement R"
+  },
+  {
+   "name": "exercise: wrong answer counted",
+   "pass": true,
+   "info": "Score : 0 / 7 · Erreurs : 1"
+  },
+  {
+   "name": "exercise: correct answer scored",
+   "pass": true,
+   "info": "Score : 1 / 7 · Erreurs : 0"
+  },
+  {
+   "name": "exercise: reset",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "saved outing draft renders",
+   "pass": true,
+   "info": "Sorties scolaires Préparez le trajet, le budget et les documents de votre sortie. Votre sortie 28 élèves Classe 4e B · 28 élèves Destination Musée d’Orsay Musée du Louvre Cité des sciences et de l’ind"
+  },
+  {
+   "name": "outing tool trace reachable",
+   "pass": true,
+   "info": "Sources et détails ⌄ La visite, à la source. Entrée élève : 0,00 € · Le 12 novembre 2026 est un jeudi ; l’horaire de fermeture du jour et les conditions d’accès à 10:00 ne sont pas établis par les inf"
+  },
+  {
+   "name": "outing action blocked with short note",
+   "pass": true,
+   "info": "Patientez…"
+  },
+  {
+   "name": "family: Mme Martin with Alex Martin and Lucas Martin",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "family: no prominent fictive banner",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "family: source opens",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "appreciations iframe renders roster",
+   "pass": true,
+   "info": "Aller à la dictée CLASSE 3A · FRANCAIS · TRIMESTRE 1 STOP Arrête les nouvelles écritures ; une saisie déjà en cours peut se terminer, rien n’est annulé. Mode ap"
+  },
+  {
+   "name": "appreciations: no \"Arrêt demandé\"",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "appreciations portraits loaded",
+   "pass": true,
+   "info": "1"
+  },
+  {
+   "name": "dictation control does not reach the network",
+   "pass": true,
+   "info": "Commencer la dictée"
+  },
+  {
+   "name": "390px / no horizontal overflow",
+   "pass": true,
+   "info": "0"
+  },
+  {
+   "name": "390px /guide no horizontal overflow",
+   "pass": true,
+   "info": "0"
+  },
+  {
+   "name": "390px /app?view=family no horizontal overflow",
+   "pass": true,
+   "info": "0"
+  },
+  {
+   "name": "390px /app no horizontal overflow",
+   "pass": true,
+   "info": "0"
+  },
+  {
+   "name": "no non-GET request left the browser",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "no external request attempted",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "no failed responses",
+   "pass": true,
+   "info": ""
+  },
+  {
+   "name": "no page errors",
+   "pass": true,
+   "info": ""
+  }
+ ],
+ "nonGet": [],
+ "external": [],
+ "bad": [],
+ "errors": []
+}

@@ -1,0 +1,73 @@
+{
+  "title": "Calli: estimated human active time for 10 existing comments",
+  "classification": "scenario_estimate_not_human_benchmark",
+  "corpus": {
+    "path": "data/pronote_batch_a.csv",
+    "sha256": "c2ebde854774b75afb346c998315907955b3574619cf78f918db1c581d8bcdc1",
+    "items": 10,
+    "comment_characters_including_spaces": 1291,
+    "spoken_words_including_student_names_whitespace_count": 215,
+    "p03_contains_literal_injection_test_fixture": true
+  },
+  "assumptions": {
+    "typing_characters_per_minute_scenarios": [
+      150,
+      225,
+      300
+    ],
+    "spoken_words_per_minute": 100,
+    "manual_navigation_and_save_seconds_per_item": 4,
+    "dictation_turn_overhead_seconds_per_item": 3,
+    "human_final_review_seconds_per_item_both_modes": 8,
+    "additional_calli_intervention_seconds": 0,
+    "basis": "Illustrative analyst-selected inputs, not population averages or observed timings."
+  },
+  "formulas": {
+    "manual_active_s": "60 * comment_characters / typing_cpm + n * (navigation_save_s + review_s)",
+    "calli_active_s": "60 * spoken_words / speaking_wpm + n * (turn_overhead_s + review_s) + extra_intervention_s",
+    "saved_percent": "100 * (manual_active_s - calli_active_s) / manual_active_s"
+  },
+  "scenarios": [
+    {
+      "typing_characters_per_minute": 150,
+      "manual_human_active_s_estimated": 636.4,
+      "calli_human_active_s_estimated": 239.0,
+      "human_active_s_saved_estimated": 397.4,
+      "human_active_percent_saved_estimated": 62.445,
+      "break_even_extra_calli_intervention_s": 397.4
+    },
+    {
+      "typing_characters_per_minute": 225,
+      "manual_human_active_s_estimated": 464.267,
+      "calli_human_active_s_estimated": 239.0,
+      "human_active_s_saved_estimated": 225.267,
+      "human_active_percent_saved_estimated": 48.521,
+      "break_even_extra_calli_intervention_s": 225.267
+    },
+    {
+      "typing_characters_per_minute": 300,
+      "manual_human_active_s_estimated": 378.2,
+      "calli_human_active_s_estimated": 239.0,
+      "human_active_s_saved_estimated": 139.2,
+      "human_active_percent_saved_estimated": 36.806,
+      "break_even_extra_calli_intervention_s": 139.2
+    }
+  ],
+  "separate_measured_reference_not_comparable_to_active_time": {
+    "run_id": "20261107-152520",
+    "provider_session_id": "200ea4e3-78b5-438c-9cf5-431211c253e4",
+    "writer_elapsed_s_measured": 300.8,
+    "writer_reported_verified_items": 10,
+    "scope": "Historical approved-text PRONOTE writer, excludes dictation, preparation and human approval time. Not the new autonomous end-to-end flow."
+  },
+  "limitations": [
+    "Both human-active-time bars are estimates, including the human using Calli. No measured human baseline exists.",
+    "Texts are already composed; pedagogical assessment and comment composition are excluded from both arms.",
+    "Manual arm assumes retyping, not a batch import, macro, or copy-paste workflow.",
+    "Same final human review allowance in both arms. No extra validation click is assumed in Calli.",
+    "No failed writes, transcription corrections, interruptions, setup or warm-up included; any intervention reduces estimated savings.",
+    "Waiting is not counted as active time only when the human can genuinely work on another task.",
+    "This range is sensitivity to selected typing speeds, not a confidence interval or measured population range.",
+    "Do not extrapolate to school budgets, jobs or annual savings without actual usage and cost data."
+  ]
+}

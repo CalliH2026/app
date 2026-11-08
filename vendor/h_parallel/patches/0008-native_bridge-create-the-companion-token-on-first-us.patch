@@ -1,0 +1,110 @@
+From 40c48b404809690899c80fd56c55f0376aa4a318 Mon Sep 17 00:00:00 2001
+From: "wilfred.dore" <wilfred.dore@telecom-paristech.org>
+Date: Sat, 7 Nov 2026 17:58:01 +0000
+Subject: [PATCH 8/9] native_bridge: create the companion token on first use,
+ not at import
+
+Importing mvp.native_bridge (as workspace.context does for an outing)
+created credentials/pronote-bridge-token next to the package, an
+untracked secret file left by an unrelated import.
+
+- bridge_token() creates the token (0600) on first use and returns it;
+  ingest, the Windows bridge and test_mvp call it. TOKEN_FILE keeps its
+  path so test_pilot's monkeypatch still works.
+- test_native_bridge_token: a fresh import creates no file; first use
+  creates it once.
+
+Co-Authored-By: Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>
+---
+ mvp/native/win32_bridge.py      |  4 ++--
+ mvp/native_bridge.py            | 12 ++++++++----
+ mvp/test_mvp.py                 |  2 +-
+ mvp/test_native_bridge_token.py | 18 ++++++++++++++++++
+ 4 files changed, 29 insertions(+), 7 deletions(-)
+ create mode 100644 mvp/test_native_bridge_token.py
+
+diff --git a/mvp/native/win32_bridge.py b/mvp/native/win32_bridge.py
+index e2942c3..66afdd8 100644
+--- a/mvp/native/win32_bridge.py
++++ b/mvp/native/win32_bridge.py
+@@ -36,8 +36,8 @@ def start():
+     if THREAD and THREAD.is_alive():return
+     STOP.clear()
+     def worker():
+-        from ..native_bridge import TOKEN_FILE
+-        with httpx.Client(timeout=10,headers={'Authorization':'Bearer '+TOKEN_FILE.read_text().strip()}) as client:
++        from ..native_bridge import bridge_token
++        with httpx.Client(timeout=10,headers={'Authorization':'Bearer '+bridge_token()}) as client:
+             while not STOP.is_set():
+                 try:
+                     response=client.post('http://127.0.0.1:8000/api/native/context',json=payload(read_once()));response.raise_for_status()
+diff --git a/mvp/native_bridge.py b/mvp/native_bridge.py
+index 620ee55..a1da642 100644
+--- a/mvp/native_bridge.py
++++ b/mvp/native_bridge.py
+@@ -9,9 +9,13 @@ from fastapi import HTTPException,Request
+ from .engine import ROOT,DATA,LOCK
+ 
+ TOKEN_FILE=ROOT.parent/'credentials/pronote-bridge-token'
+-TOKEN_FILE.parent.mkdir(exist_ok=True)
+-if not TOKEN_FILE.exists():
+-    TOKEN_FILE.write_text(secrets.token_urlsafe(32));TOKEN_FILE.chmod(0o600)
++
++def bridge_token():
++    """The local companion's bearer token, created on first use (never as an import side effect)."""
++    if not TOKEN_FILE.exists():
++        TOKEN_FILE.parent.mkdir(exist_ok=True)
++        TOKEN_FILE.write_text(secrets.token_urlsafe(32));TOKEN_FILE.chmod(0o600)
++    return TOKEN_FILE.read_text().strip()
+ SETTINGS=DATA/'native-settings.json'
+ STATE=DATA/'native-context.json'
+ 
+@@ -41,7 +45,7 @@ def context():
+     return {'state':'not_connected','message':'Le client natif n’a pas encore été relié au compagnon.','source_kind':'pronote_macos','report':None}
+ 
+ def ingest(body:NativeContext,request:Request):
+-    expected='Bearer '+TOKEN_FILE.read_text().strip()
++    expected='Bearer '+bridge_token()
+     if not secrets.compare_digest(request.headers.get('authorization',''),expected):raise HTTPException(401,'Compagnon local non authentifié')
+     if body.source_kind!='pronote_macos':raise HTTPException(400,'Source native incorrecte')
+     settings=read_settings()
+diff --git a/mvp/test_mvp.py b/mvp/test_mvp.py
+index 662e978..6a401e9 100644
+--- a/mvp/test_mvp.py
++++ b/mvp/test_mvp.py
+@@ -87,7 +87,7 @@ def test_native_connector_authentication_and_truthful_readiness(monkeypatch,tmp_
+     monkeypatch.setattr(native_bridge,'read_settings',lambda:{'enabled':True,'mode':'example'})
+     payload={'state':'observed','method':'win32_controls','app_name':'PRONOTE Monoposte','window_title':'PRONOTE - Base Exemple.not','visible_text':'Base Exemple','source_kind':'pronote_macos'}
+     assert client.post('/api/native/context',json=payload).status_code==401
+-    headers={'authorization':'Bearer '+native_bridge.TOKEN_FILE.read_text().strip()}
++    headers={'authorization':'Bearer '+native_bridge.bridge_token()}
+     r=client.post('/api/native/context',json=payload,headers=headers)
+     assert r.status_code==200
+     state=client.get('/api/native/context').json()
+diff --git a/mvp/test_native_bridge_token.py b/mvp/test_native_bridge_token.py
+new file mode 100644
+index 0000000..1f491a8
+--- /dev/null
++++ b/mvp/test_native_bridge_token.py
+@@ -0,0 +1,18 @@
++import importlib
++import sys
++
++
++def test_import_creates_no_token_and_first_use_does(tmp_path, monkeypatch):
++    from . import native_bridge
++    token = tmp_path / 'credentials' / 'pronote-bridge-token'
++    monkeypatch.setattr(native_bridge, 'TOKEN_FILE', token)
++    sys.modules.pop(native_bridge.__name__)
++    try:
++        reloaded = importlib.import_module(native_bridge.__name__)
++        monkeypatch.setattr(reloaded, 'TOKEN_FILE', token)
++        assert not token.exists()
++        value = reloaded.bridge_token()
++        assert token.read_text() == value and len(value) >= 32 and token.stat().st_mode & 0o777 == 0o600
++        assert reloaded.bridge_token() == value
++    finally:
++        sys.modules[native_bridge.__name__] = native_bridge
+-- 
+2.56.0
+

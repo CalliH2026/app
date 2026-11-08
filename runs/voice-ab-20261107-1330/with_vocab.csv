@@ -1,0 +1,12 @@
+item_id,text,start,end,confidence
+t01,"Lucas Bernard, résultat en nette progression. L'expression écrite gagne en clarté, l'oral reste trop rare. Bravo pour cet engagement.",0.032,8.888,0.7278947368421053
+t02,"Maximilien Garnier, trimestre en demi-temps. Les erreurs d'inattention coûtent des points à chaque contrôle. Un travail plus régulier permettrait de franchir un cap.",0.044,9.384,0.6352173913043478
+t03,"Gaël Lambert, trimestre encourageant après un début difficile. Les évaluations écrites restent en deçà du travail fourni à la maison. Pense à demander de l'aide dès qu'une notion résiste.",0.028,10.676,0.7503448275862069
+t04,"Chloé Mercier, trimestre 211.",0.0,2.292,0.22
+t04,Les résultats varient beaucoup d'un chapitre à l'autre. Un travail plus régulier permettrait de franchir un câble.,2.853,8.624,0.5870588235294117
+t05,"Lucas Petit, excellent investissement en classe. La compréhension des documents est frile et argumentée. Il faut maintenant oser davantage à l'oral.",0.033,8.575,0.7542857142857142
+t09,"Mélagie rare, très beau trimestre, félicitations. Mes leçons sont apprises et mes exercices faits avec soin. Il faut maintenant oser davantage à l'oral.",0.016,9.108,0.6647826086956521
+t10,"Lucas Bernard, résultat correct mais irrégulier. Le prochain trimestre doit confirmer ses progrès.",0.013,6.016,0.7584615384615384
+t11,"Chloé Mercier, trimestre encourageant après un début difficile. L'expression écrite gagne en clarté, l'oral reste trop rare. Des fiches de révision seraient un appui utile.",0.0,10.54,0.6984
+t12,"Il est depuis, beau trimestre dans l'ensemble. L'expression écrite gagne en clarté, l'oral reste trop rare. Pense à demander de l'aide dès qu'une notion résiste.",0.001,9.524,0.7428
+t13,"Chloé Mercier, des efforts visibles depuis la rentrée. Les évaluations écrites restent en deçà du travail fourni à la maison. Le prochain trimestre doit confirmer ses progrès.",0.0,10.252,0.83

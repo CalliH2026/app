@@ -1,0 +1,4 @@
+item_id,student,course,text,previous_value,set
+r01,Barbara Gardner,Mindful Course Creation,"Participe bien, doit soigner la rédaction.","Participe bien, doit soigner la rédactation.",run1
+r02,Brian Franklin,Mindful Course Creation,"Trimestre sérieux. Les leçons sont apprises régulièrement, continue ainsi.",,run1
+r03,Stephanie Adams,Mindful Course Creation,"Des progrès nets à l'oral. À l'écrit, relis-toi pour éviter les fautes d'inattention.",,run1

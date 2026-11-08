@@ -1,0 +1,167 @@
+From d6d6cff791afbd695e22e9c4ae0ac50f92507f28 Mon Sep 17 00:00:00 2001
+From: "wilfred.dore" <wilfred.dore@telecom-paristech.org>
+Date: Sat, 7 Nov 2026 17:47:42 +0000
+Subject: [PATCH 1/9] practice: accept the bare 32-hex session_id of Create
+ Session v3
+
+Create Session v3 returns a bare 32-hex session_id. practice._run only
+accepted devin-[A-Za-z0-9_-]{1,180}, so a session that Devin had
+actually created was rejected and marked uncertain.
+
+- Accept a bare 32-hex ID or the legacy devin- + 32 hex form, nothing else.
+- Keep the URL returned by the provider only if it is the
+  https://app.devin.ai/sessions/<id> page of this session. Otherwise
+  build it from the ID.
+- Persist the returned session_id (created_session_id) before any check
+  that can fail. An unexpected format then stays visible for manual
+  reconciliation, and retry still refuses to create a duplicate session.
+- Tests: an actual-shape v3 response (bare ID + URL), URL validation, and
+  unexpected IDs that block a second create.
+
+Co-Authored-By: Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>
+---
+ mvp/practice.py      | 29 +++++++++++++++++++++++---
+ mvp/test_practice.py | 49 +++++++++++++++++++++++++++++++++++++++-----
+ 2 files changed, 70 insertions(+), 8 deletions(-)
+
+diff --git a/mvp/practice.py b/mvp/practice.py
+index 5fef028..f7d7a7a 100644
+--- a/mvp/practice.py
++++ b/mvp/practice.py
+@@ -47,6 +47,22 @@ HTML_CSP = ("default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-i
+             "base-uri 'none'; form-action 'none'")
+ 
+ 
++# Create Session v3 returns a bare 32-hex session_id; "devin-" + 32 hex is the legacy form.
++SESSION_ID = re.compile(r'(?:devin-)?([0-9a-f]{32})')
++
++
++def session_url(session_id, returned=None):
++    """The provider's URL only if it is the app.devin.ai page of this session, else one built from the ID."""
++    bare = SESSION_ID.fullmatch(session_id).group(1)
++    if isinstance(returned, str):
++        parsed = urlparse(returned)
++        if (parsed.scheme == 'https' and parsed.hostname == 'app.devin.ai' and parsed.port is None
++                and not parsed.username and not parsed.password and not parsed.query and not parsed.fragment
++                and parsed.path.rstrip('/') in ('/sessions/' + bare, '/sessions/devin-' + bare)):
++            return returned
++    return 'https://app.devin.ai/sessions/' + bare
++
++
+ class PracticeError(ValueError):
+     """A bounded message authored here, safe to show in the interface."""
+ 
+@@ -366,12 +382,19 @@ def _run(job_id, generation_id, brief, settings):
+                     'structured_output_schema': OUTPUT_SCHEMA, 'structured_output_required': True})
+                 response.raise_for_status()
+                 session = response.json()
+-                session_id = session.get('session_id', '')
+-                if not re.fullmatch(r'devin-[A-Za-z0-9_-]{1,180}', session_id):
++                raw_id = session.get('session_id') if isinstance(session, dict) else None
++                # Persist what the provider returned before any check can fail: an unexpected format is then
++                # reconciled by hand instead of creating a duplicate session.
++                with LOCK:
++                    state = _current(job_id, generation_id)
++                    state['created_session_id'] = raw_id[:200] if isinstance(raw_id, str) else None
++                    _persist(state)
++                if not isinstance(raw_id, str) or not SESSION_ID.fullmatch(raw_id):
+                     raise PracticeError('La réponse Devin ne contient pas d’identifiant de session valide.')
++                session_id = raw_id
+                 with LOCK:
+                     state = _current(job_id, generation_id)
+-                    state.update(session_id=session_id, session_url=f'https://app.devin.ai/sessions/{session_id}', retryable=True)
++                    state.update(session_id=session_id, session_url=session_url(session_id, session.get('url')), retryable=True)
+                     _event(state, 'Session Devin créée ; écriture du code et tests demandés.')
+             deadline = time.monotonic() + MAX_WAIT_SECONDS
+             previous = None
+diff --git a/mvp/test_practice.py b/mvp/test_practice.py
+index 25117f1..c95e1bc 100644
+--- a/mvp/test_practice.py
++++ b/mvp/test_practice.py
+@@ -154,7 +154,8 @@ def test_restart_does_not_recreate_an_uncertain_provider_session(store, monkeypa
+         practice.start(JOB_ID, retry=True, mode='live')
+ 
+ 
+-def mock_devin(monkeypatch, *, status_code=200, attachment_body=HTML, provider_tests=True, existing=False, redirect=False):
++def mock_devin(monkeypatch, *, status_code=200, attachment_body=HTML, provider_tests=True, existing=False, redirect=False,
++               session_id='devin-' + 'b' * 32, url=None):
+     requests = []
+     def handle(request):
+         requests.append(request)
+@@ -167,11 +168,11 @@ def mock_devin(monkeypatch, *, status_code=200, attachment_body=HTML, provider_t
+         if request.method == 'POST':
+             if status_code != 200:
+                 return httpx.Response(status_code, json={'detail': 'secret-api-key private provider detail'})
+-            return httpx.Response(200, json={'session_id': 'devin-test', 'status': 'new'})
++            return httpx.Response(200, json={'session_id': session_id, 'status': 'new', **({'url': url} if url else {})})
+         if request.url.path.endswith('/attachments'):
+             return httpx.Response(200, json=[{'attachment_id': 'file-1', 'name': 'activity.html',
+                 'source': 'devin', 'url': 'https://storage.googleapis.com/devin-files/activity.html?secret=SIGNED'}])
+-        return httpx.Response(200, json={'session_id': 'devin-test', 'status': 'running', 'status_detail': 'finished',
++        return httpx.Response(200, json={'session_id': session_id, 'status': 'running', 'status_detail': 'finished',
+             'acus_consumed': .4, 'structured_output': {'artifact_name': 'activity.html',
+                 'math_tests_passed': provider_tests, 'browser_tested': provider_tests, 'test_summary': 'Tests effectués.'}})
+     transport = httpx.MockTransport(handle)
+@@ -188,7 +189,7 @@ def test_real_v3_flow_sends_only_whitelisted_skills_and_retrieves_code(store, mo
+     assert value['simulated'] is False and value['mode'] == 'live'
+     assert value['validation']['provider_tests_reported'] is True
+     assert value['validation']['runtime_verified_locally'] is False
+-    assert value['session_url'] == 'https://app.devin.ai/sessions/devin-test'
++    assert value['session_url'] == 'https://app.devin.ai/sessions/' + 'b' * 32
+     create = [r for r in requests if r.method == 'POST']
+     assert len(create) == 1
+     payload = json.loads(create[0].content)
+@@ -204,7 +205,7 @@ def test_resume_known_session_does_not_issue_another_post(store, monkeypatch):
+     source = practice._source(JOB_ID)
+     state = {'source_job_id': JOB_ID, 'fingerprint': source['fingerprint'], 'mode': 'live', 'simulated': False,
+              'status': 'running', 'creation_requested': True, 'generation_id': 'old', 'approved': False,
+-             'session_id': 'devin-test', 'session_url': 'https://app.devin.ai/sessions/devin-test', 'org_id': 'org-test'}
++             'session_id': 'devin-' + 'b' * 32, 'session_url': 'https://app.devin.ai/sessions/' + 'b' * 32, 'org_id': 'org-test'}
+     practice._persist(state)
+     assert practice.get(JOB_ID)['retryable'] is True
+     requests = mock_devin(monkeypatch)
+@@ -318,3 +319,41 @@ def test_invalid_identifiers_and_missing_reports():
+     for value in ('../secret', 'A' * 12, 'g' * 12, ''):
+         with pytest.raises(KeyError):
+             practice.get(value)
++
++
++# Shape of an actual Create Session v3 response: a bare 32-hex session_id and the app URL.
++BARE_ID = 'f89a13b65d3a40f0a6698b30d3bffef9'
++
++
++def test_v3_bare_session_id_is_accepted_and_used_for_polling(store, monkeypatch):
++    requests = mock_devin(monkeypatch, session_id=BARE_ID, url='https://app.devin.ai/sessions/' + BARE_ID)
++    practice.start(JOB_ID, mode='live')
++    value = finished()
++    assert value['status'] == 'ready' and value['session_url'] == 'https://app.devin.ai/sessions/' + BARE_ID
++    assert len([r for r in requests if r.method == 'POST']) == 1
++    assert all(r.url.path.split('/sessions/')[1].startswith(BARE_ID)
++               for r in requests if r.method == 'GET' and r.url.host == 'api.devin.ai')
++
++
++def test_returned_url_is_kept_only_for_this_session_on_app_devin_ai(store, monkeypatch):
++    mock_devin(monkeypatch, session_id=BARE_ID, url='https://evil.example/sessions/' + BARE_ID)
++    practice.start(JOB_ID, mode='live')
++    assert finished()['session_url'] == 'https://app.devin.ai/sessions/' + BARE_ID
++    assert practice.session_url('devin-' + BARE_ID) == 'https://app.devin.ai/sessions/' + BARE_ID
++    for url in ('http://app.devin.ai/sessions/' + BARE_ID, 'https://user@app.devin.ai/sessions/' + BARE_ID,
++                'https://app.devin.ai:8443/sessions/' + BARE_ID, 'https://app.devin.ai/sessions/' + 'a' * 32,
++                'https://app.devin.ai/sessions/' + BARE_ID + '?next=/x'):
++        assert practice.session_url(BARE_ID, url) == 'https://app.devin.ai/sessions/' + BARE_ID
++
++
++@pytest.mark.parametrize('bad', ['devin-test', 'session-123', 'F' * 32, 'f' * 31, '', None])
++def test_unexpected_session_id_is_persisted_and_blocks_a_duplicate_create(store, monkeypatch, bad):
++    mock_devin(monkeypatch, session_id=bad)
++    practice.start(JOB_ID, mode='live')
++    value = finished()
++    assert value['status'] == 'failed' and value['retryable'] is False
++    saved = json.loads((practice.FOLDER / JOB_ID / 'state-live.json').read_text())
++    assert saved['created_session_id'] == (bad if isinstance(bad, str) else None) and 'session_id' not in saved
++    monkeypatch.setattr(practice, '_client', lambda: pytest.fail('Must not create duplicate session'))
++    with pytest.raises(RuntimeError, match='incertaine'):
++        practice.start(JOB_ID, retry=True, mode='live')
+-- 
+2.56.0
+

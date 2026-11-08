@@ -1,0 +1,235 @@
+{
+ "upstream": "Fran-cois/H-Hack-nov26",
+ "commit": "392f137",
+ "archive_commit": "7e62463",
+ "archive_sha256": "43be3d462a610a79ebc9f0fa3f79a537aba3124d527cbce39ae7e7b69201a691",
+ "patches": [
+  "0001-practice-accept-the-bare-32-hex-session_id-of-Create.patch",
+  "0002-outings-cite-visit-facts-by-exact-field-key-and-matc.patch",
+  "0003-practice-retrieve-a-finished-activity-from-a-session.patch",
+  "0004-practice-replace-a-generator-s-own-CSP-meta-with-the.patch",
+  "0005-practice-download-the-attachment-through-the-documen.patch",
+  "0006-test_background_pronote-accept-the-teacher_assessmen.patch",
+  "0007-Preserve-Devin-sessions-when-optional-URLs-are-malfo.patch",
+  "0008-native_bridge-create-the-companion-token-on-first-us.patch",
+  "0009-outings-name-a-Holo4-timeout-and-record-the-cancel-r.patch"
+ ],
+ "files": [
+  {
+   "path": "__init__.py",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "upstream_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "status": "unchanged"
+  },
+  {
+   "path": "conftest.py",
+   "sha256": "a4321e4a4b5fe75db240a60ad7520398e2050cc314d53711c2a0c2adf3333b99",
+   "upstream_sha256": null,
+   "status": "calli-added"
+  },
+  {
+   "path": "demobro.py",
+   "sha256": "a9de18e7eeed15bfba97cd917ac7f8836102daf48e6c14205ec122f6a48cbd27",
+   "upstream_sha256": "a9de18e7eeed15bfba97cd917ac7f8836102daf48e6c14205ec122f6a48cbd27",
+   "status": "unchanged"
+  },
+  {
+   "path": "engine.py",
+   "sha256": "fde999327d79cc3e13b35f31705613274007f070608982e56c436dc2454c8c26",
+   "upstream_sha256": "fde999327d79cc3e13b35f31705613274007f070608982e56c436dc2454c8c26",
+   "status": "unchanged"
+  },
+  {
+   "path": "fixtures/alex.json",
+   "sha256": "25097d37583076ec29d8bc7d365a32d874a1b33029107c027bdfa432dce43c4b",
+   "upstream_sha256": "25097d37583076ec29d8bc7d365a32d874a1b33029107c027bdfa432dce43c4b",
+   "status": "unchanged"
+  },
+  {
+   "path": "integrations.py",
+   "sha256": "605f3b074dbb9f3d0ea9c09a2851472b54b5a002fea4ca518fd1ddb0bcf196e5",
+   "upstream_sha256": "605f3b074dbb9f3d0ea9c09a2851472b54b5a002fea4ca518fd1ddb0bcf196e5",
+   "status": "unchanged"
+  },
+  {
+   "path": "native_ai.py",
+   "sha256": "6d36a149b609d7c62e41f761e1528dcf6c70ef1d209ddc932fb681fc26dae65d",
+   "upstream_sha256": "6d36a149b609d7c62e41f761e1528dcf6c70ef1d209ddc932fb681fc26dae65d",
+   "status": "unchanged"
+  },
+  {
+   "path": "native_bridge.py",
+   "sha256": "e58d0855c9056f2f25d0ce2b097deae049b6bec2f338a9c8422a04c87fa98b1c",
+   "upstream_sha256": "ef76e0aaa5f2a5a0fafae08f74c2da2762c3e49d6149759238187feab1892a3d",
+   "status": "patched"
+  },
+  {
+   "path": "outings.py",
+   "sha256": "cf9be93011de0ec31a766e8ad3da13376ac298b7d551fa0826144b0ddf2cb323",
+   "upstream_sha256": "65a669adf1233e0603c60521f9f5e31e47880d9a113a695bacf90e97d651358a",
+   "status": "patched"
+  },
+  {
+   "path": "outings_holo.py",
+   "sha256": "301e0e513f6998b5de34c84d7a32fe2fd7e917c75473ee5c7a80f89d497e423b",
+   "upstream_sha256": "301e0e513f6998b5de34c84d7a32fe2fd7e917c75473ee5c7a80f89d497e423b",
+   "status": "unchanged"
+  },
+  {
+   "path": "outings_models.py",
+   "sha256": "7d9fd1685a13f015c848ef18eb6e76cb3cd30c365d0e42e9f66d7dd59928ffc1",
+   "upstream_sha256": "7d9fd1685a13f015c848ef18eb6e76cb3cd30c365d0e42e9f66d7dd59928ffc1",
+   "status": "unchanged"
+  },
+  {
+   "path": "outings_operations.py",
+   "sha256": "19de4017d2cb8880809be504600043698e01e0ddda2f0fd6fb7620e4caae3b86",
+   "upstream_sha256": "19de4017d2cb8880809be504600043698e01e0ddda2f0fd6fb7620e4caae3b86",
+   "status": "unchanged"
+  },
+  {
+   "path": "outings_operations_runner.py",
+   "sha256": "a54812695dedd7c2230c1a04eb3dddc791e347931a8a5310d8881ae9423bdc9e",
+   "upstream_sha256": "a54812695dedd7c2230c1a04eb3dddc791e347931a8a5310d8881ae9423bdc9e",
+   "status": "unchanged"
+  },
+  {
+   "path": "outings_orchestration.py",
+   "sha256": "6b07a0a42b242555b4ee95a373fbf35f02284d6b6c7493b13ad210b4578ae460",
+   "upstream_sha256": "6b07a0a42b242555b4ee95a373fbf35f02284d6b6c7493b13ad210b4578ae460",
+   "status": "unchanged"
+  },
+  {
+   "path": "outings_workstation.py",
+   "sha256": "64719db623f8a7c248a30e5226413074d65f6b60dc6ef51a7bece477aa554541",
+   "upstream_sha256": "64719db623f8a7c248a30e5226413074d65f6b60dc6ef51a7bece477aa554541",
+   "status": "unchanged"
+  },
+  {
+   "path": "practice.py",
+   "sha256": "090dd83b8b9007f6336b6f231acd4a3c78f8ef3b8a707df28f2fc3307f36f634",
+   "upstream_sha256": "4097277d0c0a1f709444a8199c3d65ac6df2e8e59c68270d3c39a221aeafaed3",
+   "status": "patched"
+  },
+  {
+   "path": "preparation_tools.py",
+   "sha256": "8a92bdf612e7326f8bdb7547a02f0962fbbf8aa65d24d2e36175fa5606837569",
+   "upstream_sha256": "8a92bdf612e7326f8bdb7547a02f0962fbbf8aa65d24d2e36175fa5606837569",
+   "status": "unchanged"
+  },
+  {
+   "path": "static/practice-pythagore-demo.html",
+   "sha256": "cb3f9d5ad34ad517bb1d19e397c33c69ae21224903584946210ff7cedbe567c1",
+   "upstream_sha256": "cb3f9d5ad34ad517bb1d19e397c33c69ae21224903584946210ff7cedbe567c1",
+   "status": "unchanged"
+  },
+  {
+   "path": "teacher_assessment.py",
+   "sha256": "2af0796d5594423a21f97399319914927250058b33a68badbd5be43c9572538a",
+   "upstream_sha256": "2af0796d5594423a21f97399319914927250058b33a68badbd5be43c9572538a",
+   "status": "unchanged"
+  },
+  {
+   "path": "templates/demobro-starter.yaml",
+   "sha256": "025c408f020681c14bfc6b1d8c9eadc512f7f065b6f68a52ae65ffad53c54d04",
+   "upstream_sha256": "025c408f020681c14bfc6b1d8c9eadc512f7f065b6f68a52ae65ffad53c54d04",
+   "status": "unchanged"
+  },
+  {
+   "path": "test_h_repair.py",
+   "sha256": "bde7ab214a8d35dcaecfeec10ff2ed3bb5cd2c0022172a08b773309bfa0bd967",
+   "upstream_sha256": "bde7ab214a8d35dcaecfeec10ff2ed3bb5cd2c0022172a08b773309bfa0bd967",
+   "status": "unchanged"
+  },
+  {
+   "path": "test_outings.py",
+   "sha256": "3dbddffc90531d399bb7f3432dd1b924a0981f374fc07e53ba6bfdad50cf4f8e",
+   "upstream_sha256": "778a1d2449e781439051a1316585adbeda1ec8fbd57ef6d01cb2a6c32333beb3",
+   "status": "patched"
+  },
+  {
+   "path": "test_outings_holo.py",
+   "sha256": "2b5b8f39c15835c323bc7d5ed0dcea7e9c95142afeccecc4aad21772aabfc71b",
+   "upstream_sha256": "2b5b8f39c15835c323bc7d5ed0dcea7e9c95142afeccecc4aad21772aabfc71b",
+   "status": "unchanged"
+  },
+  {
+   "path": "test_outings_holo_integration.py",
+   "sha256": "f1722fdb6154603d37025f0f3e4cca2476a58a3a8291f459d64c662f07b7121d",
+   "upstream_sha256": "5e8e5c0ba90a4f8602a37c9a2e2a17f813f13af666ba87084e60371923f7331e",
+   "status": "patched"
+  },
+  {
+   "path": "test_outings_models.py",
+   "sha256": "251817f6a561acb66d30c4aa1fb59a7ac8320b7a145eb84ad59b52addf72ea3e",
+   "upstream_sha256": "251817f6a561acb66d30c4aa1fb59a7ac8320b7a145eb84ad59b52addf72ea3e",
+   "status": "unchanged"
+  },
+  {
+   "path": "test_outings_operations.py",
+   "sha256": "262a3f3b44677208b25aef32045d4a75a7386053f4407b33297beb744fa6c891",
+   "upstream_sha256": "262a3f3b44677208b25aef32045d4a75a7386053f4407b33297beb744fa6c891",
+   "status": "unchanged"
+  },
+  {
+   "path": "test_outings_orchestration.py",
+   "sha256": "0e94b46b11d8a0413867e60d4845ca27c57a859b73a4fb19e7ff7f11fce60b81",
+   "upstream_sha256": "0e94b46b11d8a0413867e60d4845ca27c57a859b73a4fb19e7ff7f11fce60b81",
+   "status": "unchanged"
+  },
+  {
+   "path": "test_outings_provider_state.py",
+   "sha256": "41f623c1548f20279c0999aab59e15450c7b56438cc379d024666667add359ab",
+   "upstream_sha256": "41f623c1548f20279c0999aab59e15450c7b56438cc379d024666667add359ab",
+   "status": "unchanged"
+  },
+  {
+   "path": "test_outings_workstation.py",
+   "sha256": "9fbdff1ccd8a48e8be4c4e79e491847634339e6b0c249fad3f50ca2a2c712caa",
+   "upstream_sha256": "9fbdff1ccd8a48e8be4c4e79e491847634339e6b0c249fad3f50ca2a2c712caa",
+   "status": "unchanged"
+  },
+  {
+   "path": "test_practice.py",
+   "sha256": "2a8c27d4de5f57517858f12d804684515aff7a1e46a095ebafaf7a10da37a98c",
+   "upstream_sha256": "4f944fe6c91da109751cfe251cf5fd256ea98a692f56bd5a3df5644d4723e61a",
+   "status": "patched"
+  },
+  {
+   "path": "test_preparation_tools.py",
+   "sha256": "7b20c217e7081ddd0b549a0316b125f42d064c7c159bf702d1f0c0d36a8cdc80",
+   "upstream_sha256": "7b20c217e7081ddd0b549a0316b125f42d064c7c159bf702d1f0c0d36a8cdc80",
+   "status": "unchanged"
+  },
+  {
+   "path": "test_teacher_assessment.py",
+   "sha256": "660bae5f96b1fb5342412776133c893fbfb3fc87fd98805ad306a60478321332",
+   "upstream_sha256": "660bae5f96b1fb5342412776133c893fbfb3fc87fd98805ad306a60478321332",
+   "status": "unchanged"
+  },
+  {
+   "path": "test_tool_calls.py",
+   "sha256": "e4592280cf3fc46eac2eec9211bcc95b5390e2ce82717a6647a299ac38dc06d7",
+   "upstream_sha256": "e4592280cf3fc46eac2eec9211bcc95b5390e2ce82717a6647a299ac38dc06d7",
+   "status": "unchanged"
+  },
+  {
+   "path": "tool_calls.py",
+   "sha256": "9869ee5dc191ef571b099dcea33bc55a06520770273c8456c5a8ba9303dc954f",
+   "upstream_sha256": "9869ee5dc191ef571b099dcea33bc55a06520770273c8456c5a8ba9303dc954f",
+   "status": "unchanged"
+  },
+  {
+   "path": "video.py",
+   "sha256": "59e5e7703a7988201452c504716c32810638f5a79c59177541aa54013ef6428f",
+   "upstream_sha256": "59e5e7703a7988201452c504716c32810638f5a79c59177541aa54013ef6428f",
+   "status": "unchanged"
+  },
+  {
+   "path": "workspace.py",
+   "sha256": "e4d84ac075032da7717f1c405c6a0ddf21a1bd977195f8d8eb98a1c87971e9c4",
+   "upstream_sha256": "e4d84ac075032da7717f1c405c6a0ddf21a1bd977195f8d8eb98a1c87971e9c4",
+   "status": "unchanged"
+  }
+ ]
+}

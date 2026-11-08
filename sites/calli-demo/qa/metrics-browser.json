@@ -1,0 +1,14 @@
+{
+  "events": [
+    "landing",
+    "workspace",
+    "parent",
+    "outing"
+  ],
+  "duplicateRoleClicksCountedOnce": true,
+  "cookies": [],
+  "errors": [],
+  "doNotTrackSuppressed": true,
+  "newParentAssessment": "3/6",
+  "newParentPlanningCollapsed": true
+}

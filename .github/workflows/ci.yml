@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install test tools
+        run: python -m pip install "pytest>=8" "ruff==0.17.4" "fastapi>=0.110" "httpx>=0.27"
+      - name: Ruff
+        run: ruff check .
+      - name: Pytest
+        run: pytest -q
+      - name: Fictitious data is reproducible
+        run: |
+          python data/make_roster.py
+          git diff --exit-code -- data/
+      - name: README scoreboard matches runs/
+        run: python scripts/report.py --check
+
+  h-parallel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the vendored H Parallel test dependencies
+        run: python -m pip install -e ".[parallel]" "pytest>=8"
+      # separate processes: the vendored modules read their state directory once, at first import
+      - name: Vendored upstream tests
+        run: pytest -q vendor/h_parallel
+      - name: Calli adapter tests
+        run: pytest -q tests/test_parallel_live.py tests/test_parallel_ui.py
+
+  shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: System tools for Francois's tests (synthetic voices, PDF text)
+        run: sudo apt-get update && sudo apt-get install -y espeak-ng poppler-utils ffmpeg
+      - name: Install the shell
+        run: python -m pip install -e ".[shell,dev]"
+      - name: Synthetic parent voices (fixtures, not speech-to-text proof)
+        run: python -m mvp.video
+      - name: Francois's workspace tests
+        run: pytest -q mvp
+      - name: Launcher and mount tests
+        run: pytest -q tests/test_shell_launcher.py
+
+  public-preview:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sites/calli-demo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build the self-contained preview and verify read-only routes
+        run: npm run build && npm test

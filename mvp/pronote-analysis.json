@@ -1,0 +1,40 @@
+{
+  "inspected_at": "2026-11-07",
+  "official_download_page": "https://www.index-education.com/fr/telecharger-pronote.php",
+  "package_url": "https://tele7.index-education.com/telechargement/pn/v2026.0/exe/Install_PRNclient_FR_2026.2.8_win64.pkg",
+  "package_bytes": 902811819,
+  "package_sha256": "4da780e8a0fea1d036dedee08858bc487e9804c941454f0acec7acac73310cee",
+  "signature": {
+    "verified_with": "pkgutil --check-signature",
+    "developer": "INDEX EDUCATION (EYDF23L9XW)",
+    "apple_notarization": "trusted",
+    "timestamp": "2026-10-27T16:11:06Z"
+  },
+  "package_metadata": {
+    "identifier": "com.index-education.pronote_2026_FRANCE",
+    "version": "2026.2.8.0-rc",
+    "payload_files": 6094,
+    "installed_kib": 1927565,
+    "requires_root": true,
+    "installed": false
+  },
+  "web_demo_url": "https://demo.index-education.net/pronote/professeur.html?fd=1",
+  "web_assets_inspected": [
+    "professeur.js",
+    "professeur.css",
+    "professeur-full.html"
+  ],
+  "observations": [
+    "Le client web est un shell qui charge des modules JavaScript et des feuilles de style versionnés.",
+    "Le démarrage appelle Start avec un contexte serveur.",
+    "Les modules déclarent FonctionParametres, Identification, Authentification et appelfonction.",
+    "Les espaces et données scolaires dépendent de la session serveur : les fichiers statiques seuls ne constituent pas un mode hors ligne.",
+    "Le mode local de ce dépôt est une implémentation indépendante avec des données fictives, pas un patch de PRONOTE.",
+    "Le BOM du paquet Mac contient une application emballée, un runtime Python 3.12 et une arborescence de bouteille Windows (drive_c, registres et menus cxmenu). Le paquet n’est pas un frontend web autonome."
+  ],
+  "limits": [
+    "Aucun établissement réel consulté.",
+    "Aucun contournement d’authentification, patch de licence ou modification du paquet.",
+    "Pas de décompilation du binaire natif : inspection de la signature, du manifeste du paquet et du JavaScript public."
+  ]
+}

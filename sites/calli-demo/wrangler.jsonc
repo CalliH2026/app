@@ -1,0 +1,6 @@
+// Template only: not deployed. Uses the self-contained server bundle (assets embedded, no ASSETS binding).
+{
+  "name": "calli-public-preview",
+  "main": "dist/server/index.js",
+  "compatibility_date": "2025-09-01"
+}

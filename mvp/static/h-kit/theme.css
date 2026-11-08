@@ -1,0 +1,30 @@
+@import url('./fonts.css');
+@import url('./tokens.css');
+/* Adaptation pour apps, créée depuis les tokens du site ; thème non officiel. */
+.h-app { --h-bg:#f9f9fb; --h-surface:#fff; --h-text:#1c1c26; --h-muted:#4a4a58; --h-border:#d8d8e2; --h-primary:#5a04bc; --h-hover:#5507bb; --h-soft:#f1ecf9; --h-on-soft:#5a04bc; color-scheme:light; background:var(--h-bg); color:var(--h-text); font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; line-height:1.5; min-height:100vh; margin:0; }
+.h-app[data-theme="dark"] { --h-bg:#0d0d12; --h-surface:#1c1c26; --h-text:#f9f9fb; --h-muted:#adadbc; --h-border:#4a4a58; --h-soft:#2c0264; --h-on-soft:#decef3; color-scheme:dark; }
+.h-app *, .h-app *::before, .h-app *::after {box-sizing:border-box}
+.h-app :focus-visible {outline:3px solid #9a5bec;outline-offset:3px}
+.h-shell {max-width:1120px;margin:auto;padding:32px 24px 64px}
+.h-header,.h-row {display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.h-header {justify-content:space-between;border-bottom:1px solid var(--h-border);padding-bottom:24px}
+.h-brand {font-weight:700;display:flex;align-items:center;gap:16px}
+.h-logo {width:40px;height:40px;object-fit:contain;margin:16px}
+.h-logo-white {display:none}.h-app[data-theme="dark"] .h-logo-black {display:none}.h-app[data-theme="dark"] .h-logo-white {display:block}
+.h-title {font-size:clamp(32px,5vw,60px);font-weight:500;line-height:1.1;letter-spacing:-.04em;margin:0 0 24px;max-width:850px}
+.h-section {padding:48px 0 0}.h-muted {color:var(--h-muted)}
+.h-eyebrow,.h-code {font-family:'Fira Code',monospace;font-size:12px}.h-eyebrow {text-transform:uppercase;letter-spacing:.08em;color:var(--h-muted);margin-bottom:16px}
+.h-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+.h-card {background:var(--h-surface);border:1px solid var(--h-border);border-radius:12px;padding:24px}
+.h-card h2 {font-size:18px;font-weight:600;margin:0 0 12px}
+.h-stat {font-size:36px;letter-spacing:-.04em;margin:8px 0}
+.h-button {display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--h-primary);color:#fff;border:1px solid transparent;border-radius:8px;padding:12px 20px;font:600 14px 'Plus Jakarta Sans',sans-serif;cursor:pointer;text-decoration:none;min-height:44px}
+.h-button:hover {background:var(--h-hover)}.h-button:disabled {opacity:.5;cursor:not-allowed}
+.h-button-secondary {background:var(--h-surface);color:var(--h-text);border-color:var(--h-border)}.h-button-secondary:hover {background:var(--h-soft);color:var(--h-on-soft)}
+.h-label {display:block;font-size:14px;font-weight:500;margin-bottom:8px}
+.h-input {width:100%;min-height:44px;padding:12px 14px;background:var(--h-surface);color:var(--h-text);border:1px solid var(--h-border);border-radius:6px;font:inherit}
+.h-input::placeholder {color:var(--h-muted)}
+.h-badge {display:inline-block;background:var(--h-soft);color:var(--h-on-soft);border-radius:9999px;padding:4px 10px;font-size:12px;font-weight:600}
+.h-table-wrap {overflow-x:auto}.h-table {width:100%;border-collapse:collapse;font-size:14px;text-align:left}.h-table th,.h-table td {padding:16px 12px;border-bottom:1px solid var(--h-border)}.h-table th {color:var(--h-muted);font-weight:500}
+.h-swatches {display:flex;gap:12px;flex-wrap:wrap}.h-swatch {min-width:120px;flex:1}.h-chip {height:64px;border-radius:6px;border:1px solid var(--h-border);margin-bottom:8px}
+@media(max-width:600px){.h-shell{padding:20px 16px 40px}.h-section{padding-top:32px}.h-card{padding:20px}}

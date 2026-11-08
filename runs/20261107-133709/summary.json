@@ -1,0 +1,22 @@
+{
+  "run_id": "20261107-133709",
+  "target": "moodle",
+  "arm": "calligraphe",
+  "session_id": "b73cee46-41ac-495d-954c-c639d422c588",
+  "status": "idle",
+  "outcome": "success",
+  "error": null,
+  "error_code": null,
+  "answer": "Done. 2 items processed: Mark Dunn — written (\"Participation active et régulière. Les devoirs sont rendus à l'heure, continue ainsi.\"); Laura Carpenter — not_found (feedback field already contained \"Travail solide et méthodique. Le cahier est bien tenu et les consignes sont respectées. Bravo pour cet engagement.\", which did not match previous_value=null).",
+  "elapsed_s": 324.9,
+  "steps": 62,
+  "tokens": 1536519,
+  "model": "holo4-27b",
+  "items": {
+    "not_found": 1,
+    "verified": 1
+  },
+  "events": 265,
+  "cost_usd": 0.2499,
+  "cost_note": "estimate at Models API list prices from the session's token usage (backfilled)"
+}

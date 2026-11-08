@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calli · Entraînement</title>
+  <link rel="stylesheet" href="/static/parallel.css">
+</head>
+<body data-view="entrainement">
+  <header class="p-top">
+    <a class="p-brand" href="/workspace"><img class="brand-logo" src="/static/brand/calli-logo.svg" alt="Calli" width="96" height="32"></a>
+    <nav class="p-nav" aria-label="Calli">
+      <a href="/workspace">Écriture automatique</a>
+      <a href="/sortie">Sortie scolaire</a>
+      <a href="/entrainement" aria-current="page">Entraînement</a>
+    </nav>
+  </header>
+  <main class="p-main">
+    <h1>Entraînement Pythagore</h1>
+    <p class="p-lead">À partir d’une analyse H d’une copie fictive de mathématiques, Devin écrit une activité interactive. Vous la relisez avant de pouvoir la télécharger.</p>
+    <p id="p-off" class="p-off" hidden>Cette vue n’est pas activée : lancez Calli avec <code>--parallel-dir</code>.</p>
+    <form id="practice-form" class="p-form" hidden>
+      <label class="p-wide">Analyse H (identifiant) <input name="job" required pattern="[A-Za-z0-9_-]{1,64}" autocomplete="off"></label>
+      <fieldset class="p-wide"><legend>Mode</legend>
+        <label><input type="radio" name="mode" value="simulation" checked> Simulation (aucun appel Devin)</label>
+        <label><input type="radio" name="mode" value="live"> Devin (session réelle, 2 ACU max)</label>
+      </fieldset>
+      <button type="submit">Préparer l’activité</button>
+    </form>
+    <section id="practice-result" aria-live="polite" hidden>
+      <p id="practice-status" class="p-status"></p>
+      <iframe id="practice-frame" title="Aperçu de l’activité" sandbox="allow-scripts" hidden></iframe>
+      <p class="p-actions">
+        <button id="practice-approve" type="button" hidden>J’ai relu l’activité</button>
+        <a id="practice-download" href="#" hidden>Télécharger</a>
+      </p>
+      <details><summary>Détails techniques</summary>
+        <p class="p-note">Les tests annoncés par Devin sont sa déclaration ; Calli vérifie la structure du fichier, pas son exécution.</p>
+        <pre id="practice-trace"></pre>
+      </details>
+    </section>
+  </main>
+  <script src="/static/parallel.js"></script>
+</body>
+</html>

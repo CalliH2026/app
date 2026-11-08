@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calli · Écriture automatique</title>
+  <link rel="icon" href="static/calli-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="static/workspace.css">
+</head>
+<body>
+  <a class="skip" href="#dictee">Aller à la dictée</a>
+  <header class="topbar">
+    <div class="brand"><img class="brand-logo" src="static/brand/calli-logo.svg" alt="Calli" width="96" height="32"><span>Écriture automatique</span></div>
+    <p class="meta" id="course-line"></p>
+    <div class="stop-box">
+      <button type="button" id="stop" class="stop" aria-describedby="stop-help">STOP</button>
+      <span id="stop-help" class="stop-help">Arrête les nouvelles écritures ; une saisie déjà en cours peut se terminer, rien n’est annulé.</span>
+    </div>
+  </header>
+  <div id="preview-banner" class="preview-banner" role="status" hidden>
+    <strong>Mode aperçu.</strong>
+    <span>L’écriture dans PRONOTE est inactive : rien n’est mis en file ni écrit.</span>
+  </div>
+  <div id="stop-banner" class="stop-banner" role="status" hidden>
+    <strong>Arrêt demandé.</strong>
+    <span>Aucune nouvelle appréciation ne part ; l’action en cours peut se terminer.</span>
+    <button type="button" id="resume">Reprendre</button>
+  </div>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Navigation">
+      <nav>
+        <a href="#classe">Ma classe</a>
+        <a href="#dictee">Appréciations</a>
+        <a href="#preparer">Préparer mon échange</a>
+        <a href="#journal">Journal</a>
+        <a href="sortie">Sortie scolaire</a>
+        <a href="entrainement">Entraînement</a>
+      </nav>
+      <section id="classe" class="roster-panel" aria-labelledby="classe-h">
+        <h2 id="classe-h">Ma classe</h2>
+        <ul id="roster" class="roster" aria-label="Élèves"></ul>
+        <p class="portrait-note">Portraits fictifs générés par IA.</p>
+      </section>
+      <p class="meta"><a href="./">Écran d’approbation manuel (secours)</a></p>
+    </aside>
+
+    <main id="main" class="main">
+      <header class="pupil-head" aria-live="polite">
+        <div id="pupil-avatar" class="avatar big" aria-hidden="true"></div>
+        <div class="pupil-id">
+          <h1 id="pupil-name">Choisissez un élève</h1>
+          <p class="meta" id="pupil-course"></p>
+        </div>
+        <span id="kind-badge" class="badge demo" hidden>Exemple fictif</span>
+      </header>
+      <p id="global-error" class="error" role="alert" hidden></p>
+
+      <section id="dictee" class="card task" aria-labelledby="dictee-h">
+        <div class="card-head">
+          <h2 id="dictee-h">Appréciations</h2>
+          <button type="button" id="mic" class="primary mic" disabled aria-pressed="false">Commencer la dictée</button>
+        </div>
+        <p id="mic-status" class="mic-status" role="status"></p>
+        <p id="transcript" class="transcript" aria-live="polite"></p>
+        <div id="dictation-result" class="result" hidden></div>
+        <h3>Écriture et relecture</h3>
+        <p id="queue-summary" class="summary" role="status" hidden></p>
+        <p id="queue-empty" class="empty">Rien en file pour cet élève.</p>
+        <ol id="queue" class="items"></ol>
+        <details id="correction-box">
+          <summary>Corriger ou saisir au clavier</summary>
+          <label for="draft" id="draft-label">Appréciation</label>
+          <textarea id="draft" rows="4" disabled aria-describedby="counter"></textarea>
+          <p id="counter" class="counter" aria-live="polite"></p>
+          <details id="replace-box">
+            <summary>Remplacer une appréciation déjà présente dans PRONOTE</summary>
+            <label for="previous">Texte actuellement dans PRONOTE</label>
+            <textarea id="previous" rows="2" disabled></textarea>
+            <div id="replace-confirm" hidden>
+              <div class="compare">
+                <div><span class="label">Texte actuel</span><p id="replace-old"></p></div>
+                <div><span class="label">Nouveau texte</span><p id="replace-new"></p></div>
+              </div>
+              <label class="check"><input type="checkbox" id="confirm-replace"> Je confirme remplacer ce texte</label>
+            </div>
+          </details>
+          <div class="actions">
+            <button type="button" id="approve" class="secondary" disabled>Écrire cette correction</button>
+            <span id="approve-msg" class="meta" role="status"></span>
+          </div>
+        </details>
+      </section>
+
+      <section id="dossier" class="card" aria-labelledby="dossier-h">
+        <h2 id="dossier-h">Dossier source</h2>
+        <p id="case-empty" class="empty">Sélectionnez un élève pour voir son dossier.</p>
+        <div id="case" hidden>
+          <p class="question"><span class="label">Question</span> <span id="case-question"></span></p>
+          <div id="documents" class="documents"></div>
+          <details class="about"><summary>Provenance du dossier</summary><p class="meta" id="case-provenance"></p></details>
+        </div>
+      </section>
+
+      <section id="journal" class="card" aria-labelledby="journal-h">
+        <h2 id="journal-h">Journal</h2>
+        <details class="about">
+          <summary>Que vérifie la relecture ?</summary>
+          <p class="meta">Le texte relu est comparé exactement au texte écrit. Le nom affiché est celui que l’agent rapporte avoir relu sur la ligne : c’est une vérification de sa relecture, pas une preuve indépendante de la ligne écrite.</p>
+        </details>
+        <details class="about">
+          <summary>Que signifient les statuts ?</summary>
+          <dl class="legend">
+            <dt>Vérifiée</dt><dd>Le texte relu est identique au texte écrit.</dd>
+            <dt>Non confirmée</dt><dd>Relecture différente : à vérifier dans PRONOTE.</dd>
+            <dt>Non confirmé : vérification nécessaire</dt><dd>On ne sait pas si l’écriture a eu lieu. Ce n’est pas un échec confirmé ; aucune nouvelle tentative automatique.</dd>
+            <dt>Interrompue : vérifier dans PRONOTE</dt><dd>Arrêtée sans preuve qu’elle n’avait pas commencé : une écriture partielle est possible.</dd>
+            <dt>Non commencée</dt><dd>Rien n’a été tenté (arrêt, élève introuvable, ou cellule déjà remplie à arbitrer).</dd>
+          </dl>
+        </details>
+        <p id="journal-empty" class="empty">Aucune écriture relue pour l’instant.</p>
+        <ol id="journal-list" class="journal"></ol>
+      </section>
+    </main>
+
+    <aside id="preparer" class="results" aria-labelledby="results-h">
+      <div class="card-head">
+        <h2 id="results-h">Préparer mon échange</h2>
+      </div>
+      <div class="observe">
+        <span id="observe-status" role="status">Assistance parallèle active · dans Calli</span>
+        <button type="button" id="observe-toggle" class="secondary small" aria-pressed="false">Mettre en pause</button>
+      </div>
+      <details class="about">
+        <summary>Comment ça marche ?</summary>
+        <p class="meta">Ouvrir une pièce du dossier lance la préparation. Seules les actions dans Calli sont observées, pas l’écran ni PRONOTE. La préparation n’écrit rien.</p>
+      </details>
+      <button type="button" id="prepare" class="secondary" disabled>Préparer mon échange</button>
+      <p id="prep-status" class="prep-status" role="status">Aucune préparation lancée.</p>
+      <div id="prep-result" hidden>
+        <h3>Synthèse H <span class="badge">à relire</span></h3>
+        <p id="prep-summary"></p>
+        <h3>Appuis dans le dossier</h3>
+        <ul id="prep-evidence" class="evidence"></ul>
+        <h3>À vérifier</h3>
+        <ul id="prep-unknowns"></ul>
+        <h3>Pistes</h3>
+        <ul id="prep-suggestions"></ul>
+        <div id="prep-resources" hidden>
+          <h3>Ressources trouvées <small>(Linkup, à évaluer)</small></h3>
+          <ul id="prep-resource-list"></ul>
+        </div>
+        <details class="about">
+          <summary>Que garantissent les citations ?</summary>
+          <p class="meta">Chaque extrait existe mot pour mot dans la pièce citée (vérification mécanique). Leur pertinence pédagogique reste à juger par vous. La préparation n’écrit ni ne met en file aucune appréciation.</p>
+        </details>
+      </div>
+      <details class="about" id="prep-tech" hidden>
+        <summary>Détails techniques (trace)</summary>
+        <ol id="prep-events" class="events timeline"></ol>
+        <p id="prep-trace" class="trace"></p>
+      </details>
+    </aside>
+  </div>
+  <script src="static/workspace.js"></script>
+</body>
+</html>

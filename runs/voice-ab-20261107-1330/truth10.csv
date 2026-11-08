@@ -1,0 +1,11 @@
+item_id,student_id,text,set,fixture,reassign_from
+t01,s01,"Résultats en nette progression. L'expression écrite gagne en clarté, l'oral reste trop rare. Bravo pour cet engagement.",demo,,
+t02,s05,Trimestre en demi-teinte. Les erreurs d'inattention coûtent des points à chaque contrôle. Un travail plus régulier permettrait de franchir un cap.,demo,,
+t03,s03,Trimestre encourageant après un début difficile. Les évaluations écrites restent en deçà du travail fourni à la maison. Pense à demander de l'aide dès qu'une notion résiste.,demo,,
+t04,s07,Trimestre en demi-teinte. Les résultats varient beaucoup d'un chapitre à l'autre. Un travail plus régulier permettrait de franchir un cap.,demo,,
+t05,s02,Excellent investissement en classe. La compréhension des documents est fine et argumentée. Il faut maintenant oser davantage à l'oral.,demo,,
+t09,s06,"Très bon trimestre, félicitations. Les leçons sont apprises et les exercices faits avec soin. Il faut maintenant oser davantage à l'oral.",measured,,
+t10,s01,Résultats corrects mais irréguliers. Le prochain trimestre doit confirmer ces progrès.,measured,,
+t11,s07,"Trimestre encourageant après un début difficile. L'expression écrite gagne en clarté, l'oral reste trop rare. Des fiches de révision seraient un appui utile.",measured,,
+t12,s09,"Bon trimestre dans l'ensemble. L'expression écrite gagne en clarté, l'oral reste trop rare. Pense à demander de l'aide dès qu'une notion résiste.",measured,,
+t13,s07,Des efforts visibles depuis la rentrée. Les évaluations écrites restent en deçà du travail fourni à la maison. Le prochain trimestre doit confirmer ces progrès.,measured,,

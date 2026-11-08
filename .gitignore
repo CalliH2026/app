@@ -1,0 +1,43 @@
+.env
+.env.*
+env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+runs/**/*.png
+.DS_Store
+calligraphe.egg-info/
+*.egg-info/
+# live state of the approval screen and the writer loop (the journals in runs/<timestamp>/ are the evidence)
+runs/queue.jsonl
+runs/queue.jsonl.*
+runs/STOP
+# cache of sourced suggestions (research/advice.py)
+runs/advice-cache.jsonl
+# vendored H Parallel: local state, generated voices and optional .env never committed
+vendor/h_parallel/data/
+vendor/h_parallel/fixtures/*.wav
+vendor/h_parallel/.env
+vendor/credentials/
+# Francois's workspace (mvp/): local state, generated voices, bridge token, optional .env
+mvp/data/
+mvp/fixtures/*.wav
+# the two reviewed ElevenLabs parent voices (provenance: mvp/fixtures/parent-voices-elevenlabs.json)
+!mvp/fixtures/parent-points-elevenlabs.wav
+!mvp/fixtures/parent-progress-elevenlabs.wav
+mvp/.env
+credentials/
+
+# Public release: local state and hosting identities
+.openai/
+**/.openai/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+work/
+outputs/
+.DS_Store

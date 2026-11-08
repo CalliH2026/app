@@ -1,0 +1,64 @@
+From 047987be171ab4482bee305dd6fb5b0e71d9f286 Mon Sep 17 00:00:00 2001
+From: famat <contact@famat.me>
+Date: Sat, 7 Nov 2026 18:59:02 +0100
+Subject: [PATCH 7/9] Preserve Devin sessions when optional URLs are malformed
+
+---
+ mvp/practice.py      | 13 ++++++++-----
+ mvp/test_practice.py | 16 ++++++++++++++++
+ 2 files changed, 24 insertions(+), 5 deletions(-)
+
+diff --git a/mvp/practice.py b/mvp/practice.py
+index c848716..7fcadcb 100644
+--- a/mvp/practice.py
++++ b/mvp/practice.py
+@@ -55,11 +55,14 @@ def session_url(session_id, returned=None):
+     """The provider's URL only if it is the app.devin.ai page of this session, else one built from the ID."""
+     bare = SESSION_ID.fullmatch(session_id).group(1)
+     if isinstance(returned, str):
+-        parsed = urlparse(returned)
+-        if (parsed.scheme == 'https' and parsed.hostname == 'app.devin.ai' and parsed.port is None
+-                and not parsed.username and not parsed.password and not parsed.query and not parsed.fragment
+-                and parsed.path.rstrip('/') in ('/sessions/' + bare, '/sessions/devin-' + bare)):
+-            return returned
++        try:
++            parsed = urlparse(returned)
++            if (parsed.scheme == 'https' and parsed.hostname == 'app.devin.ai' and parsed.port is None
++                    and not parsed.username and not parsed.password and not parsed.query and not parsed.fragment
++                    and parsed.path.rstrip('/') in ('/sessions/' + bare, '/sessions/devin-' + bare)):
++                return returned
++        except ValueError:
++            pass  # A malformed optional URL must not hide the valid session ID.
+     return 'https://app.devin.ai/sessions/' + bare
+ 
+ 
+diff --git a/mvp/test_practice.py b/mvp/test_practice.py
+index 61bcecc..17da0c1 100644
+--- a/mvp/test_practice.py
++++ b/mvp/test_practice.py
+@@ -355,6 +355,22 @@ def test_returned_url_is_kept_only_for_this_session_on_app_devin_ai(store, monke
+         assert practice.session_url(BARE_ID, url) == 'https://app.devin.ai/sessions/' + BARE_ID
+ 
+ 
++@pytest.mark.parametrize('url', [
++    'https://app.devin.ai:bad/sessions/' + BARE_ID,
++    'https://app.devin.ai:65536/sessions/' + BARE_ID,
++    'https://[app.devin.ai/sessions/' + BARE_ID,
++])
++def test_malformed_optional_session_url_does_not_lose_a_created_session(store, monkeypatch, url):
++    requests = mock_devin(monkeypatch, session_id=BARE_ID, url=url)
++    practice.start(JOB_ID, mode='live')
++    value = finished()
++    assert value['status'] == 'ready'
++    assert value['session_url'] == 'https://app.devin.ai/sessions/' + BARE_ID
++    saved = json.loads((practice.FOLDER / JOB_ID / 'state-live.json').read_text())
++    assert saved['session_id'] == BARE_ID
++    assert len([r for r in requests if r.method == 'POST']) == 1
++
++
+ @pytest.mark.parametrize('bad', ['devin-test', 'session-123', 'F' * 32, 'f' * 31, '', None])
+ def test_unexpected_session_id_is_persisted_and_blocks_a_duplicate_create(store, monkeypatch, bad):
+     mock_devin(monkeypatch, session_id=bad)
+-- 
+2.56.0
+

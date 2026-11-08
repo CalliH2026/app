@@ -1,0 +1,88 @@
+{
+  "calligraphe/moodle": {
+    "arm": "calligraphe",
+    "target": "moodle",
+    "runs": 6,
+    "attempted": 28,
+    "verified": 21,
+    "not_found": 3,
+    "mismatch": 4,
+    "false_success": 0,
+    "aborted": 0,
+    "verified_share": 0.75,
+    "seconds_median": 79.3,
+    "seconds_worst": 667.3,
+    "steps": 704,
+    "tokens_per_verified": 1331618,
+    "cost_per_verified_usd": 0.222,
+    "sessions": [
+      "ff858d65-cb91-475c-977d-3a9f47a3d7f1",
+      "2d63bf6d-48da-4649-81ac-e795f789c2f0",
+      "bad1d76f-6114-477d-afe6-707e1d9ca2b5",
+      "b73cee46-41ac-495d-954c-c639d422c588",
+      "405d5130-f598-4571-a7b1-5485f59a7ad4",
+      "858668c7-59b8-4520-83d9-03fd87712cfc"
+    ]
+  },
+  "baseline/moodle": {
+    "arm": "baseline",
+    "target": "moodle",
+    "runs": 2,
+    "attempted": 16,
+    "verified": 8,
+    "not_found": 0,
+    "mismatch": 0,
+    "false_success": 0,
+    "aborted": 8,
+    "verified_share": 0.5,
+    "seconds_median": 32.4,
+    "seconds_worst": 35.6,
+    "steps": 169,
+    "tokens_per_verified": 678035,
+    "cost_per_verified_usd": 0.119,
+    "sessions": [
+      "b8ded379-40ac-4a08-a43f-5c0eb2b34294",
+      "285cca15-b433-4705-8bb4-33e4f0690568"
+    ]
+  },
+  "audit/moodle": {
+    "arm": "audit",
+    "target": "moodle",
+    "runs": 1,
+    "attempted": 8,
+    "verified": 8,
+    "not_found": 0,
+    "mismatch": 0,
+    "false_success": 0,
+    "aborted": 0,
+    "verified_share": 1.0,
+    "seconds_median": 18.6,
+    "seconds_worst": 18.6,
+    "steps": 30,
+    "tokens_per_verified": 75429,
+    "cost_per_verified_usd": 0.019,
+    "sessions": [
+      "5317e57b-3b5f-4f16-b88e-d64d0d6f29ee"
+    ]
+  },
+  "calligraphe/pronote": {
+    "arm": "calligraphe",
+    "target": "pronote",
+    "runs": 1,
+    "attempted": 10,
+    "verified": 10,
+    "not_found": 0,
+    "mismatch": 0,
+    "false_success": 0,
+    "aborted": 0,
+    "verified_share": 1.0,
+    "seconds_median": 21.4,
+    "seconds_worst": 39.0,
+    "steps": 83,
+    "tokens_per_verified": 185608,
+    "cost_per_verified_usd": 0.029,
+    "sessions": [
+      "200ea4e3-78b5-438c-9cf5-431211c253e4"
+    ]
+  }
+}

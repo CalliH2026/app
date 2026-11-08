@@ -1,0 +1,21 @@
+{
+  "run_id": "20261107-133807",
+  "target": "moodle",
+  "arm": "calligraphe",
+  "session_id": "405d5130-f598-4571-a7b1-5485f59a7ad4",
+  "status": "idle",
+  "outcome": "success",
+  "error": null,
+  "error_code": null,
+  "answer": "Successfully wrote and verified 7 approved report-card comments (m09–m15) in the \"Timed Task\" assignment of \"Mindful Course Creation\" for: Mark Dunn, Julie Mills, Mary Cooper, Richard Kim, Heather Wright, Peter Wallace, and Jennifer Larson. All feedback saved without student notification.",
+  "elapsed_s": 577.3,
+  "steps": 129,
+  "tokens": 4514220,
+  "model": "holo4-27b",
+  "items": {
+    "verified": 7
+  },
+  "events": 534,
+  "cost_usd": 0.624,
+  "cost_note": "estimate at Models API list prices from the session's token usage (backfilled)"
+}

@@ -1,0 +1,82 @@
+{
+  "classification": "hypothetical_sensitivity_not_observed_error_statistics",
+  "unit": "one completed comment, not characters or WER",
+  "items": 10,
+  "base_manual_active_seconds": 464.26666666666665,
+  "base_calli_active_seconds": 239.0,
+  "formula": {
+    "manual": "H0 + n * p_manual * mean_extra_repair_seconds_manual",
+    "calli": "C0 + n * (p_asr * mean_extra_repair_seconds_asr + p_gui * mean_extra_human_repair_seconds_gui)",
+    "gain": "100 * (1 - expected_C / expected_H)",
+    "positive_gain_condition": "extra_C - extra_H < H0 - C0"
+  },
+  "break_even_net_extra_calli_seconds": 225.26666666666665,
+  "scenarios": [
+    {
+      "label": "Base, no additional repair",
+      "assumed_p_manual_repair_per_comment": 0,
+      "assumed_manual_repair_seconds": 0,
+      "assumed_p_asr_repair_per_comment": 0,
+      "assumed_asr_repair_seconds": 0,
+      "assumed_p_gui_incident_per_comment": 0,
+      "assumed_gui_human_repair_seconds": 0,
+      "manual_extra_seconds_expected": 0,
+      "calli_extra_seconds_expected": 0,
+      "manual_active_seconds_expected": 464.26666666666665,
+      "calli_active_seconds_expected": 239.0,
+      "saved_percent_ratio_of_expected_times": 48.52096496266513
+    },
+    {
+      "label": "Equal extra repair burden",
+      "assumed_p_manual_repair_per_comment": 0.1,
+      "assumed_manual_repair_seconds": 15,
+      "assumed_p_asr_repair_per_comment": 0.1,
+      "assumed_asr_repair_seconds": 15,
+      "assumed_p_gui_incident_per_comment": 0,
+      "assumed_gui_human_repair_seconds": 0,
+      "manual_extra_seconds_expected": 15.0,
+      "calli_extra_seconds_expected": 15.0,
+      "manual_active_seconds_expected": 479.26666666666665,
+      "calli_active_seconds_expected": 254.0,
+      "saved_percent_ratio_of_expected_times": 47.0023647238837
+    },
+    {
+      "label": "More Calli repairs",
+      "assumed_p_manual_repair_per_comment": 0.1,
+      "assumed_manual_repair_seconds": 15,
+      "assumed_p_asr_repair_per_comment": 0.2,
+      "assumed_asr_repair_seconds": 15,
+      "assumed_p_gui_incident_per_comment": 0.1,
+      "assumed_gui_human_repair_seconds": 30,
+      "manual_extra_seconds_expected": 15.0,
+      "calli_extra_seconds_expected": 60.0,
+      "manual_active_seconds_expected": 479.26666666666665,
+      "calli_active_seconds_expected": 299.0,
+      "saved_percent_ratio_of_expected_times": 37.6130198915009
+    },
+    {
+      "label": "Adverse Calli scenario",
+      "assumed_p_manual_repair_per_comment": 0.1,
+      "assumed_manual_repair_seconds": 15,
+      "assumed_p_asr_repair_per_comment": 0.4,
+      "assumed_asr_repair_seconds": 30,
+      "assumed_p_gui_incident_per_comment": 0.2,
+      "assumed_gui_human_repair_seconds": 60,
+      "manual_extra_seconds_expected": 15.0,
+      "calli_extra_seconds_expected": 240.0,
+      "manual_active_seconds_expected": 479.26666666666665,
+      "calli_active_seconds_expected": 479.0,
+      "saved_percent_ratio_of_expected_times": 0.05564056196967204
+    }
+  ],
+  "cautions": [
+    "All probabilities and repair durations are illustrative inputs, not measured or literature-derived rates.",
+    "Count only corrections additional to baseline typing time and common review; do not double-count immediate backspaces.",
+    "Linearity of expectation does not require independent incidents; repair costs must not overlap or be counted twice.",
+    "Reported gain is the ratio of expected times, not the expected percentage for individual users.",
+    "No confidence interval, population inference or quality-equivalence claim is supported.",
+    "Unnoticed errors remain a quality risk even when they consume no correction time.",
+    "Stop-and-inspect costs for unknown writes belong in GUI human repair time. Never assume a safe automatic retry.",
+    "Native agent wall-clock time, setup and pedagogical composition remain outside active-time estimates."
+  ]
+}

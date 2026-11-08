@@ -1,0 +1,19 @@
+{
+  "student": {"id":"alex", "name":"Alex Martin", "class":"4e B", "subject":"Mathématiques", "teacher":"Mme Laurent"},
+  "appointment": {"id":"rdv-alex", "in_minutes":120, "duration_minutes":20, "room":"Salle 204", "participants":"Mme Laurent · parents d’Alex", "reason":"Bilan du contrôle : théorème de Pythagore"},
+  "messages": [
+    {"id":"msg-1", "from":"Mme Laurent", "date":"5 novembre · 17:10", "text":"Le contrôle est corrigé. Le résultat numérique ne suffit pas : le choix du théorème et la conclusion font partie des compétences évaluées. La consigne et le barème sont joints."},
+    {"id":"msg-2", "from":"Mme Martin (mère d’Alex)", "date":"6 novembre · 18:35", "text":"Nous confirmons le rendez-vous. Nous avons joint un vocal au dossier pour préciser notre question. Merci de nous aider à comprendre la copie."},
+    {"id":"msg-3", "from":"Mme Laurent", "date":"7 novembre · 08:20", "text":"Nous reprendrons l’exercice 2 et nous définirons une méthode de rédaction qu’Alex pourra réutiliser en autonomie."}
+  ],
+  "documents": [
+    {"id":"consigne", "title":"Consigne · exercice 2", "type":"school", "text":"ABC est un triangle rectangle en A. AB = 3 cm et AC = 4 cm. Calculer BC. Justifier le choix du théorème, écrire l’égalité, détailler le calcul et conclure avec l’unité. L’exercice est noté sur 6 points."},
+    {"id":"bareme", "title":"Barème · exercice 2 / 6", "type":"school", "text":"Identifier le triangle rectangle et l’hypoténuse : 1 point. Nommer le théorème de Pythagore et justifier son application : 1 point. Écrire BC² = AB² + AC² : 1 point. Effectuer BC² = 9 + 16 = 25, puis BC = 5 : 2 points. Conclure par une phrase avec l’unité : 1 point."},
+    {"id":"copie", "title":"Copie d’Alex · exercice 2", "type":"school", "text":"Réponse écrite : « BC² = 3² + 4² = 25 ; BC = 5 cm ». Annotation : « Calcul exact. Préciser pourquoi le théorème s’applique, identifier l’hypoténuse et rédiger la conclusion. » Détail attribué : identification 0/1 ; justification 0/1 ; égalité 1/1 ; calcul 2/2 ; conclusion rédigée 0/1. Note de l’exercice : 3/6. Aucune note globale du contrôle n’est fournie."},
+    {"id":"methode", "title":"Fiche méthode · raisonner et rédiger", "type":"school", "text":"Avant le calcul : je repère l’angle droit et le côté opposé, l’hypoténuse. J’écris : « Le triangle ABC est rectangle en A. D’après le théorème de Pythagore… ». Après le calcul : « La longueur BC est donc égale à 5 cm. » Pour progresser : refaire un exemple guidé puis un exemple autonome avec d’autres longueurs."}
+  ],
+  "audio": {
+    "points": {"file":"parent-points-elevenlabs.wav", "text":"Bonjour Madame Laurent. Merci de nous recevoir tout à l’heure pour parler du contrôle de mathématiques. Nous avons regardé la copie d’Alex ensemble hier soir. Sur l’exercice du triangle, il trouve bien cinq centimètres, et cela correspond à la correction. Pourtant, il n’a que trois points sur six. Pourquoi perd-il des points alors que son résultat est juste ? Nous aimerions comprendre ce qui était attendu dans la rédaction, ce qui lui manque exactement et comment lui expliquer cela sans le décourager. Merci beaucoup."},
+    "progress": {"file":"parent-progress-elevenlabs.wav", "text":"Bonjour Madame Laurent. Nous avons bien vu la note du contrôle et nous souhaitons surtout préparer la suite. Alex sait faire ses calculs mais il ne sait pas toujours comment expliquer son raisonnement. Quand nous lui demandons de rédiger, il ne sait pas par où commencer. Comment peut-il progresser ? Pourriez-vous proposer une petite méthode pour reconnaître le théorème à utiliser et rédiger sa réponse ? Nous aimerions repartir du rendez-vous avec un exercice concret à refaire à la maison, puis une façon de vérifier qu’il sait le faire seul. Merci pour votre aide."}
+  }
+}

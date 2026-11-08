@@ -1,0 +1,45 @@
+[project]
+name = "calli"
+version = "0.1.0"
+description = "Your words, to the letter: a computer-use agent writes dictated comments into school software without an API, verifies every cell, and can undo."
+requires-python = ">=3.10"
+dependencies = [
+    "hai-agents[cli]>=1.4.3",
+]
+
+[project.urls]
+Homepage = "https://calli-demo.leisurelychestnut.chatgpt.site"
+Repository = "https://github.com/CalliH2026/app"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "httpx>=0.27"]
+voice = ["gladiaio-sdk>=2.2.1"]
+mic = ["gladiaio-sdk>=2.2.1", "sounddevice>=0.4"]
+ui = ["fastapi>=0.110", "uvicorn>=0.29"]
+research = ["linkup-sdk>=0.2"]
+# Francois Amat's H Parallel (vendor/h_parallel): school outing and Pythagore practice
+parallel = ["fastapi>=0.110", "httpx>=0.27", "pillow>=12,<13", "python-dotenv>=1.2,<2"]
+# Francois Amat's teacher workspace (mvp/), the product shell; same pins as mvp/requirements.txt without the desktop extra
+shell = ["fastapi>=0.120,<1", "uvicorn>=0.38,<1", "httpx>=0.28,<1", "python-dotenv>=1.2,<2", "pillow>=12,<13",
+         "hai-agents[browser]==1.4.3", "python-multipart>=0.0.20,<1", "PyYAML>=6,<7", "fonttools[woff]>=4,<5",
+         "authlib>=1.6,<2", "itsdangerous>=2.2,<3", "reportlab>=4,<6", "pronotepy==2.15.7", "stripe==16.1.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+# vendor/: upstream source kept byte-for-byte (see vendor/h_parallel/PROVENANCE.md)
+extend-exclude = ["vendor", "mvp"]
+
+[tool.ruff.lint]
+# BLE001: the usage fetch is best-effort by design and must never fail a run
+ignore = ["BLE001"]
+
+[tool.setuptools]
+packages = ["agent", "voice", "ui", "research", "billing", "calli_parallel"]
+
+[tool.setuptools.package-data]
+ui = ["static/*", "static/avatars/*", "static/fonts/*", "static/fonts/licenses/*"]

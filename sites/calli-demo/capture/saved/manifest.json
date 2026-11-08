@@ -1,0 +1,411 @@
+{
+ "base": "local offline server, sanitized by build/build.mjs",
+ "routes": {
+  "/": {
+   "file": "000.bin",
+   "status": 200,
+   "sha256": "4d39e27205a3b7fe9e02a2c590fa19a8a84b4f6049c2a95b87eb4d25503554c2",
+   "bytes": 10461,
+   "headers": {
+    "content-type": "text/html; charset=utf-8"
+   },
+   "raw_sha256": "4d39e27205a3b7fe9e02a2c590fa19a8a84b4f6049c2a95b87eb4d25503554c2"
+  },
+  "/calli/workspace": {
+   "file": "001.bin",
+   "status": 200,
+   "sha256": "ac0d2d06738075c8eb9c0867f9165cd41d2619a9399042f4f588cab04ee10515",
+   "bytes": 8752,
+   "headers": {
+    "content-type": "text/html; charset=utf-8"
+   },
+   "raw_sha256": "ac0d2d06738075c8eb9c0867f9165cd41d2619a9399042f4f588cab04ee10515"
+  },
+  "/api/workspace": {
+   "file": "002.bin",
+   "status": 200,
+   "sha256": "fce069aedb86ff3753bc1923ee61e8fb707760cb5289d11665ab19e89571be14",
+   "bytes": 9300,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "fce069aedb86ff3753bc1923ee61e8fb707760cb5289d11665ab19e89571be14"
+  },
+  "/api/auth/me": {
+   "file": "003.bin",
+   "status": 200,
+   "sha256": "6f353a57b1c19e9e68e4afeee3718ec1a3394d75f666edad0a80c92cde41b9a7",
+   "bytes": 30,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "6f353a57b1c19e9e68e4afeee3718ec1a3394d75f666edad0a80c92cde41b9a7"
+  },
+  "/api/calendar/status": {
+   "file": "004.bin",
+   "status": 200,
+   "sha256": "218fe3e7d5bb0f1943c15af1a39b02589c38ac2737cd567650ca5f04cdcf158a",
+   "bytes": 57,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "218fe3e7d5bb0f1943c15af1a39b02589c38ac2737cd567650ca5f04cdcf158a"
+  },
+  "/api/calli/status": {
+   "file": "005.bin",
+   "status": 200,
+   "sha256": "68aa9d67cb75f8d1ff1119d257d1c8e327bcc19115f2244781ef36c6f8f74090",
+   "bytes": 191,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "68aa9d67cb75f8d1ff1119d257d1c8e327bcc19115f2244781ef36c6f8f74090"
+  },
+  "/api/notifications/status": {
+   "file": "006.bin",
+   "status": 200,
+   "sha256": "ac81e890cb91c79ccf83bc8a8bf9e2782d602bf33154c0f835ae0b4e6a99a87f",
+   "bytes": 24,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "ac81e890cb91c79ccf83bc8a8bf9e2782d602bf33154c0f835ae0b4e6a99a87f"
+  },
+  "/api/recordings": {
+   "file": "007.bin",
+   "status": 200,
+   "sha256": "f106865252b1bdc358537dabdbbc91ee7ccbbc0d8d991c25d54c74064076a460",
+   "bytes": 920,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "f106865252b1bdc358537dabdbbc91ee7ccbbc0d8d991c25d54c74064076a460"
+  },
+  "/api/recordings/native/status": {
+   "file": "008.bin",
+   "status": 200,
+   "sha256": "e9373c549ff7cc47fd4d378d465486b6caaf272c8d39c9e22462f06f4060ecdb",
+   "bytes": 658,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "e9373c549ff7cc47fd4d378d465486b6caaf272c8d39c9e22462f06f4060ecdb"
+  },
+  "/api/reports": {
+   "file": "009.bin",
+   "status": 200,
+   "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "bytes": 2,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "/api/fixture": {
+   "file": "010.bin",
+   "status": 200,
+   "sha256": "41b2ca07b8950620473d4a63743f6360c64013842d004adb43e27b9e7d564a5a",
+   "bytes": 3935,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "41b2ca07b8950620473d4a63743f6360c64013842d004adb43e27b9e7d564a5a"
+  },
+  "/api/family": {
+   "file": "011.bin",
+   "status": 200,
+   "sha256": "6b160515c9778425efd22d467d67596fcfb41332f204b60800052e6e814dd037",
+   "bytes": 16676,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "d7a6b19ee155244b2c58a8cab764de334295b2d24e336f1bbb9485894295c2ac"
+  },
+  "/api/outings/options": {
+   "file": "012.bin",
+   "status": 200,
+   "sha256": "69e273996dd25c9f15f1251ff20d096b292aaa035a6aa94691cbcfc9611a6709",
+   "bytes": 3085,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "69e273996dd25c9f15f1251ff20d096b292aaa035a6aa94691cbcfc9611a6709"
+  },
+  "/api/outings/23025b24ce29": {
+   "file": "013.bin",
+   "status": 200,
+   "sha256": "67dc9a2687b9db909d4cdc5768bc9208aa58e3a09bd2920b54e817408e2d59a1",
+   "bytes": 23873,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "67dc9a2687b9db909d4cdc5768bc9208aa58e3a09bd2920b54e817408e2d59a1"
+  },
+  "/api/outings/23025b24ce29/export": {
+   "file": "014.bin",
+   "status": 200,
+   "sha256": "0a1050c53a692c35f29f202adfeef185174cf676a1652174fac729f8aae45382",
+   "bytes": 2777,
+   "headers": {
+    "content-disposition": "attachment; filename=\"dossier-sortie-scolaire.txt\"",
+    "content-type": "text/plain; charset=utf-8"
+   },
+   "raw_sha256": "0a1050c53a692c35f29f202adfeef185174cf676a1652174fac729f8aae45382"
+  },
+  "/api/jobs/6b073dfc404f": {
+   "file": "015.bin",
+   "status": 200,
+   "sha256": "1543d5ca13fb35ebea05a1ecd12b0b3a00f2a51a50d0110ae8bdc4650329df3f",
+   "bytes": 73534,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "1543d5ca13fb35ebea05a1ecd12b0b3a00f2a51a50d0110ae8bdc4650329df3f"
+  },
+  "/api/jobs/6b073dfc404f/practice": {
+   "file": "016.bin",
+   "status": 200,
+   "sha256": "764d7e0e4217911df0beea330282350c1c4c3608dc8b64edb7dcc8af738802bd",
+   "bytes": 1886,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "f5f12004f3791f2a85253e8c63a3e32422fcb78f91a30295aa0c3fa7f3a76f2a"
+  },
+  "/api/jobs/6b073dfc404f/practice/preview": {
+   "file": "017.bin",
+   "status": 200,
+   "sha256": "2f334b5d6ab3094752fb4fc25d49f0559f547776670f7bd3c1ecbcb770b00266",
+   "bytes": 118814,
+   "headers": {
+    "referrer-policy": "no-referrer",
+    "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+    "content-security-policy": "sandbox allow-scripts; default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; font-src data:; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'self'",
+    "x-calli-presentation": "new-pronote-v1",
+    "x-calli-original-sha256": "4dc614241a077b73ebd11944b3b96497a265489c96d90fe9129a2df3a4de2a1e",
+    "content-type": "text/html; charset=utf-8"
+   },
+   "raw_sha256": "2f334b5d6ab3094752fb4fc25d49f0559f547776670f7bd3c1ecbcb770b00266"
+  },
+  "/api/jobs/6b073dfc404f/audio": {
+   "file": "018.bin",
+   "status": 200,
+   "sha256": "3c66aeeae8d5fc189510bd156958ac77a9f5810f626012bdbd9b8fe6265caa02",
+   "bytes": 1597604,
+   "headers": {
+    "content-type": "audio/x-wav"
+   },
+   "raw_sha256": "3c66aeeae8d5fc189510bd156958ac77a9f5810f626012bdbd9b8fe6265caa02"
+  },
+  "/audio/points": {
+   "file": "019.bin",
+   "status": 200,
+   "sha256": "9fb3d2ddf1f8bc7512f810c76f67327de4dd64ee85921864a49df603bc29f76a",
+   "bytes": 1544856,
+   "headers": {
+    "content-type": "audio/x-wav"
+   },
+   "raw_sha256": "9fb3d2ddf1f8bc7512f810c76f67327de4dd64ee85921864a49df603bc29f76a"
+  },
+  "/api/pronote/background": {
+   "file": "020.bin",
+   "status": 200,
+   "sha256": "d4c019a6adcea1c2b32dcae480b2731156cb869bd5a61229ea50466bc4691899",
+   "bytes": 110,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "d4c019a6adcea1c2b32dcae480b2731156cb869bd5a61229ea50466bc4691899"
+  },
+  "/api/pronote/connection": {
+   "file": "021.bin",
+   "status": 200,
+   "sha256": "554640a7956792214cc5df88d6d4fc4258db98166fbad703a902d23b6e513f67",
+   "bytes": 301,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "554640a7956792214cc5df88d6d4fc4258db98166fbad703a902d23b6e513f67"
+  },
+  "/api/native/context": {
+   "file": "022.bin",
+   "status": 200,
+   "sha256": "d300c4a54fe5905f7c773216e0ddf38508f3e8ded979a79d524b02ea4900190f",
+   "bytes": 141,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "d300c4a54fe5905f7c773216e0ddf38508f3e8ded979a79d524b02ea4900190f"
+  },
+  "/api/native/documents": {
+   "file": "023.bin",
+   "status": 200,
+   "sha256": "8d1b66110a9d7d59b167ef7e9dbf04ec660948a3bd3e6951ddad4dcf3e8f1009",
+   "bytes": 337,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "8d1b66110a9d7d59b167ef7e9dbf04ec660948a3bd3e6951ddad4dcf3e8f1009"
+  },
+  "/calli/api/config": {
+   "file": "024.bin",
+   "status": 200,
+   "sha256": "1a96914d741bd1b64c069799d7007579f40d76d9f0ee6bb0d7768045bcf785c8",
+   "bytes": 1262,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "1a96914d741bd1b64c069799d7007579f40d76d9f0ee6bb0d7768045bcf785c8"
+  },
+  "/calli/api/state": {
+   "file": "025.bin",
+   "status": 200,
+   "sha256": "fc9a29dc23e3054ee818eebe6920c16ad5d5f291f2a01246a4fa1e08a1af24b2",
+   "bytes": 95,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "fc9a29dc23e3054ee818eebe6920c16ad5d5f291f2a01246a4fa1e08a1af24b2"
+  },
+  "/calli/api/workspace/cases": {
+   "file": "026.bin",
+   "status": 200,
+   "sha256": "6f1f71739b2b30908b64ec63c00498ec25a5a9397ce4f1f15fa31fb5e599c04a",
+   "bytes": 2247,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "6f1f71739b2b30908b64ec63c00498ec25a5a9397ce4f1f15fa31fb5e599c04a"
+  },
+  "/calli/api/workspace/dictations": {
+   "file": "027.bin",
+   "status": 200,
+   "sha256": "0809c74dbb645db28ec054b1293985e160a2562dbdbbc365550ecde2ae98768e",
+   "bytes": 17,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "0809c74dbb645db28ec054b1293985e160a2562dbdbbc365550ecde2ae98768e"
+  },
+  "/api/family/sources/A-COPIE": {
+   "file": "028.bin",
+   "status": 200,
+   "sha256": "efa521d0c8cfd42d42670ec7600daf353ac46333c6a3ee9576bdbb72d19468a6",
+   "bytes": 404,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "efa521d0c8cfd42d42670ec7600daf353ac46333c6a3ee9576bdbb72d19468a6"
+  },
+  "/api/family/sources/A-MSG-1": {
+   "file": "029.bin",
+   "status": 200,
+   "sha256": "7bd1e0274730a1679a3333f87d312a587d29c6a5fb25a408c32e4669eb156e7f",
+   "bytes": 380,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "7bd1e0274730a1679a3333f87d312a587d29c6a5fb25a408c32e4669eb156e7f"
+  },
+  "/api/family/sources/A-MSG-3": {
+   "file": "030.bin",
+   "status": 200,
+   "sha256": "46645fa3e34fc3c01890ac57b012c4528a75476463c2890a947e0c767df8b778",
+   "bytes": 324,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "46645fa3e34fc3c01890ac57b012c4528a75476463c2890a947e0c767df8b778"
+  },
+  "/api/family/sources/A-RDV": {
+   "file": "031.bin",
+   "status": 200,
+   "sha256": "e052882c1fdc1c4210e7c4ff066452283992740aef924593c7c01c3760e561da",
+   "bytes": 317,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "e052882c1fdc1c4210e7c4ff066452283992740aef924593c7c01c3760e561da"
+  },
+  "/api/family/sources/L-DEVOIR": {
+   "file": "032.bin",
+   "status": 200,
+   "sha256": "c3fb9225b6667d82796d295f463fa82ce521775313212cf7a018128939736e99",
+   "bytes": 303,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "c3fb9225b6667d82796d295f463fa82ce521775313212cf7a018128939736e99"
+  },
+  "/api/family/sources/L-REUNION": {
+   "file": "033.bin",
+   "status": 200,
+   "sha256": "571a4e910e7ea9fc4e79fce1ac11c11ea74f3c595784e564e57ed789bc6b52c7",
+   "bytes": 274,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "571a4e910e7ea9fc4e79fce1ac11c11ea74f3c595784e564e57ed789bc6b52c7"
+  },
+  "/api/family/sources/L-SORTIE": {
+   "file": "034.bin",
+   "status": 200,
+   "sha256": "9b5393741052abee904a308688cd1b16285e7b6417b6a35ea525bf4a2427cd5f",
+   "bytes": 326,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "9b5393741052abee904a308688cd1b16285e7b6417b6a35ea525bf4a2427cd5f"
+  },
+  "/api/workspace/documents/copie": {
+   "file": "035.bin",
+   "status": 200,
+   "sha256": "5f5ce748b3fceda1cb7cbf59b9279895b72ee661e9798f535c74ca1b4257f6ae",
+   "bytes": 1893,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "5f5ce748b3fceda1cb7cbf59b9279895b72ee661e9798f535c74ca1b4257f6ae"
+  },
+  "/api/workspace/documents/bareme": {
+   "file": "036.bin",
+   "status": 200,
+   "sha256": "d9d8888386d6c6b337fdf24da19198d84c42ed722e2c85eabab6e99fed6a7789",
+   "bytes": 796,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "d9d8888386d6c6b337fdf24da19198d84c42ed722e2c85eabab6e99fed6a7789"
+  },
+  "/api/workspace/documents/consigne": {
+   "file": "037.bin",
+   "status": 200,
+   "sha256": "af87673c13698656faa40b095341a0cd3993ac8f9140130ccb4b329b1e0105d7",
+   "bytes": 744,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "af87673c13698656faa40b095341a0cd3993ac8f9140130ccb4b329b1e0105d7"
+  },
+  "/api/workspace/documents/methode": {
+   "file": "038.bin",
+   "status": 200,
+   "sha256": "a8056511c42d0f6dae633177734eba4f02ef5bf39d7498c958faacbfa139e7db",
+   "bytes": 876,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "a8056511c42d0f6dae633177734eba4f02ef5bf39d7498c958faacbfa139e7db"
+  },
+  "/calli/api/workspace/cases/s01-francais-t1": {
+   "file": "039.bin",
+   "status": 200,
+   "sha256": "ad14c7a583fc1ccf60cabd5e67676c1f3da1121176cbdda5c839c9a7cc61da5a",
+   "bytes": 2624,
+   "headers": {
+    "content-type": "application/json"
+   },
+   "raw_sha256": "ad14c7a583fc1ccf60cabd5e67676c1f3da1121176cbdda5c839c9a7cc61da5a"
+  }
+ }
+}

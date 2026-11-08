@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import {handle} from '../dist/worker.js';
+const origin='https://calli-demo.example';
+function database(){const calls=[];return {calls,DB:{prepare(sql){return {bind(...args){return {async run(){calls.push({sql,args});return {success:true};}}}}}}}}
+function request(body={event:'landing'}, headers={}) {return new Request(origin+'/metrics/event',{method:'POST',headers:{'content-type':'application/json',origin,...headers},body:JSON.stringify(body)});}
+test('counts only one allowlisted event and UTC day, with no identity fields',async()=>{const d=database();const res=await handle(request(),d);assert.equal(res.status,204);assert.equal(d.calls.length,1);assert.match(d.calls[0].sql,/ON CONFLICT/);assert.match(d.calls[0].args[0],/^\d{4}-\d{2}-\d{2}$/);assert.equal(d.calls[0].args[1],'landing');assert.equal(d.calls[0].args.length,2);assert.equal(res.headers.get('set-cookie'),null);});
+test('rejects foreign origins and unsupported data without storage',async()=>{for(const [body,headers,status] of [[{event:'landing'},{origin:'https://other.example'},403],[{event:'landing',email:'never-store-this'}, {},400],[{event:'arbitrary'}, {},400],[{event:'x'.repeat(800)}, {},413],[{}, {},400]]){const d=database();assert.equal((await handle(request(body,headers),d)).status,status);assert.equal(d.calls.length,0);}});
+test('honours privacy signals and keeps demo usable if metrics are unavailable',async()=>{for(const headers of [{dnt:'1'},{'sec-gpc':'1'}]){const d=database();assert.equal((await handle(request({},headers),d)).status,204);assert.equal(d.calls.length,0);}assert.equal((await handle(request(),{})).status,204);const DB={prepare(){throw Error('unavailable')}};assert.equal((await handle(request(),{DB})).status,204);});
+test('metrics has no public read route or generic write capability',async()=>{const r=await handle(new Request(origin+'/metrics/event'),{});assert.equal(r.status,405);assert.equal(r.headers.get('allow'),'POST');assert.equal((await handle(new Request(origin+'/api/family',{method:'POST',body:'{}'}),{})).status,405);});

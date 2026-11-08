@@ -1,0 +1,47 @@
+[
+ {
+  "path": "/api/family",
+  "pointer": "/live/tool_calls/0/id",
+  "rule": "provider_session_id"
+ },
+ {
+  "path": "/api/family",
+  "pointer": "/live/tool_calls/0/session_id",
+  "rule": "provider_session_id"
+ },
+ {
+  "path": "/api/family",
+  "pointer": "/live/tool_calls/1/id",
+  "rule": "provider_session_id"
+ },
+ {
+  "path": "/api/family",
+  "pointer": "/live/tool_calls/1/session_id",
+  "rule": "provider_session_id"
+ },
+ {
+  "path": "/api/family",
+  "pointer": "/live/tool_calls/2/id",
+  "rule": "provider_session_id"
+ },
+ {
+  "path": "/api/family",
+  "pointer": "/live/tool_calls/2/session_id",
+  "rule": "provider_session_id"
+ },
+ {
+  "path": "/api/family",
+  "pointer": "/live/tool_calls/3/id",
+  "rule": "provider_session_id"
+ },
+ {
+  "path": "/api/family",
+  "pointer": "/live/tool_calls/3/session_id",
+  "rule": "provider_session_id"
+ },
+ {
+  "path": "/api/jobs/6b073dfc404f/practice",
+  "pointer": "/session_url",
+  "rule": "private_session_link"
+ }
+]

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calli: manual approval</title>
+  <link rel="icon" href="/static/calli-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <h1 class="brand-h1"><img class="brand-logo" src="/static/brand/calli-logo.svg" alt="Calli" width="96" height="32"></h1>
+    <p id="summary" role="status" aria-live="polite"></p>
+  </header>
+
+  <div id="stop-banner" class="banner banner-stop" role="alert" hidden>
+    <span class="icon" aria-hidden="true">■</span>
+    <strong>stopped: no new write will start</strong>
+    <button type="button" id="resume">Resume</button>
+  </div>
+
+  <div id="stop-confirm" class="banner banner-confirm" role="alertdialog" aria-labelledby="stop-confirm-title" hidden>
+    <strong id="stop-confirm-title">Stop all new writes?</strong>
+    <span>Pending items are cancelled; the item being written finishes its read-back.</span>
+    <button type="button" id="stop-yes" class="danger">Yes, STOP</button>
+    <button type="button" id="stop-no">Cancel</button>
+  </div>
+
+  <main class="layout">
+    <section class="panel" aria-labelledby="dictation-title">
+      <h2 id="dictation-title">Dictation</h2>
+      <form id="dictate-form">
+        <label for="utterance">Dictated sentence</label>
+        <textarea id="utterance" rows="3" placeholder="Barbara, participe bien, doit soigner la rédaction."></textarea>
+        <p class="hint" id="utterance-hint">Enter proposes, Shift+Enter adds a line.</p>
+        <button type="submit" id="propose">Propose</button>
+      </form>
+
+      <section id="proposal" class="proposal" aria-labelledby="proposal-title" hidden>
+        <h3 id="proposal-title">Proposal <span id="proposal-more"></span></h3>
+        <fieldset id="candidates">
+          <legend>Student</legend>
+          <div id="candidate-list"></div>
+        </fieldset>
+        <div id="correct-student" hidden>
+          <label for="student-select">Student (whole class)</label>
+          <select id="student-select"></select>
+        </div>
+        <label for="proposal-text">Text to write</label>
+        <textarea id="proposal-text" rows="4" readonly></textarea>
+        <div id="advice" class="advice" hidden>
+          <p id="advice-text"></p>
+          <p class="meta">Source: <a id="advice-source" target="_blank" rel="noopener noreferrer"></a></p>
+          <button type="button" id="advice-add">Ajouter</button>
+        </div>
+        <label for="course">Course or class</label>
+        <input id="course" type="text" autocomplete="off">
+        <div class="actions">
+          <button type="button" id="approve" class="primary">Approve</button>
+          <button type="button" id="correct">Correct</button>
+          <button type="button" id="discard">Discard</button>
+        </div>
+        <p id="proposal-msg" role="status" aria-live="polite"></p>
+      </section>
+
+      <p id="message" role="status" aria-live="polite"></p>
+
+      <button type="button" id="stop" class="danger stop">
+        <span class="icon" aria-hidden="true">■</span> STOP
+      </button>
+      <p class="hint">Escape: STOP (asks to confirm). Enter: approve when one student is selected.</p>
+
+      <h2 id="roster-title">Class</h2>
+      <ul id="roster" class="roster" aria-labelledby="roster-title"></ul>
+    </section>
+
+    <section class="panel" aria-labelledby="queue-title">
+      <h2 id="queue-title">Queue</h2>
+      <ol id="queue" class="items"></ol>
+      <p id="queue-empty" class="hint">No approved item yet.</p>
+
+      <h2 id="journal-title">Journal</h2>
+      <p id="journal-path" class="hint"></p>
+      <ol id="journal" class="journal" aria-labelledby="journal-title"></ol>
+    </section>
+  </main>
+</body>
+</html>

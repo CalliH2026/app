@@ -1,0 +1,84 @@
+/* Calli brand (logo by Liqin Wang) and fictional AI portraits in this workspace. */
+.calli-brand { flex-direction: column; align-items: flex-start; gap: 6px; }
+.calli-brand i { font-style: normal; font-size: 9px; letter-spacing: .08em; opacity: .6; }
+.calli-logo { display: block; width: 132px; max-width: 100%; height: auto; }
+.avatar.calli-photo { background-image: url(/static/avatars/calli-portraits-fictifs-ia-s01-s10.png);
+  background-size: 500% 200%; background-repeat: no-repeat; color: transparent; }
+.avatar.small { width: 28px; height: 28px; display: inline-grid; vertical-align: middle; margin-right: 8px; }
+.calli-photo-note { font-size: 11px; opacity: .65; }
+.calli-module { margin-top: 8px; }
+.calli-frame { display: block; width: 100%; height: calc(100vh - 210px); min-height: 560px; border: 0; background: transparent; }
+.calli-unavailable { border: 1px solid var(--line, #e3e3e3); border-radius: 14px; padding: 18px 20px; background: #fff; max-width: 640px; }
+.calli-unavailable p { margin: 6px 0 0; }
+@media (max-width: 760px) { .calli-logo { width: 104px; } .calli-frame { height: calc(100vh - 170px); min-height: 480px; } }
+.calli-toolbar { align-items: end; }
+.calli-toolbar select { min-width: 14rem; }
+.calli-tech { margin-top: 10px; font-size: 12px; }
+/* "Assistant Calli": the Calli symbol (brand/calli-symbol.svg), natural aspect ratio, H icon sizes. */
+.calli-symbol { height: 20px; width: auto; flex-shrink: 0; display: inline-block; object-fit: contain; }
+.nav > .calli-symbol { height: 19px; margin: 0; }
+.agent-overview > .calli-symbol { height: 48px; }
+.recording-placeholder > .calli-symbol, .orbit .calli-symbol { height: 44px; opacity: .7; }
+
+/* Ma famille: read-only parent view, same H tokens as the workspace. */
+.family-banner { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; background: var(--pale, #f2ebfc); border-radius: 9px; padding: 14px 18px; margin-bottom: 16px; font-size: 12px; color: var(--ink, #23222a); }
+.family-banner span { color: #5e5868; }
+.role-tag { font-style: normal; font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: .4px; color: var(--muted, #86838f); border: 1px solid var(--line, #eae8ee); border-radius: 3px; padding: 1px 4px; margin-left: 4px; vertical-align: 1px; background: #fff; }
+.family-banner .family-parent { flex-basis: 100%; margin: 0; font-size: 11px; color: var(--iris, #5a04bc); }
+.family-mode { font-family: var(--mono); font-size: 10px; color: var(--iris, #5a04bc) !important; margin-left: auto; }
+.family-briefs { margin-bottom: 16px; }
+.family-about summary, .family-evidence > summary { cursor: pointer; font-size: 12px; color: var(--muted, #86838f); }
+.family-about p { margin: 6px 0 0; font-size: 12px; }
+.family-evidence { margin-bottom: 16px; }
+.family-evidence > summary { font-size: 14px; font-weight: 600; color: var(--ink, #23222a); padding: 8px 0; }
+.family-evidence[open] > summary { margin-bottom: 8px; }
+.family-briefs > h3 { font-size: 16px; font-weight: 600; margin: 0 0 10px; }
+.family-brief-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.family-brief { padding: 16px 20px; }
+.family-brief header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.family-brief header small { display: block; font-size: 12px; color: var(--muted, #86838f); }
+.family-brief dl { margin: 0; display: grid; gap: 4px; }
+.family-brief dt { font-size: 12px; font-weight: 600; color: #4a4a58; margin-top: 8px; }
+.family-brief dt:first-child { margin-top: 0; }
+.family-brief dd { margin: 0; font-size: 14px; line-height: 20px; color: #23222a; }
+.family-brief dd .family-source { margin-left: 4px; }
+.family-brief dd.family-assessment { padding: 9px 12px; background: #f1ecf9; border-radius: 8px; color: #5a04bc; font-weight: 600; }
+.family-top { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; margin-bottom: 16px; }
+.family-children { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+.family-block, .family-child { padding: 18px 20px; }
+.family-block h3 { font-size: 14px; font-weight: 600; margin: 0 0 12px; }
+.family-child header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.family-child header small { display: block; font-size: 11px; color: var(--muted, #86838f); }
+.family-child ul, .family-actions, .family-deadlines, .family-calls, .family-errors { list-style: none; margin: 0; padding: 0; }
+.family-child > ul > li, .family-actions > li { border-top: 1px solid var(--line, #eae8ee); padding: 10px 0; font-size: 12px; line-height: 1.6; }
+.family-child blockquote { margin: 0 0 4px; font-size: 12px; color: var(--ink, #23222a); }
+.family-child p { margin: 0 0 4px; color: #5e5868; }
+.family-view .family-tag { all: unset; display: inline-block; font-family: var(--mono); font-size: 9px; letter-spacing: .4px; text-transform: uppercase; color: var(--muted, #86838f); margin-right: 8px; }
+.family-view .family-tag.suggestion { color: var(--iris, #5a04bc); }
+.family-source { display: inline-block; font-size: 11px; color: var(--iris, #5a04bc); margin-right: 10px; }
+.family-source.stale { color: var(--red, #ac5f63); }
+.family-deadlines li { display: grid; grid-template-columns: 9.5em 1fr auto; gap: 2px 10px; padding: 9px 0; border-top: 1px solid var(--line, #eae8ee); font-size: 12px; }
+.family-deadlines time { font-weight: 600; }
+.family-deadlines small { grid-column: 2; color: var(--muted, #86838f); }
+.family-deadlines a { grid-row: 1; grid-column: 3; font-size: 11px; color: var(--iris, #5a04bc); }
+.family-deadlines li.past { opacity: .6; }
+.family-missing { background: #fbf4f4; border-radius: 6px; padding: 8px 10px; font-size: 11px; color: var(--red, #ac5f63) !important; }
+.family-child details summary, .calli-tech summary { font-size: 11px; color: var(--muted, #86838f); cursor: pointer; margin-top: 8px; }
+.family-sources li { font-size: 11px; padding: 8px 0; border-top: 1px solid var(--line, #eae8ee); }
+.family-sources li.flash { background: var(--pale, #f2ebfc); }
+.family-sources .mono { font-size: 9px; margin: 0 6px 0 0; }
+.family-calls li, .family-errors li { font-size: 12px; padding: 4px 0; }
+.family-errors li { color: var(--red, #ac5f63); }
+@media (max-width: 760px) {
+  .family-top, .family-children { grid-template-columns: 1fr; }
+  .family-mode { margin-left: 0; }
+  .family-deadlines li { grid-template-columns: 1fr auto; }
+  .family-deadlines small { grid-column: 1; }
+  .family-deadlines a { grid-column: 2; }
+}
+
+.family-preparing{font-size:13px;color:var(--purple,#5a04bc);background:var(--lilac,#f4effa);padding:12px 16px;border-radius:10px;margin:0 0 16px}
+
+/* Long display formulas scroll within their report, preserving mobile width. */
+.calli-math .katex { font-size: 1.04em; }
+.calli-math .katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .25rem 0; }

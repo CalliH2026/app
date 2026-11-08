@@ -1,0 +1,13 @@
+{
+  "purpose": "Authorized actual landing capture for new video opening",
+  "files": {
+    "index.html": "da9dfe9f860f2594379765439fda40aba76eafb2bf2c36f78116639d749a7e11",
+    "styles.css": "b93fdee27c111a43609b8d7f88d63ae3586fba7b0418f0a1f57b70003bf8817e",
+    "index.fr.html": "26e576c0958af26c0dc0eacc7acdaff0e31f154cd249e6fc0c5e139b48cc1061",
+    "assets/workspace.png": "d1696a72a22a0f2c48d0ff6f36bf5053b03455f9aabe7f4ce00422677c650ac5",
+    "assets/pronote.png": "28484748c8c20712a52e6209ee33f34c568da179e3485add0fe5628eb401667a",
+    "assets/calli-logo-transparent.svg": "b47674e89ad18c3fb1902f19a1d0adcfc53fd1edaedfc7ff3f311e7b4fbc53fd"
+  },
+  "hero_update": "Replace assets/workspace.png with accepted PR22 np-today-2c1f5a4.png and update intrinsic width/height. Return that exact screenshot to Root for final landing sync.",
+  "video": "Excluded from archive. Use existing orchestration MP4 on cloud only if browser metadata requests require it; no playback during capture. Final local landing gets final new presentation video."
+}

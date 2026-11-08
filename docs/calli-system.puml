@@ -1,0 +1,66 @@
+@startuml
+title Calli: integrated software architecture
+top to bottom direction
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam defaultFontName SansSerif
+skinparam defaultFontColor #17202E
+skinparam ArrowColor #737B89
+skinparam componentBackgroundColor #F0ECFA
+skinparam componentBorderColor #7160A8
+skinparam packageBorderColor #C9CDD6
+skinparam packageBackgroundColor #FAFAFC
+skinparam nodesep 35
+skinparam ranksep 40
+
+actor "Teacher / parent" as User
+package "Browser" {
+  [New Pronote\nrole-specific views] as UI
+  [Isolated exercise preview] as Exercise
+}
+package "Calli Python service" {
+  [FastAPI workspace\nmvp.app] as App
+  [Dictation policy\nui.dictation] as Policy
+  [Preparation / exercise / family\ncase and source checks] as Prep
+  [Outing coordinator\n3 independent collectors] as Outing
+  database "Queue + STOP" as Queue
+  database "Case snapshots, jobs\nand artifacts" as Jobs
+}
+package "Native writer process" {
+  [next_item / report_result\ncomparison and journal] as Writer
+  database "Run journal" as Journal
+}
+package "External services" {
+  [Gladia\nspeech to text] as Gladia
+  [H managed agents\npreparation and outing tools] as H
+  [Linkup / OSRM\nsearch and route estimates] as Search
+  [Cognition Devin API\nexercise generation] as Devin
+  [Holo desktop\ncomputer use] as Holo
+}
+node "Windows desktop" {
+  [PRONOTE] as Pronote
+}
+
+User --> UI
+UI --> App : HTTP / WebSocket
+App --> Policy : /calli mount
+Policy <--> Gladia : audio / transcript
+Policy --> Queue : guarded completed turn
+App --> Prep
+App --> Outing
+Prep <--> H : bounded tools / result
+Outing <--> H : requested collectors / result
+Prep --> Search
+Outing --> Search
+Prep --> Devin : skill brief
+Prep --> Jobs
+Outing --> Jobs
+App --> Exercise : sandboxed HTML
+Queue <--> Writer : one item at a time
+Writer <--> Holo : custom tools
+Holo --> Pronote : screen / input / read-back
+Writer --> Journal
+
+footer Configured backend topology. The public site is a separate read-only export of saved outputs.\nThe embedded native module is disabled in hosted mode (PUBLIC_URL).
+@enduml

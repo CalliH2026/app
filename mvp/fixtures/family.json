@@ -1,0 +1,53 @@
+{
+  "family_id": "demo-famille-composite",
+  "label": "Famille Martin",
+  "parent": {"initials": "GM", "name": "Grégory Martin", "role": "Parent", "relation": "Père d’Alex et de Lucas Martin", "space": "Espace parent"},
+  "notice": "Famille fictive créée pour la démonstration : Grégory Martin et ses deux enfants, Alex (dossier du prototype New Pronote) et Lucas (sources de démonstration Calli). Aucune donnée réelle ; elle n’est pas reliée au relevé natif PRONOTE.",
+  "as_of": "2026-11-07",
+  "stale_after_days": 21,
+  "children": [
+    {"child_id": "alex", "name": "Alex Martin", "class": "4e B", "origin": "Dossier fictif du prototype New Pronote", "avatar": {"id": "alex"}},
+    {"child_id": "lucas", "name": "Lucas Martin", "class": "3A", "origin": "Sources fictives Calli", "avatar": {"native_id": "s01"}}
+  ],
+  "sources": [
+    {"source_id": "A-COPIE", "child_id": "alex", "kind": "Copie corrigée", "date": "2026-11-04", "author": "Mme Laurent", "title": "Copie d’Alex · exercice 2",
+     "text": "Calcul exact. Préciser pourquoi le théorème s’applique, identifier l’hypoténuse et rédiger la conclusion. Note de l’exercice : 3/6. Aucune note globale du contrôle n’est fournie."},
+    {"source_id": "A-MSG-1", "child_id": "alex", "kind": "Message", "date": "2026-11-05", "author": "Mme Laurent", "title": "Contrôle corrigé",
+     "text": "Le contrôle est corrigé. Le résultat numérique ne suffit pas : le choix du théorème et la conclusion font partie des compétences évaluées. La consigne et le barème sont joints."},
+    {"source_id": "A-RDV", "child_id": "alex", "kind": "Rendez-vous", "date": "2026-11-07", "author": "Mme Laurent", "title": "Bilan du contrôle",
+     "text": "Rendez-vous le 7 novembre en salle 204, 20 minutes, avec Mme Laurent : bilan du contrôle sur le théorème de Pythagore."},
+    {"source_id": "A-MSG-3", "child_id": "alex", "kind": "Message", "date": "2026-11-07", "author": "Mme Laurent", "title": "Préparation du rendez-vous",
+     "text": "Nous reprendrons l’exercice 2 et nous définirons une méthode de rédaction qu’Alex pourra réutiliser en autonomie."},
+    {"source_id": "L-DEVOIR", "child_id": "lucas", "kind": "Devoir", "date": "2026-11-04", "author": "M. Durand", "title": "Français · lecture analytique",
+     "text": "Lecture analytique du chapitre 3 du Petit Prince, à rendre le 13 novembre sur une copie double."},
+    {"source_id": "L-SORTIE", "child_id": "lucas", "kind": "Sortie scolaire", "date": "2026-11-03", "author": "Vie scolaire", "title": "Sortie au musée",
+     "text": "Sortie de la classe de 3A au musée le 20 novembre. L’autorisation parentale signée est à rendre avant le 14 novembre."},
+    {"source_id": "L-REUNION", "child_id": "lucas", "kind": "Information", "date": "2026-09-20", "author": "Vie scolaire", "title": "Réunion de rentrée",
+     "text": "Réunion parents-professeurs de la classe de 3A le 2 octobre à 18 h."}
+  ],
+  "deadlines": [
+    {"deadline_id": "D-RDV-ALEX", "child_id": "alex", "date": "2026-11-07", "label": "Rendez-vous bilan avec Mme Laurent (salle 204)", "source_id": "A-RDV"},
+    {"deadline_id": "D-DEVOIR-LUCAS", "child_id": "lucas", "date": "2026-11-13", "label": "Rendre la lecture analytique de français", "source_id": "L-DEVOIR"},
+    {"deadline_id": "D-SORTIE-LUCAS", "child_id": "lucas", "date": "2026-11-14", "label": "Rendre l’autorisation de sortie signée", "source_id": "L-SORTIE"}
+  ],
+  "missing": [
+    {"missing_id": "M-NOTE-ALEX", "child_id": "alex", "topic": "Note globale du contrôle", "reason": "La copie corrigée indique qu’aucune note globale du contrôle n’est fournie.", "source_id": "A-COPIE"},
+    {"missing_id": "M-NOTES-LUCAS", "child_id": "lucas", "topic": "Notes du trimestre", "reason": "Aucun relevé de notes de Lucas n’est fourni dans les sources de démonstration.", "source_id": null}
+  ],
+  "actions": [
+    {"action_id": "ACT-SORTIE-LUCAS", "child_id": "lucas", "text": "Signer l’autorisation de sortie de Lucas et la lui confier.", "source_ids": ["L-SORTIE"]},
+    {"action_id": "ACT-CONCLUSION-ALEX", "child_id": "alex", "text": "Relire avec Alex la conclusion attendue avant le rendez-vous.", "source_ids": ["A-COPIE", "A-RDV"]},
+    {"action_id": "ACT-LECTURE-LUCAS", "child_id": "lucas", "text": "Prévoir un moment pour que Lucas avance sa lecture analytique.", "source_ids": ["L-DEVOIR"]},
+    {"action_id": "ACT-METHODE-ALEX", "child_id": "alex", "text": "Demander à Alex de garder par écrit la méthode de rédaction définie au rendez-vous.", "source_ids": ["A-MSG-3"]}
+  ],
+  "saved_digest": {
+    "points": [
+      {"child_id": "alex", "source_id": "A-COPIE"},
+      {"child_id": "alex", "source_id": "A-MSG-3"},
+      {"child_id": "lucas", "source_id": "L-DEVOIR"},
+      {"child_id": "lucas", "source_id": "L-SORTIE"}
+    ],
+    "deadline_ids": ["D-RDV-ALEX", "D-DEVOIR-LUCAS", "D-SORTIE-LUCAS"],
+    "action_ids": ["ACT-SORTIE-LUCAS", "ACT-CONCLUSION-ALEX", "ACT-LECTURE-LUCAS"]
+  }
+}

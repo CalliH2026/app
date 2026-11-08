@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="108" height="64" viewBox="0 0 108 64" role="img" aria-labelledby="parallel-logo-title">
+  <title id="parallel-logo-title">Parallèle</title>
+  <path fill="#17151C" fill-rule="evenodd" d="M60 32a28 28 0 1 1-56 0 28 28 0 0 1 56 0ZM20 42l7.4-20h4.4l-7.4 20H20Zm13.2 0 7.4-20H45l-7.4 20h-4.4Z"/>
+  <path fill="#17151C" fill-rule="evenodd" d="M74 18h14c8 0 13 4.3 13 11.5S96 41 88 41h-7v8h-7V18Zm7 6.5v10h6.8c3.9 0 6.2-1.7 6.2-5s-2.3-5-6.2-5H81Z"/>
+</svg>

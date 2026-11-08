@@ -1,0 +1,22 @@
+{
+  "run_id": "20261107-140107",
+  "target": "moodle",
+  "arm": "calligraphe",
+  "session_id": "858668c7-59b8-4520-83d9-03fd87712cfc",
+  "status": "idle",
+  "outcome": "partial",
+  "error": null,
+  "error_code": null,
+  "answer": "7 feedback comments written in the \"Timed Task\" assignment (Mindful Course Creation): 6 verified successfully (Amy George, Donald Torres, Julie Ellis, Peter Kelly, Charles Bailey, Ann Hansen); Lisa Diaz's comment was saved but the system flagged a persistent text mismatch on the word \"rigoureux\" (gender agreement) despite two correction attempts — the queue is now exhausted.",
+  "elapsed_s": 1362.6,
+  "steps": 207,
+  "tokens": 10010200,
+  "model": "holo4-27b",
+  "cost_usd": 2.0522,
+  "cost_note": "estimate at Models API list prices from the session's token usage",
+  "items": {
+    "verified": 6,
+    "mismatch": 2
+  },
+  "events": 832
+}

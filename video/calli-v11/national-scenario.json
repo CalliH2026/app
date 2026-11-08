@@ -1,0 +1,73 @@
+{
+  "classification": "Full-adoption scenario: gross value of time freed, not measured savings or net fiscal savings",
+  "official_source": {
+    "url": "https://www.education.gouv.fr/depp/l-education-nationale-en-chiffres-edition-2026-505326",
+    "publication_date": "2026-08-25",
+    "reference_school_year": "2025-2026",
+    "schools": 47000,
+    "colleges": 7000,
+    "lycees": 3700,
+    "all_establishments": 57700,
+    "secondary_teachers": 485450
+  },
+  "assumptions": {
+    "adoption": 1,
+    "value_per_hour_eur": 40,
+    "hourly_value_sensitivity_eur": [
+      25,
+      40,
+      60
+    ],
+    "teacher_workload": "video/calli-v8/annual-estimates.json",
+    "teacher_hours_p50": 6.055537943153573,
+    "scope": "Secondary teachers only; all modelled tasks adopted; primary/admin/local-authority/parent gains excluded"
+  },
+  "annual": {
+    "hours_p50": 2939660.894503902,
+    "gross_time_value_eur": 117586435.78015609,
+    "hours_model_p10": 2250005.8200049307,
+    "hours_model_p90": 3657676.7219485086,
+    "display_hours": "~3M",
+    "display_eur": "~€120M"
+  },
+  "adoption_sensitivity": [
+    {
+      "adoption": 0.1,
+      "hours": 293966.08945039025,
+      "gross_time_value_eur": 11758643.57801561
+    },
+    {
+      "adoption": 0.25,
+      "hours": 734915.2236259755,
+      "gross_time_value_eur": 29396608.945039023
+    },
+    {
+      "adoption": 1,
+      "hours": 2939660.894503902,
+      "gross_time_value_eur": 117586435.78015609
+    }
+  ],
+  "valuation_sensitivity": [
+    {
+      "eur_per_hour": 25,
+      "gross_time_value_eur": 73491522.36259755
+    },
+    {
+      "eur_per_hour": 40,
+      "gross_time_value_eur": 117586435.78015609
+    },
+    {
+      "eur_per_hour": 60,
+      "gross_time_value_eur": 176379653.67023414
+    }
+  ],
+  "limitations": [
+    "School counts are context, not the multiplier. The multiplier is secondary-teacher headcount.",
+    "No 43% reduction of annual working time is claimed.",
+    "Time saved has not been measured against human participants.",
+    "Rate of €40/h is an explicit analyst assumption, not an official salary or marginal cost.",
+    "Agent, infrastructure, deployment, support, maintenance costs excluded; no ROI or cash savings established.",
+    "Other actors are not added without a separate validated workload model.",
+    "Adoption and task fit must be validated; the nationally scaled scenario is not a forecast."
+  ]
+}

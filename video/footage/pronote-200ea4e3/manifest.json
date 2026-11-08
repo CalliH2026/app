@@ -1,0 +1,349 @@
+{
+  "session_id": "200ea4e3-78b5-438c-9cf5-431211c253e4",
+  "run_id": "20261107-152520",
+  "source": "H session observation screenshots (JPEG data in files named .png), unretouched, chronological",
+  "target": "PRONOTE desktop client, Windows trial; fictitious students",
+  "what_it_shows": "the approved-CSV writer run: each cell is written from the approved text, saved (Ctrl+S) and read back by the agent (read-backs in runs/20261107-152520/journal.jsonl). No live speech and no live approval is recorded here.",
+  "output": {
+    "file": "video/out/footage-pronote-20s.mp4",
+    "size": [
+      1920,
+      1080
+    ],
+    "fps": 30,
+    "duration_s": 20.0
+  },
+  "views": {
+    "full": [
+      0,
+      0,
+      1280,
+      800
+    ],
+    "grid": [
+      0,
+      0,
+      1280,
+      620
+    ],
+    "zoom_in_s": 0.5,
+    "screen_area_px": [
+      0,
+      60,
+      1920,
+      900
+    ]
+  },
+  "label": "PRONOTE trial | Recorded H session | Sped up",
+  "narration": {
+    "file": "pronote-narration.mp3",
+    "start_s": 0.5,
+    "tempo": 1.0,
+    "voice": "ElevenLabs Alice",
+    "model": "eleven_multilingual_v2",
+    "text": "Here is the real Pronote desktop, inside a Windows trial. The agent writes an approved comment, saves it, and reads it back. Ten comments were verified in five minutes. These are fictitious students. This recording is sped up."
+  },
+  "subtitles": [
+    {
+      "start_s": 0.5,
+      "end_s": 4.5,
+      "text": "Here is the real Pronote desktop, inside a Windows trial."
+    },
+    {
+      "start_s": 4.7,
+      "end_s": 8.6,
+      "text": "The agent writes an approved comment, saves it, and reads it back."
+    },
+    {
+      "start_s": 9.0,
+      "end_s": 12.2,
+      "text": "Ten comments were verified in five minutes."
+    },
+    {
+      "start_s": 12.3,
+      "end_s": 14.3,
+      "text": "These are fictitious students."
+    },
+    {
+      "start_s": 14.4,
+      "end_s": 16.6,
+      "text": "This recording is sped up."
+    }
+  ],
+  "omitted_frames": "7-10 (scroll attempts with no change on screen) and 26-62 (later items, same pattern)",
+  "shots": [
+    {
+      "source_frame": 1,
+      "source_file": "frames/frame-0001.png",
+      "source_sha256": "c56875dc218dc899e4c81c12d5a8c382b02ae7bdf1000a72ed192ada335c1132",
+      "view": "full",
+      "start_s": 0.0,
+      "end_s": 1.5,
+      "out_frames": [
+        0,
+        44
+      ],
+      "original_caption": ""
+    },
+    {
+      "source_frame": 2,
+      "source_file": "frames/frame-0002.png",
+      "source_sha256": "498ca389d87c66de6f37148a2fd927aa136d3b5d5ab9a79c10d46a09a069e1fa",
+      "view": "full",
+      "start_s": 1.5,
+      "end_s": 2.5,
+      "out_frames": [
+        45,
+        74
+      ],
+      "original_caption": "I can see the Saisie des appréciations screen is already open with 3A and FRANCAIS selected, Trimestre 1. I ca"
+    },
+    {
+      "source_frame": 3,
+      "source_file": "frames/frame-0003.png",
+      "source_sha256": "894986ec58a27eeb9477c38cb370ef86432cc0990b9e49c4ab8a95dbd679d7c9",
+      "view": "grid",
+      "start_s": 2.5,
+      "end_s": 3.5,
+      "out_frames": [
+        75,
+        104
+      ],
+      "original_caption": "The cell is open for editing (0/255 shown). Now I'll type the approved comment."
+    },
+    {
+      "source_frame": 4,
+      "source_file": "frames/frame-0004.png",
+      "source_sha256": "09f907e86883be3550a5caa526559f52e8e01532d33e91af4cee45e133d7c2b2",
+      "view": "grid",
+      "start_s": 3.5,
+      "end_s": 5.0,
+      "out_frames": [
+        105,
+        149
+      ],
+      "original_caption": "The text is entered (119/255 characters). Now I'll click on another student's row to save the comment."
+    },
+    {
+      "source_frame": 5,
+      "source_file": "frames/frame-0005.png",
+      "source_sha256": "530e7a05bf3f140b1e7eddf3692f6b59ee5c8e1cf1c823bc96cd4437acfcbc3a",
+      "view": "grid",
+      "start_s": 5.0,
+      "end_s": 6.3,
+      "out_frames": [
+        150,
+        188
+      ],
+      "original_caption": "The comment is saved in the cell. I can see the text displayed in BERNARD Lucas's row. The title bar shows \"mo"
+    },
+    {
+      "source_frame": 6,
+      "source_file": "frames/frame-0006.png",
+      "source_sha256": "530e7a05bf3f140b1e7eddf3692f6b59ee5c8e1cf1c823bc96cd4437acfcbc3a",
+      "view": "grid",
+      "start_s": 6.3,
+      "end_s": 8.0,
+      "out_frames": [
+        189,
+        239
+      ],
+      "original_caption": "The file is saved (title bar no longer shows \"modifié\"). The comment is visible in BERNARD Lucas's row. Let me"
+    },
+    {
+      "source_frame": 11,
+      "source_file": "frames/frame-0011.png",
+      "source_sha256": "334636d56738d8c7097185ba459d28251f2370495dc91ef4ef67a8a024e1a084",
+      "view": "grid",
+      "start_s": 8.0,
+      "end_s": 8.6,
+      "out_frames": [
+        240,
+        257
+      ],
+      "original_caption": "I can see PETIT Lucas in the list. Let me double-click on the Appréciations cell for that student."
+    },
+    {
+      "source_frame": 12,
+      "source_file": "frames/frame-0012.png",
+      "source_sha256": "c5d7f17c872f5f3b8b13ffbe6a70a35c5001e3a0581146afe2bac9eb8883a84d",
+      "view": "grid",
+      "start_s": 8.6,
+      "end_s": 9.2,
+      "out_frames": [
+        258,
+        275
+      ],
+      "original_caption": "The cell is open for editing (0/255). Now I'll type the approved comment."
+    },
+    {
+      "source_frame": 13,
+      "source_file": "frames/frame-0013.png",
+      "source_sha256": "be7f3f747668e83fb2e9080f956078a30a3781abee46cf379007a7a642666c8d",
+      "view": "grid",
+      "start_s": 9.2,
+      "end_s": 10.1,
+      "out_frames": [
+        276,
+        302
+      ],
+      "original_caption": "The text is entered (146/255 characters). Now I'll click on another student's row to save."
+    },
+    {
+      "source_frame": 14,
+      "source_file": "frames/frame-0014.png",
+      "source_sha256": "49336ca232289c6e79942911f2a98e2a3e9c060618304afd4f234d11802f9837",
+      "view": "grid",
+      "start_s": 10.1,
+      "end_s": 11.0,
+      "out_frames": [
+        303,
+        329
+      ],
+      "original_caption": "The comment is saved in the cell. I can see the text for PETIT Lucas. Now I'll press Ctrl+S to save to disk."
+    },
+    {
+      "source_frame": 15,
+      "source_file": "frames/frame-0015.png",
+      "source_sha256": "49336ca232289c6e79942911f2a98e2a3e9c060618304afd4f234d11802f9837",
+      "view": "grid",
+      "start_s": 11.0,
+      "end_s": 12.0,
+      "out_frames": [
+        330,
+        359
+      ],
+      "original_caption": "File saved (title bar no longer shows \"modifié\"). Let me zoom in to verify the exact text in PETIT Lucas's cel"
+    },
+    {
+      "source_frame": 16,
+      "source_file": "frames/frame-0016.png",
+      "source_sha256": "ca745901c14251fbf2abd9bb61d418c0eeea52e0f777b851dd53dfd3f29dfcd2",
+      "view": "grid",
+      "start_s": 12.0,
+      "end_s": 12.7,
+      "out_frames": [
+        360,
+        380
+      ],
+      "original_caption": "I can see LAMBERT Gaël in the current view. Let me double-click on the Appréciations cell for that student."
+    },
+    {
+      "source_frame": 17,
+      "source_file": "frames/frame-0017.png",
+      "source_sha256": "f044a19f735831f217ab84404ee8d898d63b710e51413d79e5467e64562eb56d",
+      "view": "grid",
+      "start_s": 12.7,
+      "end_s": 13.4,
+      "out_frames": [
+        381,
+        401
+      ],
+      "original_caption": "The cell is open for editing (0/255). I'll type the text exactly as provided by next_item."
+    },
+    {
+      "source_frame": 18,
+      "source_file": "frames/frame-0018.png",
+      "source_sha256": "f670ef474d759ba7c4f7ed072cb163d829cb71fbc5bd4efcea8d2653bc4f4838",
+      "view": "grid",
+      "start_s": 13.4,
+      "end_s": 14.1,
+      "out_frames": [
+        402,
+        422
+      ],
+      "original_caption": "The text is entered (96/255 characters). Now I'll click another student's row to save."
+    },
+    {
+      "source_frame": 19,
+      "source_file": "frames/frame-0019.png",
+      "source_sha256": "e78dcd3bdd0c2d327a524b0ff9eec57cd8ebc8d1ae1cf9108b9c75eff7d07fda",
+      "view": "grid",
+      "start_s": 14.1,
+      "end_s": 14.8,
+      "out_frames": [
+        423,
+        443
+      ],
+      "original_caption": "The comment is saved in the cell. The title bar shows \"modifié\" - I'll press Ctrl+S to save to disk."
+    },
+    {
+      "source_frame": 20,
+      "source_file": "frames/frame-0020.png",
+      "source_sha256": "e78dcd3bdd0c2d327a524b0ff9eec57cd8ebc8d1ae1cf9108b9c75eff7d07fda",
+      "view": "grid",
+      "start_s": 14.8,
+      "end_s": 15.5,
+      "out_frames": [
+        444,
+        464
+      ],
+      "original_caption": "File saved. Let me zoom in to verify the exact text in LAMBERT Gaël's cell."
+    },
+    {
+      "source_frame": 21,
+      "source_file": "frames/frame-0021.png",
+      "source_sha256": "35de8ce0f2bc0ccc0c0d59195b09cfba43eb39e302caf729cc07bbc98d9ee8ba",
+      "view": "grid",
+      "start_s": 15.5,
+      "end_s": 16.4,
+      "out_frames": [
+        465,
+        491
+      ],
+      "original_caption": "I can see FONTAINE Gaëlle in the current view. Let me double-click on the Appréciations cell."
+    },
+    {
+      "source_frame": 22,
+      "source_file": "frames/frame-0022.png",
+      "source_sha256": "8ff51e9f82571ad5be53df836b73878599d0a4fdc68424f6190602052c7dbbfb",
+      "view": "grid",
+      "start_s": 16.4,
+      "end_s": 17.3,
+      "out_frames": [
+        492,
+        518
+      ],
+      "original_caption": "The cell is open for editing (0/255). Now I'll type the approved comment."
+    },
+    {
+      "source_frame": 23,
+      "source_file": "frames/frame-0023.png",
+      "source_sha256": "6fe87a5431bdee8cd7fa1619f03d5b2c14af9c1bfa6515ccb03b2d1a265eba26",
+      "view": "grid",
+      "start_s": 17.3,
+      "end_s": 18.2,
+      "out_frames": [
+        519,
+        545
+      ],
+      "original_caption": "The text is entered (173/255 characters). Now I'll click on another student's row to save."
+    },
+    {
+      "source_frame": 24,
+      "source_file": "frames/frame-0024.png",
+      "source_sha256": "d94b6ce7d6d856ceed64946213ffb8ab2725ac364c76c58628419164f8675009",
+      "view": "grid",
+      "start_s": 18.2,
+      "end_s": 19.1,
+      "out_frames": [
+        546,
+        572
+      ],
+      "original_caption": "The comment is saved in the cell. Title bar shows \"modifié\" - pressing Ctrl+S to save to disk."
+    },
+    {
+      "source_frame": 25,
+      "source_file": "frames/frame-0025.png",
+      "source_sha256": "d94b6ce7d6d856ceed64946213ffb8ab2725ac364c76c58628419164f8675009",
+      "view": "grid",
+      "start_s": 19.1,
+      "end_s": 20.0,
+      "out_frames": [
+        573,
+        599
+      ],
+      "original_caption": "File saved. Let me zoom in to verify the exact text in FONTAINE Gaëlle's cell."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "provider": "ElevenLabs",
+  "endpoint": "POST https://api.elevenlabs.io/v1/text-to-speech/{voice_id}?output_format=mp3_44100_128",
+  "documentation": "https://elevenlabs.io/docs/api-reference/text-to-speech/convert",
+  "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+  "voice": "Alice - Clear, Engaging Educator",
+  "model_id": "eleven_multilingual_v2",
+  "language_code": "fr",
+  "purpose": "Synthetic voices of the fictional parents of Alex Martin (fixtures only); saved run inputs are unchanged",
+  "derivation": "ffmpeg -i <source.mp3> -ac 1 -ar 24000 -c:a pcm_s16le <file.wav>",
+  "files": [
+    {
+      "scenario": "points",
+      "file": "parent-points-elevenlabs.wav",
+      "sha256": "9fb3d2ddf1f8bc7512f810c76f67327de4dd64ee85921864a49df603bc29f76a",
+      "format": "WAV PCM 16-bit, 24 kHz, mono",
+      "duration_seconds": 32.182875,
+      "source_mp3": "parent-points-elevenlabs.mp3",
+      "source_mp3_sha256": "f419c1d4d09399583288d4603dcc9506f5de1101fdc29955ec887e7b1504d444",
+      "characters": 522,
+      "text": "Bonjour Madame Laurent. Merci de nous recevoir tout à l’heure pour parler du contrôle de mathématiques. Nous avons regardé la copie d’Alex ensemble hier soir. Sur l’exercice du triangle, il trouve bien cinq centimètres, et cela correspond à la correction. Pourtant, il n’a que trois points sur six. Pourquoi perd-il des points alors que son résultat est juste ? Nous aimerions comprendre ce qui était attendu dans la rédaction, ce qui lui manque exactement et comment lui expliquer cela sans le décourager. Merci beaucoup."
+    },
+    {
+      "scenario": "progress",
+      "file": "parent-progress-elevenlabs.wav",
+      "sha256": "cbd181a2231a0cfc4d714d2ac38fe6bc775dd0522eba154a8e896323c28bf9bc",
+      "format": "WAV PCM 16-bit, 24 kHz, mono",
+      "duration_seconds": 34.226208,
+      "source_mp3": "parent-progress-elevenlabs.mp3",
+      "source_mp3_sha256": "5d7aa0b08b036becfaff0984bd7d38c124cea2acc6b201dfa92019d1448d1339",
+      "characters": 569,
+      "text": "Bonjour Madame Laurent. Nous avons bien vu la note du contrôle et nous souhaitons surtout préparer la suite. Alex sait faire ses calculs mais il ne sait pas toujours comment expliquer son raisonnement. Quand nous lui demandons de rédiger, il ne sait pas par où commencer. Comment peut-il progresser ? Pourriez-vous proposer une petite méthode pour reconnaître le théorème à utiliser et rédiger sa réponse ? Nous aimerions repartir du rendez-vous avec un exercice concret à refaire à la maison, puis une façon de vérifier qu’il sait le faire seul. Merci pour votre aide."
+    }
+  ]
+}

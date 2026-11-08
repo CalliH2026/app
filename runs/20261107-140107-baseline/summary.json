@@ -1,0 +1,20 @@
+{
+  "run_id": "20261107-140107",
+  "arm": "baseline",
+  "target": "moodle",
+  "session_id": "b8ded379-40ac-4a08-a43f-5c0eb2b34294",
+  "status": "completed",
+  "answer": "null",
+  "elapsed_s": 233.2,
+  "steps": 113,
+  "tokens": 3907539,
+  "model": "holo4-27b",
+  "cost_usd": 0.6408,
+  "cost_note": "estimate at Models API list prices from the session's token usage",
+  "items": {
+    "verified": 0,
+    "mismatch": 0,
+    "aborted": 8
+  },
+  "note": "rebuilt from session events: the client crashed after the session completed (extract_metrics signature change)"
+}

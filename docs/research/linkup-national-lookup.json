@@ -1,0 +1,7 @@
+{
+  "query": "Read https://www.education.gouv.fr/depp/l-education-nationale-en-chiffres-edition-2026-505326 . Extract the exact counts of primary schools, collèges, lycées, total establishments, teachers in secondary education and their reference year. Return source URLs. Distinguish secondary teachers from all teachers. Do not invent productivity or monetary savings.",
+  "result": {
+    "answer": "I can’t access the linked page from the information provided, so I can’t verify the exact counts or their reference year. Please share the relevant passage or table, and I can extract the figures while distinguishing secondary teachers from all teachers.",
+    "sources": []
+  }
+}

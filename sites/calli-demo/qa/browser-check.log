@@ -1,0 +1,38 @@
+PASS landing shows Try the workspace
+PASS landing video links to YouTube
+PASS Today greets Mme Laurent
+PASS preview status chip present
+PASS page classes renders
+PASS page evaluations renders
+PASS page documents renders
+PASS page messages renders
+PASS page agenda renders
+PASS page agent renders
+PASS page reports renders
+PASS page management renders
+PASS copy document opens with source details
+PASS opening the copy attaches the saved H run (no new run) Aperçu public : aucune nouvelle session H n’est lancée. Le rapport enregistré du 7 novembre 2026 est affiché.
+PASS marking scheme opens
+PASS saved H report renders
+PASS practice card shows the saved Devin exercise Un entraînement pour progresser Pythagore · trois étapes · à essayer en autonomie Devin Création avec API Analyse de la copie par H. L’activité travaille le rep
+PASS exercise: wrong answer counted Score : 0 / 7 · Erreurs : 1
+PASS exercise: correct answer scored Score : 1 / 7 · Erreurs : 0
+PASS exercise: reset
+PASS saved outing draft renders Sorties scolaires Préparez le trajet, le budget et les documents de votre sortie. Votre sortie 28 élèves Classe 4e B · 28 élèves Destination Musée d’Orsay Musée
+PASS outing tool trace reachable Sources et détails ⌄ La visite, à la source. Entrée élève : 0,00 € · Le 12 novembre 2026 est un jeudi ; l’horaire de fermeture du jour et les conditions d’accès
+PASS outing action blocked with short note Patientez…
+PASS family: Mme Martin with Alex Martin and Lucas Martin
+PASS family: no prominent fictive banner
+PASS family: source opens
+PASS appreciations iframe renders roster Aller à la dictée CLASSE 3A · FRANCAIS · TRIMESTRE 1 STOP Arrête les nouvelles écritures ; une saisie déjà en cours peut se terminer, rien n’est annulé. Mode ap
+PASS appreciations: no "Arrêt demandé"
+PASS appreciations portraits loaded 1
+PASS dictation control does not reach the network Commencer la dictée
+PASS 390px / no horizontal overflow 0
+PASS 390px /guide no horizontal overflow 0
+PASS 390px /app?view=family no horizontal overflow 0
+PASS 390px /app no horizontal overflow 0
+PASS no non-GET request left the browser
+PASS no external request attempted
+PASS no failed responses
+PASS no page errors

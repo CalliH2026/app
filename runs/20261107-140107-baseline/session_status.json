@@ -1,0 +1,19 @@
+{
+  "status": "completed",
+  "error": null,
+  "error_code": null,
+  "outcome": "success",
+  "steps": 113,
+  "usage_per_model": [
+    {
+      "name": "holo4-27b",
+      "input_tokens": 3852738,
+      "cached_tokens": 2957600,
+      "output_tokens": 32889,
+      "reasoning_tokens": 21912
+    }
+  ],
+  "subagent_session_ids": [],
+  "pending_tool_calls": [],
+  "pending_approvals": []
+}

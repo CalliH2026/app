@@ -1,0 +1,92 @@
+# ──────────────────────────────────────────────────
+# Template galerie — « Ma première démo »
+# Cible example.com : toujours en ligne, AUCUN sélecteur,
+# AUCUN identifiant requis. Rend tel quel en un seul appel
+# render_demo_from_yaml — le point de départ anti-échec pour
+# un compte frais. Remplacez ensuite les url: et les
+# narration: par celles du produit à présenter. Les effets
+# 3D (perspective_tilt, device_frame) restent sans sélecteur.
+# ──────────────────────────────────────────────────
+
+metadata:
+  title: "Ma première démo"
+  description: "Parcours minimal garanti : page publique, scroll doux, révélations 3D, sous-titres karaoke."
+  version: "2.1.0"
+
+voice:
+  engine: "gtts"
+  voice_id: "fr"
+
+scenarios:
+  - name: "Premier pas"
+    url: "https://example.com"
+    browser: "chrome"
+    color_scheme: "light"
+    viewport:
+      width: 1920
+      height: 1080
+    subtitle:
+      enabled: true
+      style: "karaoke"
+      font_size: 42
+      position: "bottom"
+      highlight_color: "#6366F1"
+    pre_steps:
+      - action: "navigate"
+        url: "https://example.com"
+        wait: 2.0
+    steps:
+      # 1. Accroche d'ouverture
+      - action: "scroll"
+        direction: "down"
+        pixels: 1
+        narration: "Bienvenue ! Cette démo a été générée automatiquement à partir de quelques lignes de YAML."
+        wait: 4.0
+        effects:
+          - type: "glow"
+            duration: 3.0
+            color: "#6366F1"
+
+      # 2. Mise en valeur
+      - action: "scroll"
+        direction: "down"
+        pixels: 300
+        narration: "Décrivez ici la première fonctionnalité de votre produit, pendant que la caméra suit le contenu."
+        wait: 3.5
+        smooth_scroll: true
+        effects:
+          - type: "perspective_tilt"
+            angle: 8
+            direction: "left"
+            duration: 2.5
+
+      # 3. Deuxième point clé
+      - action: "scroll"
+        direction: "down"
+        pixels: 300
+        narration: "Chaque étape associe une narration à une action : navigation, scroll, clic ou saisie."
+        wait: 3.5
+        smooth_scroll: true
+        effects:
+          - type: "device_frame"
+            text: "macbook"
+            color: "#6366F1"
+            duration: 3.0
+
+      # 4. Conclusion
+      - action: "navigate"
+        url: "https://example.com"
+        narration: "À vous de jouer : remplacez ces URL par les vôtres et relancez le rendu."
+        wait: 4.0
+        effects:
+          - type: "fade_in"
+            duration: 1.5
+
+pipeline:
+  - stage: "optimize"
+
+output:
+  filename: "premiere-demo.mp4"
+  directory: "output/"
+  formats:
+    - "mp4"

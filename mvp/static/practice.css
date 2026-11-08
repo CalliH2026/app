@@ -1,0 +1,36 @@
+.practice-card{padding:23px;margin:24px 0;border:1px solid #e4d9ee;border-radius:10px;background:#faf7fd;color:#594769}
+.practice-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:13px}
+.practice-card h3{font-size:15px;font-weight:600;margin:0 0 7px;letter-spacing:-.3px}
+.practice-card-head p,.practice-description{font-size:12px;line-height:1.8;color:#897494;margin:0}
+.practice-badge{font-size:9px;line-height:1.7;padding:5px 8px;border:1px solid #e1d3eb;border-radius:6px;background:#f0e8f7;color:#87689c;flex-shrink:0;max-width:145px;text-align:center}
+.practice-card-status{font-size:12px;color:#857090;line-height:1.8;margin:14px 0 0}
+.practice-card-status.is-error{color:#a36254}
+.practice-actions{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-top:17px}
+.practice-actions .button{font-size:11px;min-height:41px;padding:11px 13px}
+.practice-fine{font-size:10px!important;line-height:1.9!important;color:#a28aaf!important;margin:12px 0 0!important}
+.practice-error{font-size:11px;line-height:1.8;padding:10px 12px;border:1px solid #eddbd3;border-radius:6px;background:#fff6f1;color:#a36350;margin:12px 0 0}
+.practice-details{margin-top:14px;border-top:1px solid #e9e0ef;padding-top:12px}
+.practice-details summary{font-size:10px;line-height:1.9;cursor:pointer;color:#9d83ad}
+.practice-events{padding:0;list-style:none;margin:11px 0 0}
+.practice-events li{display:flex;gap:9px;font-size:10px;line-height:1.9;margin-top:5px;color:#9e86aa}
+.practice-events time{white-space:nowrap;font-size:9px;color:#b4a0bf}
+.practice-session{font-size:11px;color:#88639e;text-decoration:underline;text-underline-offset:3px}
+.practice-preview-dialog{width:min(1080px,calc(100vw - 38px));max-width:none;height:min(900px,calc(100dvh - 38px));max-height:none;padding:0;border:1px solid #ddcfe9;border-radius:13px;background:#fff;overflow:hidden;box-shadow:0 30px 90px #32164a26}
+.practice-preview-dialog::backdrop{background:#30213765;backdrop-filter:blur(3px)}
+.practice-preview-shell{height:100%;display:flex;flex-direction:column;min-height:0}
+.practice-preview-head{display:flex;align-items:flex-start;gap:16px;padding:20px 23px;border-bottom:1px solid #e8dff0}
+.practice-preview-head>div{flex:1;min-width:0}
+.practice-preview-head h2{font-size:20px;line-height:1.4;margin:0 0 6px;letter-spacing:-.5px}
+.practice-preview-head p{font-size:11px;line-height:1.7;color:#a08aaf;margin:0}
+.practice-preview-close{width:31px;height:32px;border:1px solid #e4d9ec;border-radius:7px;color:#967da5;background:#fcfaff;display:grid;place-items:center;flex-shrink:0}
+.practice-preview-close svg{width:17px;height:17px}
+.practice-preview-frame{width:100%;border:0;display:block;flex:1;min-height:0;background:#f8f6fc}
+.practice-preview-footer{display:flex;align-items:center;justify-content:space-between;gap:17px;padding:15px 22px;border-top:1px solid #e8dff0;background:#fff}
+.practice-preview-footer>p{font-size:11px;line-height:1.8;color:#9d86ac;max-width:430px;margin:0}
+.practice-preview-footer .practice-actions{margin:0;flex-shrink:0}
+.practice-preview-footer .button{font-size:11px}
+.practice-preview-footer [role=alert]{color:#a36254}
+.practice-loading-mark{display:inline-block;width:11px;height:11px;border:1.5px solid currentColor;border-right-color:transparent;border-radius:50%;vertical-align:-1px;margin-right:6px;animation:practice-spin .8s linear infinite}
+@keyframes practice-spin{to{transform:rotate(360deg)}}
+@media(max-width:760px){.practice-card{padding:20px}.practice-card-head{flex-direction:column;gap:9px}.practice-badge{max-width:none;text-align:left}.practice-preview-dialog{width:calc(100vw - 14px);height:calc(100dvh - 14px);border-radius:10px}.practice-preview-head{padding:16px}.practice-preview-head h2{font-size:17px}.practice-preview-footer{padding:13px 15px;align-items:stretch;flex-direction:column;gap:10px}.practice-preview-footer .practice-actions{width:100%}.practice-preview-footer .button{flex:1}.practice-preview-footer>p{font-size:10px;max-width:none}.practice-card .practice-actions .button{width:100%}.practice-card h3{font-size:14px}.practice-events li{display:block}.practice-events time{margin-right:7px}}
+@media(prefers-reduced-motion:reduce){.practice-loading-mark{animation:none}}

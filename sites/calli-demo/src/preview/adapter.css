@@ -1,0 +1,12 @@
+.calli-preview-status{position:fixed;left:14px;bottom:14px;z-index:9999;font:500 12px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;color:#1d2433;max-width:min(360px,calc(100vw - 28px))}
+.calli-preview-status summary{cursor:pointer;list-style:none;display:inline-block;padding:6px 11px;border:1px solid #d5dbe5;border-radius:999px;background:rgba(255,255,255,.94);box-shadow:0 2px 8px rgba(20,30,50,.08)}
+.calli-preview-status summary::-webkit-details-marker{display:none}
+.calli-preview-status summary::before{content:"";display:inline-block;width:7px;height:7px;margin-right:7px;border-radius:50%;background:#8a94a6;vertical-align:1px}
+.calli-preview-panel{margin-top:8px;padding:12px 14px;border:1px solid #d5dbe5;border-radius:12px;background:#fff;box-shadow:0 8px 24px rgba(20,30,50,.14)}
+.calli-preview-panel p{margin:0 0 8px}
+.calli-preview-panel ul{margin:0 0 8px;padding:0;list-style:none}
+.calli-preview-panel li{display:flex;flex-direction:column;padding:5px 0;border-top:1px solid #eef1f5}
+.calli-preview-panel li span,.calli-preview-muted{color:#5d6778}
+.calli-preview-panel a{color:#1f5fbf;font-weight:600;text-decoration:none}
+.calli-preview-toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10000;max-width:min(560px,calc(100vw - 28px));padding:10px 14px;border-radius:10px;background:#1d2433;color:#fff;font:500 13px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(20,30,50,.2)}
+.calli-preview-toast[hidden]{display:none}

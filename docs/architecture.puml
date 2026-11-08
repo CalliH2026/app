@@ -1,0 +1,56 @@
+@startuml
+title Calli: native writer and trust boundaries
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+package "Calli service (local or Windows demo VM)" {
+  [Microphone] as Mic
+  [New Pronote dictation\ncontext checks, correct, STOP] as UI
+  [Local structurer\nutterance -> student + text] as Struct
+  database "Guarded item queue\n+ STOP file" as Queue
+  [Verifier\ncompare reported identity\nand read-back to queued item] as Verifier
+  database "Journal (JSONL)\nbefore, after, status" as Journal
+  [Scoreboard\nREADME table] as Report
+  [Custom tools\nnext_item, report_result] as Tools
+}
+
+package "Gladia" {
+  [Live speech-to-text\ncustom vocabulary = roster] as STT
+}
+
+package "H Company" {
+  [Computer-use agent\nHolo model] as Agent
+  [Environment\ncloud browser | Windows desktop] as Env
+}
+
+package "Target software (no API, untrusted content)" {
+  [Moodle demo\nassignment feedback] as Moodle
+  [PRONOTE client\nBulletins > Appréciations] as Pronote
+}
+
+Mic --> STT
+STT --> Struct
+Struct --> UI
+UI --> Queue : guarded completed dictation\nor confirmed correction
+Queue --> Tools
+Tools <--> Agent : next_item / report_result
+Agent --> Env
+Env --> Moodle
+Env --> Pronote
+Tools --> Verifier
+Verifier --> Journal
+Verifier --> Queue : optional corrective retry\n(disabled in presentation run)
+Journal --> Report
+UI ..> Queue : STOP drains the queue
+
+note right of Verifier
+  The status of an item is decided here,
+  by checking the reported identity and text.
+  This is not an independent visual audit.
+end note
+
+note bottom of Pronote
+  Text visible on the screen is data for the agent,
+  never an instruction (write policy, injection fixture).
+end note
+@enduml

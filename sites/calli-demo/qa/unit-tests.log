@@ -1,0 +1,44 @@
+✔ GET passes through, every other method is answered locally with 403 JSON (22.356866ms)
+✔ opening the copy shows the saved H report instead of starting a run (3.697871ms)
+✔ microphone, websocket and beacons are disabled; saved outing is preselected (0.881627ms)
+✔ dist stays within budget and contains no media video (27.187811ms)
+✔ no secret-like strings or local paths in the shipped files (22.924832ms)
+✔ API fixtures have no local paths or server-only hints (3.013691ms)
+✔ wrangler template points at the self-contained server and has no account binding (0.204464ms)
+▶ dist/server/index.js (embedded assets, main)
+  ✔ every inventoried route answers GET with its type and HEAD with no body (236.798838ms)
+  ✔ inventory has the required entry points and only GET/HEAD (0.518966ms)
+  ✔ writes, provider actions and unknown methods are rejected as JSON (16.264443ms)
+  ✔ websocket upgrades are refused (0.332438ms)
+  ✔ unknown JSON endpoints fail as JSON, never as HTML (0.715111ms)
+  ✔ unknown pages get a small HTML 404, HEAD without body (0.32188ms)
+  ✔ no arbitrary file serving or traversal (0.665742ms)
+  ✔ query strings do not change routing (0.418752ms)
+  ✔ saved fixtures keep the accepted personas and saved statuses (12.849737ms)
+  ✔ saved Devin exercise keeps its sandbox CSP (0.612381ms)
+  ✔ pages carry a same-origin CSP and the preview adapter (0.76204ms)
+  ✔ size-optimized media keep their declared type (1.343768ms)
+✔ dist/server/index.js (embedded assets, main) (272.996629ms)
+▶ dist/worker.js + ASSETS binding
+  ✔ every inventoried route answers GET with its type and HEAD with no body (184.237976ms)
+  ✔ inventory has the required entry points and only GET/HEAD (0.303643ms)
+  ✔ writes, provider actions and unknown methods are rejected as JSON (2.615515ms)
+  ✔ websocket upgrades are refused (0.160656ms)
+  ✔ unknown JSON endpoints fail as JSON, never as HTML (0.497876ms)
+  ✔ unknown pages get a small HTML 404, HEAD without body (0.207238ms)
+  ✔ no arbitrary file serving or traversal (0.438579ms)
+  ✔ query strings do not change routing (2.97202ms)
+  ✔ saved fixtures keep the accepted personas and saved statuses (8.243422ms)
+  ✔ saved Devin exercise keeps its sandbox CSP (0.665459ms)
+  ✔ pages carry a same-origin CSP and the preview adapter (1.777618ms)
+  ✔ size-optimized media keep their declared type (1.74131ms)
+✔ dist/worker.js + ASSETS binding (204.714212ms)
+✔ server bundle is a plain default {fetch} module and works without env (10.482632ms)
+ℹ tests 32
+ℹ suites 2
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 628.18374

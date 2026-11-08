@@ -1,0 +1,147 @@
+From c1a7e5bb41120b27706588af3c80d13c810a84d4 Mon Sep 17 00:00:00 2001
+From: "wilfred.dore" <wilfred.dore@telecom-paristech.org>
+Date: Sat, 7 Nov 2026 18:07:16 +0000
+Subject: [PATCH 9/9] outings: name a Holo4 timeout and record the cancel
+ request as unconfirmed
+
+A real outing session reached the 300 s wait without any tool call while
+the provider still reported running. The job ended 'partial' with the
+generic message, indistinguishable from an ordinary partial dossier with
+unknown facts, and the cancel request was silently swallowed.
+
+- job.h_outcome is 'timeout' (TimeoutError from wait_for_completion) or
+  'error', with h_error; _error names the 300 s limit (H_TIMEOUT_S).
+- job.session_cancel records {requested_at, state: cancel_requested} or
+  cancel_failed with the exception type: a request, not a confirmed stop.
+  session_cleanup still records the provider status seen afterwards.
+- Status semantics are unchanged (failures stay 'partial').
+- Tests: timeout without any tool call, and a failed cancel request.
+
+Co-Authored-By: Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>
+---
+ mvp/outings.py                       | 13 +++++--
+ mvp/test_outings_holo_integration.py | 57 ++++++++++++++++++++++++++++
+ 2 files changed, 67 insertions(+), 3 deletions(-)
+
+diff --git a/mvp/outings.py b/mvp/outings.py
+index c515250..4080923 100644
+--- a/mvp/outings.py
++++ b/mvp/outings.py
+@@ -28,6 +28,7 @@ from .tool_calls import ToolCallTracker
+ 
+ PARIS = ZoneInfo('Europe/Paris')
+ FOLDER = DATA / 'outings'
++H_TIMEOUT_S = 300
+ LOCK = threading.RLock()
+ JOBS = {}
+ HOLO_MODEL = 'holo4-27b'
+@@ -214,6 +215,8 @@ def _error(exc):
+     # Provider bodies may contain credentials/URLs. Return bounded safe categories.
+     if isinstance(exc, httpx.HTTPStatusError):
+         return f'Le fournisseur a répondu HTTP {exc.response.status_code}. Réessayez ultérieurement.'
++    if isinstance(exc, TimeoutError):
++        return f'Holo4 n’a pas terminé dans le délai de {H_TIMEOUT_S} s.'
+     if isinstance(exc, httpx.TimeoutException):
+         return 'Le fournisseur n’a pas répondu à temps.'
+     if isinstance(exc, httpx.RequestError):
+@@ -659,7 +662,7 @@ def _fill_with_h(job):
+         _change(job, session_id=session.id)
+         threading.Thread(target=_follow_h_session, args=(client, session.id, job, monitor_stop),
+                          name='holo4-provider-status-' + job['id'], daemon=True).start()
+-        result = session.wait_for_completion(timeout_seconds=300, wait_for_seconds=10)
++        result = session.wait_for_completion(timeout_seconds=H_TIMEOUT_S, wait_for_seconds=10)
+         if result.answer is None or not used['filled'] or str(result.status) not in ('completed', 'idle'):
+             raise ValueError('H n’a pas terminé le préremplissage.')
+         answer = result.answer
+@@ -674,10 +677,13 @@ def _fill_with_h(job):
+         pool.close()
+         if session is not None:
+             if not completed:
++                # A cancel request is not a confirmed stop: record what was asked and what the provider said next.
++                cancel = {'requested_at': now(), 'state': 'cancel_requested'}
+                 try:
+                     session.cancel()
+-                except Exception:
+-                    pass
++                except Exception as exc:
++                    cancel.update(state='cancel_failed', error=type(exc).__name__)
++                _change(job, session_cancel=cancel)
+             cleanup = finish_session_safely(session)
+             if cleanup:
+                 _change(job, session_cleanup=cleanup)
+@@ -699,6 +705,7 @@ def _execute(job):
+         except Exception as exc:
+             message = _error(exc)
+             _task(job, 'dossier', status='failed', error=message)
++            _change(job, h_outcome='timeout' if isinstance(exc, TimeoutError) else 'error', h_error=message)
+             _event(job, 'h', 'La session Holo4 est terminée avec des points à vérifier ; les résultats reçus restent disponibles.')
+         with LOCK:
+             if not job.get('dossier'):
+diff --git a/mvp/test_outings_holo_integration.py b/mvp/test_outings_holo_integration.py
+index 4b04236..e0fd95c 100644
+--- a/mvp/test_outings_holo_integration.py
++++ b/mvp/test_outings_holo_integration.py
+@@ -185,3 +185,60 @@ def test_ephemeral_environment_serializes_as_a_real_workstation_in_installed_sdk
+     assert payload['storage'] == {'ephemeral': True}
+     assert payload['kind'] == 'workstation'
+     assert not {'mode', 'start_url', 'session_id'} & payload.keys()
++
++
++def timeout_client(monkeypatch, cancel_error=None):
++    import hai_agents
++    seen = {'cancelled': 0}
++
++    class Session:
++        id = 'timeout-session'
++
++        def wait_for_completion(self, **kwargs):
++            raise TimeoutError('Session timeout-session did not settle within 300s')
++
++        def status(self):
++            return {'status': 'running'}
++
++        def cancel(self):
++            seen['cancelled'] += 1
++            if cancel_error:
++                raise cancel_error
++
++    class Client:
++        def __init__(self, **kwargs): pass
++
++        def start_session(self, **kwargs):
++            return Session()
++
++    monkeypatch.setattr(hai_agents, 'Client', Client)
++    monkeypatch.setattr(outings, 'key', lambda _: 'test-only')
++    return seen
++
++
++def test_timeout_without_tool_call_is_reported_as_timeout_with_an_unconfirmed_cancel(store, monkeypatch):
++    execute = outings._execute
++    local_providers(monkeypatch)
++    seen = timeout_client(monkeypatch)
++    job = job_for(store, monkeypatch)
++    execute(job)
++    assert seen['cancelled'] == 1
++    assert job['session_cancel']['state'] == 'cancel_requested'
++    assert job['session_cleanup']['provider_status_before'] == 'running'
++    assert job['session_cleanup']['release_requested'] is False
++    assert job['h_outcome'] == 'timeout' and 'délai de 300 s' in job['h_error']
++    assert not job.get('tool_calls') and not job.get('executions')
++    assert not any(t['status'] == 'done' for t in job['tasks'])
++    assert job['status'] == 'partial'
++
++
++def test_failed_cancel_request_is_recorded(store, monkeypatch):
++    execute = outings._execute
++    local_providers(monkeypatch)
++    seen = timeout_client(monkeypatch, cancel_error=RuntimeError('provider refused'))
++    job = job_for(store, monkeypatch)
++    execute(job)
++    assert seen['cancelled'] == 1
++    assert job['session_cancel'] == {'requested_at': job['session_cancel']['requested_at'], 'state': 'cancel_failed',
++                                     'error': 'RuntimeError'}
++    assert job['h_outcome'] == 'timeout'
+-- 
+2.56.0
+

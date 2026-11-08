@@ -1,0 +1,198 @@
+From d08772742e741e7759d1a0c3c84b5a976b8f5b9e Mon Sep 17 00:00:00 2001
+From: "wilfred.dore" <wilfred.dore@telecom-paristech.org>
+Date: Sat, 7 Nov 2026 17:52:46 +0000
+Subject: [PATCH 5/9] practice: download the attachment through the documented
+ v3 endpoint
+
+A real session's attachment url is https://app.devin.ai/attachments/<uuid>/activity.html,
+a browser page that answers 401 without a user session; _download fetched it
+without authentication and failed.
+
+- The UUID comes from attachment_id, or from the path of that app.devin.ai
+  link; the name must be activity.html. The link itself is never fetched.
+- GET https://api.devin.ai/v3/organizations/{org}/attachments/{uuid}/activity.html
+  with the service key, as documented; its redirect Location is checked by
+  the existing allowlist and public-address check and fetched without the
+  Authorization header, with the existing size bound and no further redirect.
+- Tests: the official endpoint is used with the key, app.devin.ai is never
+  requested, redirects outside the allowlist or to a private address are
+  refused, and no other host ever receives Authorization.
+
+Co-Authored-By: Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>
+---
+ mvp/practice.py      | 44 +++++++++++++++++++++++++++++-
+ mvp/test_practice.py | 64 +++++++++++++++++++++++++++++++++++++++-----
+ 2 files changed, 101 insertions(+), 7 deletions(-)
+
+diff --git a/mvp/practice.py b/mvp/practice.py
+index 6477c16..c848716 100644
+--- a/mvp/practice.py
++++ b/mvp/practice.py
+@@ -284,6 +284,48 @@ def _safe_attachment_url(value):
+     return value
+ 
+ 
++_UUID = re.compile(r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}')
++_APP_ATTACHMENT = re.compile(r'/attachments/([0-9a-f-]{36})/activity\.html')
++
++
++def _attachment_uuid(item):
++    """The attachment UUID from its metadata, or from the path of its app.devin.ai browser link."""
++    value = item.get('attachment_id')
++    if isinstance(value, str) and _UUID.fullmatch(value):
++        return value
++    parsed = urlparse(str(item.get('url') or ''))
++    match = _APP_ATTACHMENT.fullmatch(parsed.path)
++    if parsed.scheme == 'https' and parsed.hostname == 'app.devin.ai' and match and _UUID.fullmatch(match.group(1)):
++        return match.group(1)
++    raise PracticeError('La pièce jointe Devin n’a pas d’identifiant reconnu.')
++
++
++def _fetch_attachment(client, org, uuid_value, auth):
++    """Documented v3 download: the API answers the authenticated request with a redirect to a presigned URL.
++
++    The attachment's app.devin.ai link is a browser page (401 without a user session) and is never fetched.
++    The service key goes only to api.devin.ai; the presigned host is allowlisted and fetched without it.
++    """
++    url = f'{API_BASE}/organizations/{org}/attachments/{uuid_value}/activity.html'
++    with client.stream('GET', url, headers=auth) as response:
++        if response.status_code in (301, 302, 303, 307, 308):
++            location = response.headers.get('location', '')
++        else:
++            response.raise_for_status()
++            return _bounded(response)
++    return _download(client, location)
++
++
++def _bounded(response):
++    chunks, size = [], 0
++    for chunk in response.iter_bytes():
++        size += len(chunk)
++        if size > MAX_HTML_BYTES:
++            raise PracticeError('Le fichier généré est trop volumineux.')
++        chunks.append(chunk)
++    return b''.join(chunks)
++
++
+ def _download(client, url):
+     # No Authorization header is forwarded to the attachment storage host.
+     _safe_attachment_url(url)
+@@ -486,7 +528,7 @@ def _run(job_id, generation_id, brief, settings):
+                         raise PracticeError('Devin n’a pas joint le fichier activity.html à sa session.')
+                     if len(matches) > 1:
+                         raise PracticeError('Devin a joint plusieurs fichiers activity.html : vérifiez la session avant de choisir.')
+-                    content = _download(client, matches[0]['url'])
++                    content = _fetch_attachment(client, org, _attachment_uuid(matches[0]), auth)
+                     _finish(job_id, generation_id, content, {'html_structure_checked': True, 'provider_tests_reported': True,
+                         'runtime_verified_locally': False, 'teacher_review_required': True, 'simulated': False,
+                         'provider_state': f'{status}/{detail}'})
+diff --git a/mvp/test_practice.py b/mvp/test_practice.py
+index 11e54b1..61bcecc 100644
+--- a/mvp/test_practice.py
++++ b/mvp/test_practice.py
+@@ -154,12 +154,17 @@ def test_restart_does_not_recreate_an_uncertain_provider_session(store, monkeypa
+         practice.start(JOB_ID, retry=True, mode='live')
+ 
+ 
++ATTACHMENT_ID = 'a5e0469f-1def-4f1b-a98a-0ede95ad40a1'
++
++
+ def mock_devin(monkeypatch, *, status_code=200, attachment_body=HTML, provider_tests=True, existing=False, redirect=False,
+                session_id='devin-' + 'b' * 32, url=None, status='running', detail='finished', acus=.4, report=None,
+-               attachments=None):
++               attachments=None, location='https://storage.googleapis.com/devin-files/activity.html?secret=SIGNED'):
+     requests = []
+     def handle(request):
+         requests.append(request)
++        if request.url.host == 'app.devin.ai':
++            return httpx.Response(401, json={'detail': 'browser session required'})
+         if request.url.host == 'storage.googleapis.com':
+             assert 'authorization' not in request.headers
+             if redirect:
+@@ -170,10 +175,12 @@ def mock_devin(monkeypatch, *, status_code=200, attachment_body=HTML, provider_t
+             if status_code != 200:
+                 return httpx.Response(status_code, json={'detail': 'secret-api-key private provider detail'})
+             return httpx.Response(200, json={'session_id': session_id, 'status': 'new', **({'url': url} if url else {})})
++        if request.url.path.endswith('/attachments/' + ATTACHMENT_ID + '/activity.html'):
++            return httpx.Response(307, headers={'location': location})
+         if request.url.path.endswith('/attachments'):
+-            return httpx.Response(200, json=attachments if attachments is not None else [{'attachment_id': 'file-1',
++            return httpx.Response(200, json=attachments if attachments is not None else [{'attachment_id': ATTACHMENT_ID,
+                 'name': 'activity.html', 'source': 'devin',
+-                'url': 'https://storage.googleapis.com/devin-files/activity.html?secret=SIGNED'}])
++                'url': 'https://app.devin.ai/attachments/' + ATTACHMENT_ID + '/activity.html'}])
+         return httpx.Response(200, json={'session_id': session_id, 'status': status, 'status_detail': detail,
+             'acus_consumed': acus, 'structured_output': report if report is not None else {'artifact_name': 'activity.html',
+                 'math_tests_passed': provider_tests, 'browser_tested': provider_tests, 'test_summary': 'Tests effectués.'}})
+@@ -334,7 +341,7 @@ def test_v3_bare_session_id_is_accepted_and_used_for_polling(store, monkeypatch)
+     assert value['status'] == 'ready' and value['session_url'] == 'https://app.devin.ai/sessions/' + BARE_ID
+     assert len([r for r in requests if r.method == 'POST']) == 1
+     assert all(r.url.path.split('/sessions/')[1].startswith(BARE_ID)
+-               for r in requests if r.method == 'GET' and r.url.host == 'api.devin.ai')
++               for r in requests if r.method == 'GET' and '/sessions/' in r.url.path)
+ 
+ 
+ def test_returned_url_is_kept_only_for_this_session_on_app_devin_ai(store, monkeypatch):
+@@ -383,8 +390,8 @@ def test_waiting_for_user_with_final_report_and_attachment_is_retrieved(store, m
+     ('waiting_for_user', {**DONE_REPORT, 'browser_tested': False}, None, 'intervention'),
+     ('waiting_for_approval', DONE_REPORT, None, 'intervention'),
+     ('waiting_for_user', DONE_REPORT, [], 'pas joint'),
+-    ('waiting_for_user', DONE_REPORT, [{'name': 'activity.html', 'source': 'devin', 'url': 'https://storage.googleapis.com/a'},
+-                                       {'name': 'activity.html', 'source': 'devin', 'url': 'https://storage.googleapis.com/b'}],
++    ('waiting_for_user', DONE_REPORT, [{'attachment_id': ATTACHMENT_ID, 'name': 'activity.html', 'source': 'devin'},
++                                       {'attachment_id': ATTACHMENT_ID, 'name': 'activity.html', 'source': 'devin'}],
+      'plusieurs'),
+ ])
+ def test_waiting_session_without_a_complete_result_still_fails(store, monkeypatch, detail, report, attachments, message):
+@@ -440,3 +447,48 @@ def test_retrieved_activity_records_raw_and_derived_hashes(store, monkeypatch):
+     assert value['validation']['provider_csp_removed'].startswith("default-src 'none'")
+     derived = practice.artifact_path(JOB_ID).read_bytes()
+     assert hashlib.sha256(derived).hexdigest() != value['validation']['raw_sha256']
++
++
++def test_attachment_is_downloaded_through_the_documented_v3_endpoint(store, monkeypatch):
++    requests = mock_devin(monkeypatch, session_id=BARE_ID)
++    practice.start(JOB_ID, mode='live')
++    assert finished()['status'] == 'ready'
++    official = [r for r in requests if r.url.path.endswith('/attachments/' + ATTACHMENT_ID + '/activity.html')]
++    assert len(official) == 1 and official[0].url.host == 'api.devin.ai'
++    assert official[0].headers['authorization'] == 'Bearer secret-api-key'
++    assert not any(r.url.host == 'app.devin.ai' for r in requests)
++    assert all('authorization' not in r.headers for r in requests if r.url.host != 'api.devin.ai')
++
++
++@pytest.mark.parametrize('location, addresses', [
++    ('https://evil.test/activity.html', [(2, 1, 6, '', ('8.8.8.8', 443))]),
++    ('http://storage.googleapis.com/activity.html', [(2, 1, 6, '', ('8.8.8.8', 443))]),
++    ('https://storage.googleapis.com/activity.html', [(2, 1, 6, '', ('10.0.0.5', 443))]),
++    ('', [(2, 1, 6, '', ('8.8.8.8', 443))]),
++])
++def test_redirect_outside_the_allowlist_is_refused_without_forwarding_the_key(store, monkeypatch, location, addresses):
++    requests = mock_devin(monkeypatch, session_id=BARE_ID, location=location)
++    monkeypatch.setattr(practice.socket, 'getaddrinfo', lambda *args, **kwargs: addresses)
++    practice.start(JOB_ID, mode='live')
++    assert finished()['status'] == 'failed'
++    assert not any(r.url.host not in ('api.devin.ai',) for r in requests)
++
++
++@pytest.mark.parametrize('item', [
++    {'name': 'activity.html', 'source': 'devin', 'url': 'https://storage.googleapis.com/x'},
++    {'attachment_id': 'file-1', 'name': 'activity.html', 'source': 'devin'},
++    {'name': 'activity.html', 'source': 'devin', 'url': 'https://app.devin.ai/attachments/' + ATTACHMENT_ID + '/other.html'},
++])
++def test_attachment_without_a_recognised_uuid_fails(store, monkeypatch, item):
++    mock_devin(monkeypatch, session_id=BARE_ID, attachments=[item])
++    practice.start(JOB_ID, mode='live')
++    value = finished()
++    assert value['status'] == 'failed' and 'identifiant' in value['message']
++
++
++def test_uuid_from_the_app_link_when_metadata_lacks_it(store, monkeypatch):
++    requests = mock_devin(monkeypatch, session_id=BARE_ID, attachments=[
++        {'name': 'activity.html', 'source': 'devin', 'url': 'https://app.devin.ai/attachments/' + ATTACHMENT_ID + '/activity.html'}])
++    practice.start(JOB_ID, mode='live')
++    assert finished()['status'] == 'ready'
++    assert not any(r.url.host == 'app.devin.ai' for r in requests)
+-- 
+2.56.0
+

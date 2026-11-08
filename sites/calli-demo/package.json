@@ -1,0 +1,15 @@
+{
+  "name": "calli-public-preview",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Read-only public preview of the New Pronote + Calli workspace (saved runs, fictional data) as a Cloudflare Worker with static assets.",
+  "type": "module",
+  "engines": {"node": ">=20"},
+  "scripts": {
+    "build": "node build/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node build/build.mjs && node --test tests/*.test.mjs",
+    "serve": "node build/serve.mjs 8787",
+    "export-fixtures": "python3 capture/export_fixtures.py http://127.0.0.1:8773"
+  }
+}

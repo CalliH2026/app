@@ -1,0 +1,39 @@
+{
+ "note": "Size-optimized replacements used in the built package. Originals are kept in vendor/ and capture/raw/.",
+ "overrides": [
+  {
+   "routes": [
+    "/static/avatars/calli-portraits-fictifs-ia-s01-s10.png",
+    "/calli/static/avatars/calli-portraits-fictifs-ia-s01-s10.png"
+   ],
+   "file": "portraits-s01-s10.webp",
+   "type": "image/webp",
+   "method": "WebP quality 90 re-encode, same 1983x793 pixels grid",
+   "original_sha256": "da4b1a4b8fe2ed3675aaaa5ae72517fe3508442de7251228a68530dc49fd8a2d",
+   "original_bytes": 2380288,
+   "sha256": "ed0938b30a7fb0d244294d8d4f07f88821b3cec1575a9bdc9e05a01f36d8c1c3"
+  },
+  {
+   "routes": [
+    "/api/jobs/6b073dfc404f/audio"
+   ],
+   "file": "parent-voice-note-job.mp3",
+   "type": "audio/mpeg",
+   "method": "MP3 48 kbit/s from saved 24 kHz mono WAV",
+   "original_sha256": "3c66aeeae8d5fc189510bd156958ac77a9f5810f626012bdbd9b8fe6265caa02",
+   "original_bytes": 1597604,
+   "sha256": "98a6d6cff2e193de5e3a864a73748ff75d3fd03521feac9326d188da0dfe103b"
+  },
+  {
+   "routes": [
+    "/audio/points"
+   ],
+   "file": "parent-voice-note-points.mp3",
+   "type": "audio/mpeg",
+   "method": "MP3 48 kbit/s from saved 24 kHz mono WAV",
+   "original_sha256": "9fb3d2ddf1f8bc7512f810c76f67327de4dd64ee85921864a49df603bc29f76a",
+   "original_bytes": 1544856,
+   "sha256": "0fb7e9f238c8c6f213d45c2a036371275b857f1787066ca44094693128d2372f"
+  }
+ ]
+}

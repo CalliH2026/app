@@ -1,0 +1,198 @@
+[
+  {
+    "arm": "with vocabulary",
+    "n": 10,
+    "correct": 8,
+    "abstained": 0,
+    "wrong": 2,
+    "missing": 0,
+    "name_in_transcript": 8,
+    "per_item": [
+      {
+        "item_id": "t01",
+        "expected": "s01",
+        "candidates": [
+          "s01"
+        ],
+        "outcome": "correct",
+        "transcript": "Lucas Bernard, résultat en nette progression. L'expression écrite gagne en clarté, l'oral reste trop rare. Bravo pour cet engagement."
+      },
+      {
+        "item_id": "t02",
+        "expected": "s05",
+        "candidates": [
+          "s05"
+        ],
+        "outcome": "correct",
+        "transcript": "Maximilien Garnier, trimestre en demi-temps. Les erreurs d'inattention coûtent des points à chaque contrôle. Un travail plus régulier permettrait de franchir un cap."
+      },
+      {
+        "item_id": "t03",
+        "expected": "s03",
+        "candidates": [
+          "s03"
+        ],
+        "outcome": "correct",
+        "transcript": "Gaël Lambert, trimestre encourageant après un début difficile. Les évaluations écrites restent en deçà du travail fourni à la maison. Pense à demander de l'aide dès qu'une notion résiste."
+      },
+      {
+        "item_id": "t04",
+        "expected": "s07",
+        "candidates": [
+          "s07"
+        ],
+        "outcome": "correct",
+        "transcript": "Chloé Mercier, trimestre 211. Les résultats varient beaucoup d'un chapitre à l'autre. Un travail plus régulier permettrait de franchir un câble."
+      },
+      {
+        "item_id": "t05",
+        "expected": "s02",
+        "candidates": [
+          "s02"
+        ],
+        "outcome": "correct",
+        "transcript": "Lucas Petit, excellent investissement en classe. La compréhension des documents est frile et argumentée. Il faut maintenant oser davantage à l'oral."
+      },
+      {
+        "item_id": "t09",
+        "expected": "s06",
+        "candidates": [],
+        "outcome": "wrong",
+        "transcript": "Mélagie rare, très beau trimestre, félicitations. Mes leçons sont apprises et mes exercices faits avec soin. Il faut maintenant oser davantage à l'oral."
+      },
+      {
+        "item_id": "t10",
+        "expected": "s01",
+        "candidates": [
+          "s01"
+        ],
+        "outcome": "correct",
+        "transcript": "Lucas Bernard, résultat correct mais irrégulier. Le prochain trimestre doit confirmer ses progrès."
+      },
+      {
+        "item_id": "t11",
+        "expected": "s07",
+        "candidates": [
+          "s07"
+        ],
+        "outcome": "correct",
+        "transcript": "Chloé Mercier, trimestre encourageant après un début difficile. L'expression écrite gagne en clarté, l'oral reste trop rare. Des fiches de révision seraient un appui utile."
+      },
+      {
+        "item_id": "t12",
+        "expected": "s09",
+        "candidates": [],
+        "outcome": "wrong",
+        "transcript": "Il est depuis, beau trimestre dans l'ensemble. L'expression écrite gagne en clarté, l'oral reste trop rare. Pense à demander de l'aide dès qu'une notion résiste."
+      },
+      {
+        "item_id": "t13",
+        "expected": "s07",
+        "candidates": [
+          "s07"
+        ],
+        "outcome": "correct",
+        "transcript": "Chloé Mercier, des efforts visibles depuis la rentrée. Les évaluations écrites restent en deçà du travail fourni à la maison. Le prochain trimestre doit confirmer ses progrès."
+      }
+    ],
+    "accuracy": 0.8
+  },
+  {
+    "arm": "without vocabulary",
+    "n": 10,
+    "correct": 8,
+    "abstained": 0,
+    "wrong": 2,
+    "missing": 0,
+    "name_in_transcript": 8,
+    "per_item": [
+      {
+        "item_id": "t01",
+        "expected": "s01",
+        "candidates": [
+          "s01"
+        ],
+        "outcome": "correct",
+        "transcript": "Lucas Bernard, résultat en nette progression. L'expression écrite gagne en clarté, l'oral reste trop rare. Bravo pour cet engagement."
+      },
+      {
+        "item_id": "t02",
+        "expected": "s05",
+        "candidates": [
+          "s05"
+        ],
+        "outcome": "correct",
+        "transcript": "Maximilien Garnier, trimestre en demi-temps. Les erreurs d'inattention coûtent des points à chaque contrôle. Un travail plus régulier permettrait de franchir un cap."
+      },
+      {
+        "item_id": "t03",
+        "expected": "s03",
+        "candidates": [
+          "s03"
+        ],
+        "outcome": "correct",
+        "transcript": "Gaël Lambert, trimestre encourageant après un début difficile. Les évaluations écrites restent en deçà du travail fourni à la maison. Pense à demander de l'aide dès qu'une notion résiste."
+      },
+      {
+        "item_id": "t04",
+        "expected": "s07",
+        "candidates": [
+          "s07"
+        ],
+        "outcome": "correct",
+        "transcript": "Chloé Mercier, trimestre 211. Les résultats varient beaucoup d'un chapitre à l'autre. Un travail plus régulier permettrait de franchir un câble."
+      },
+      {
+        "item_id": "t05",
+        "expected": "s02",
+        "candidates": [
+          "s02"
+        ],
+        "outcome": "correct",
+        "transcript": "Lucas Potti, excellent investissement en classe. La compréhension des documents est frile et argumentée. Il faut maintenant oser davantage à l'oral."
+      },
+      {
+        "item_id": "t09",
+        "expected": "s06",
+        "candidates": [],
+        "outcome": "wrong",
+        "transcript": "Mélagie rare, très beau trimestre, félicitations. Mes leçons sont apprises et mes exercices faits avec soin. Il faut maintenant oser davantage à l'oral."
+      },
+      {
+        "item_id": "t10",
+        "expected": "s01",
+        "candidates": [
+          "s01"
+        ],
+        "outcome": "correct",
+        "transcript": "Lucas Bernard, résultat correct mais irrégulier. Le prochain trimestre doit confirmer ses progrès."
+      },
+      {
+        "item_id": "t11",
+        "expected": "s07",
+        "candidates": [
+          "s07"
+        ],
+        "outcome": "correct",
+        "transcript": "Chloé Mercier, trimestre encourageant après un début difficile. L'expression écrite gagne en clarté, l'oral reste trop rare. Des fiches de révision seraient un appui utile."
+      },
+      {
+        "item_id": "t12",
+        "expected": "s09",
+        "candidates": [],
+        "outcome": "wrong",
+        "transcript": "Il est depuis, beau trimestre dans l'ensemble. L'expression écrite gagne en clarté, l'oral reste trop rare. Pense à demander de l'aide dès qu'une notion résiste."
+      },
+      {
+        "item_id": "t13",
+        "expected": "s07",
+        "candidates": [
+          "s07"
+        ],
+        "outcome": "correct",
+        "transcript": "Chloé Mercier, des efforts visibles depuis la rentrée. Les évaluations écrites restent en deçà du travail fourni à la maison. Le prochain trimestre doit confirmer ses progrès."
+      }
+    ],
+    "accuracy": 0.8
+  }
+]

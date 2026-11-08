@@ -1,0 +1,369 @@
+{
+  "checked_at": "2026-11-07T14:45:03.238047+00:00",
+  "scope": "Read-only local official PRONOTE demo attachment storage investigation",
+  "ui_actions": false,
+  "database_mutations": false,
+  "permission_changes": false,
+  "native_window_title_from_saved_context": "PRONOTE Monoposte 2026.2.8 (64bit) - Version non enregistrée  - Superviseur (Administrateur) en modification - [Base Exemple PRONOTE 2026_Archive.not modifié]",
+  "context_observed_at": "2026-11-07T15:45:01.531207+01:00",
+  "official_archive": {
+    "path": "mvp/data/pronote-demo-bottle/drive_c/H-Demo/PRONOTE/Exemples/Base Exemple PRONOTE 2026.zip",
+    "sha256": "492081080a8afcd5d31933a68bbdab24190afdd8847fe089a6c3c9699a7ba01f"
+  },
+  "attachment_counts": {
+    "DocJoint": 19,
+    "DocCasier": 4
+  },
+  "attachments": [
+    {
+      "archive_relative_path": "DocJoint/23145/12/CHIMIE (2).txt",
+      "size": 564,
+      "sha256": "ecf1a637ef3d5601b3d27d7a933c6444c6f6d718ddc0ce8859a888bb2c0aef6a",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/12/CHIMIE (2).txt",
+        "size": 765,
+        "sha256": "2ec52c1d95222cc39b71677340b62f95f298ff2c7b4690980a1cd43671869750",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/21/Support 3.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/21/Support 3.txt",
+        "size": 1597,
+        "sha256": "90522f64524c15ed01e899730b3b096d31f21781c8b0f537ada6fb1b1aa0b3ce",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/21/Support 7.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/21/Support 7.txt",
+        "size": 1597,
+        "sha256": "90522f64524c15ed01e899730b3b096d31f21781c8b0f537ada6fb1b1aa0b3ce",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/21/Support 8.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/21/Support 8.txt",
+        "size": 1597,
+        "sha256": "2e04a39abf502887015c86769561f943ffc7040eb28540f3a3fa2644e195ef9c",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/26/Support 5.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/26/Support 5.txt",
+        "size": 1597,
+        "sha256": "2e04a39abf502887015c86769561f943ffc7040eb28540f3a3fa2644e195ef9c",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/27/Support 3.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/27/Support 3.txt",
+        "size": 1597,
+        "sha256": "2e04a39abf502887015c86769561f943ffc7040eb28540f3a3fa2644e195ef9c",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/27/Support 5.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/27/Support 5.txt",
+        "size": 1597,
+        "sha256": "2e04a39abf502887015c86769561f943ffc7040eb28540f3a3fa2644e195ef9c",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/27/Support 7.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/27/Support 7.txt",
+        "size": 1597,
+        "sha256": "a3676329ab1815e0da0df8ab486a28182efb66e83bc42df89e84d9f7defca19f",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/29/Support 3.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/29/Support 3.txt",
+        "size": 1597,
+        "sha256": "a3676329ab1815e0da0df8ab486a28182efb66e83bc42df89e84d9f7defca19f",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/29/Support 7.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/29/Support 7.txt",
+        "size": 1597,
+        "sha256": "a3676329ab1815e0da0df8ab486a28182efb66e83bc42df89e84d9f7defca19f",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/3/Support 7.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/3/Support 7.txt",
+        "size": 1597,
+        "sha256": "a3676329ab1815e0da0df8ab486a28182efb66e83bc42df89e84d9f7defca19f",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/3/Support 8.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/3/Support 8.txt",
+        "size": 1597,
+        "sha256": "2d7f745968f1e1298967f15d1e24b3bdde6eb748b090738ebe7e11901e8ca5d7",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/31/Support de cours 6.txt",
+      "size": 40,
+      "sha256": "803725e4611badcf876d6bb38f77af7869c0fcbe9387c5702897915306eadeb6",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/31/Support de cours 6.txt",
+        "size": 461,
+        "sha256": "3e3a5816c1391e3b87eedba4378638a8b95568f641031eedde8a72c2567ca56d",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/32/Test Doc CDT.txt",
+      "size": 17,
+      "sha256": "9ae3fe5fa74d10f466403d811cc3679a380c83217ccae2c338092592296ccdcc",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/32/Test Doc CDT.txt",
+        "size": 445,
+        "sha256": "c282e85a0d0c1f3019b55da665ca8f5b0548c167aad88c5ea09e761b3bb39faf",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/33/Test Doc CDT.txt",
+      "size": 17,
+      "sha256": "9ae3fe5fa74d10f466403d811cc3679a380c83217ccae2c338092592296ccdcc",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/33/Test Doc CDT.txt",
+        "size": 445,
+        "sha256": "d54ad49b8cdb7a5daa44828deae410d1b0534c1631c395d813e29fe64d6b98f8",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/5/Support 7.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/5/Support 7.txt",
+        "size": 1597,
+        "sha256": "54649ee744f6318809443fb0a0a46bd4cf5579a101acc0bace71d9d215b648d2",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/9/Support 3.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/9/Support 3.txt",
+        "size": 1597,
+        "sha256": "54649ee744f6318809443fb0a0a46bd4cf5579a101acc0bace71d9d215b648d2",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/9/Support 4.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/9/Support 4.txt",
+        "size": 1597,
+        "sha256": "54649ee744f6318809443fb0a0a46bd4cf5579a101acc0bace71d9d215b648d2",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocJoint/23145/9/Support 5.txt",
+      "size": 2758,
+      "sha256": "1e599ff8e4e13cc51508ce3874e7cefeca9b24f4bb337f59d69c27015951f8ff",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocJoint/23145/9/Support 5.txt",
+        "size": 1597,
+        "sha256": "457434e3537bde9dc6d58f45d141c416de3376a543947240219c049709dd782d",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocCasier/23145/{0EAF2C29-BF85-4669-8457-7E804DF0CE22}",
+      "size": 15128,
+      "sha256": "61d63dae5d71ac5a3723c4a00d0a6532c9c46b98a477086077d9eee601fa3d1f",
+      "format": "docx_zip",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocCasier/23145/{0EAF2C29-BF85-4669-8457-7E804DF0CE22}",
+        "size": 12845,
+        "sha256": "263611d07fbf1eb78797a6984b05ae53dfb792519b7624fc1680bdf62b71f887",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocCasier/23145/{146F609A-EEE6-4482-A6F9-35A67221E54C}",
+      "size": 244,
+      "sha256": "18b1fb825eacf82486b37a8e58df190d10a4c26a83a95a5167a5208d7bbb5b07",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocCasier/23145/{146F609A-EEE6-4482-A6F9-35A67221E54C}",
+        "size": 605,
+        "sha256": "7e7dfe5b4b9c78daeda3ab7b61d6d9d6fdc732dbbb50350afb62dd464a2f5ce4",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocCasier/23145/{B54AF7AD-32C3-4DD0-9AFB-774C56B20C0D}",
+      "size": 80,
+      "sha256": "68e48b0c1f4a32e91ccf7592509e3e567aee9f02fc9b722cde238164c4ead21a",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocCasier/23145/{B54AF7AD-32C3-4DD0-9AFB-774C56B20C0D}",
+        "size": 493,
+        "sha256": "a4d5489bc062f9a95efd7c0226cb6373c310a1350250431858e06572f8dcb155",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    },
+    {
+      "archive_relative_path": "DocCasier/23145/{EA28BA1B-B3D3-43A4-8E05-80038F94C988}",
+      "size": 244,
+      "sha256": "18b1fb825eacf82486b37a8e58df190d10a4c26a83a95a5167a5208d7bbb5b07",
+      "format": "text_cp1252_or_utf8",
+      "pedagogical_copy_or_rubric": false,
+      "working_file": {
+        "path": "mvp/data/pronote-demo-bottle/drive_c/ProgramData/IndexEducation/PRONOTE/MONOPOSTE/VERSION 2026-0/FR/DocCasier/23145/{EA28BA1B-B3D3-43A4-8E05-80038F94C988}",
+        "size": 605,
+        "sha256": "f12ea2db7f4dbb0c1198f86452e5a15ba5d061ed8ae6a6c5a7401dabddbb404f",
+        "magic": "4653464202000000",
+        "plaintext_present": false
+      }
+    }
+  ],
+  "findings": [
+    "Official archive contains 19 DocJoint plaintext resources and 4 DocCasier resources; one DocCasier file is DOCX despite having no extension.",
+    "No native student copy and no marking rubric were identified in those 23 sample resources. Most course supports are Lorem ipsum or short test files.",
+    "Working ProgramData DocJoint/DocCasier resources begin FSFB version2 and contain no corresponding plaintext. They are not safely readable by the existing native text extractor.",
+    "The cleartext resource files extracted from the official archive are authentic sample resources, but are not proof of a new copy/rubric import into the currently open database.",
+    "The current AttachmentRegistry deliberately requires actual import evidence; placing fixture files beside the database cannot legitimately satisfy that requirement.",
+    "Actual open/export of an imported attachment through PRONOTE can provide cleartext file bytes for background reads; it must be verified through native UI before registration."
+  ],
+  "official_documents": [
+    {
+      "url": "https://docs.index-education.com/docs_fr/fr-pronote-support-fiche-897-3490-deposer-un-document-dans-le-casier-numerique.php",
+      "opened": true,
+      "supported_route": "Communication > Casier numérique > Diffusion > Professeurs/Personnels > Déposer un document > Depuis mon poste > choosefile > nature/name > recipients > Valider",
+      "version_caveat": "Current vendor documentation; actual Monoposte UI controls must be observed before invoking."
+    },
+    {
+      "url": "https://doc.index-education.com/fr/pronote/pronote/PRONOTE/R/Ressources_p%C3%A9dagogiques.htm",
+      "opened": false,
+      "source": "Official search snippet only; direct fetch502",
+      "supported_route": "Cahier de textes > Ressources pédagogiques lists linked course attachments, submitted work and corrected copies; supports Récupérer depuis le serveur."
+    }
+  ],
+  "recommended_next_steps": [
+    "Import demo copy and rubric as actual native attachments through the observed PRONOTE UI.",
+    "Open or export both attachments through PRONOTE; locate actual cleartext output and verify bytes/hash.",
+    "Register only those verified outputs with provenance.import_evidence, preserving native import evidence.",
+    "Bind the real copy viewer open event to background NativeCase collection; do not label a mere file-system creation as a PRONOTE copy open."
+  ]
+}

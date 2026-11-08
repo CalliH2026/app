@@ -1,0 +1,48 @@
+<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>PRONOTE · Mon établissement</title><style>*{box-sizing:border-box}body{font:16px/1.6 -apple-system,BlinkMacSystemFont,sans-serif;background:#f7f7fb;color:#242234;margin:0}main{max-width:760px;margin:48px auto;padding:28px}h1{font-size:38px;line-height:1.2;letter-spacing:-1px}h2{font-size:22px}label{display:block;font-weight:600;margin:20px 0 8px}input,select,textarea{display:block;width:100%;font:inherit;padding:12px;border:1px solid #c7c4d4;border-radius:8px;margin-top:8px}button{font:inherit;border:0;border-radius:8px;padding:13px 20px;cursor:pointer;background:#5a04bc;color:white;margin:16px 8px 0 0}button.secondary{color:#39314b;background:#e9e6f0}button:disabled{opacity:.5;cursor:wait}.card{background:white;padding:24px;border:1px solid #e3dfeb;border-radius:14px;margin:24px 0}small,.muted{color:#625c70}pre{font:14px/1.7 -apple-system,BlinkMacSystemFont,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere}#status{min-height:52px}input[type=checkbox]{display:inline;width:auto;margin-right:10px}label.confirm{font-weight:400}#source{overflow-wrap:anywhere}a{color:#5a04bc}.choices{display:flex;gap:12px;flex-wrap:wrap}.choices button{flex:1;margin:0;min-width:200px}.choices button[aria-pressed="false"]{background:#e9e6f0;color:#39314b}.row{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.check{display:flex;align-items:flex-start;gap:8px;font-weight:400}.check input{flex:none;width:auto;margin-top:8px}.dataset{border-top:1px solid #e3dfeb;padding:14px 0}.dataset h3{font-size:17px;margin:0 0 6px}.dataset ul{padding-left:20px}.dataset li{white-space:pre-wrap;overflow-wrap:anywhere;margin:10px 0}.status{min-height:2em}.pill{font-size:13px;padding:4px 10px;background:#eee8f7;border-radius:20px;display:inline-block}@media(max-width:600px){main{margin:16px auto;padding:16px}.row{grid-template-columns:1fr}.card{padding:18px}h1{font-size:30px}}[hidden]{display:none!important}</style><main><small>MON ÉTABLISSEMENT · LECTURE SEULE</small><h1>Connectez votre PRONOTE</h1><p>Ouvrez votre espace habituel ou connectez votre compte pour retrouver automatiquement les données disponibles.</p><nav class="choices" aria-label="Choisir une connexion"><button type="button" id="choose-browser" aria-pressed="true" aria-controls="browser-panel">Ouvrir mon PRONOTE</button><button type="button" id="choose-automatic" aria-pressed="false" aria-controls="automatic-panel">Connexion automatique</button></nav><div id="browser-panel"><section class="card"><h2>1. Ouvrez votre établissement</h2><form id="setup"><label>Nom de l’établissement (facultatif)<input id="establishment" maxlength="160" autocomplete="organization"></label><label>Adresse de votre espace PRONOTE professeur<input id="web_url" type="url" required maxlength="600" placeholder="https://votre-etablissement.index-education.net/pronote/professeur.html"></label><label>Parcours de connexion<select id="auth_route"><option value="direct">PRONOTE direct</option><option value="ent" selected>Via mon ENT</option></select></label><small>Utilisez l’adresse PRONOTE fournie par l’établissement, sans code ni paramètre de connexion. La redirection vers votre ENT est prise en charge.</small><br><button id="connect" type="submit">Ouvrir mon PRONOTE</button></form><p class="muted">Une fenêtre séparée s’ouvre. Saisissez votre identifiant, votre mot de passe et votre éventuel code de connexion uniquement dans PRONOTE ou votre ENT.</p></section><section class="card"><h2>2. Relevez une vue utile</h2><p>Une fois connecté, ouvrez par exemple votre agenda ou une évaluation, puis revenez dans cette fenêtre pour confirmer votre connexion.</p><label class="confirm"><input id="authenticated" type="checkbox">Je suis connecté et la vue que je souhaite tester est ouverte.</label><label class="check"><input id="view-auto-refresh" type="checkbox" checked><span>Actualiser automatiquement la vue ouverte toutes les 10 secondes, après ma confirmation de connexion.</span></label><button id="capture">Relever la vue ouverte</button><button id="stop" class="secondary">Terminer et effacer le relevé</button><p id="status" role="status" aria-live="polite">Prêt à ouvrir votre établissement.</p></section><section id="result" class="card" hidden><h2>3. Vérifiez le résultat</h2><small id="source"></small><pre id="text"></pre><p class="muted">Vérifiez que ce texte correspond à la vue affichée. Les copies jointes, tableaux dessinés et contenus intégrés peuvent manquer. Ce relevé ne constitue pas une synchronisation de votre dossier.</p></section><p class="muted">Vos notes et vos messages ne sont pas modifiés. Aucun contenu n’est envoyé à une IA. L’adresse de l’établissement reste sur ce Mac ; le relevé et la connexion sont effacés à la fin de la session.</p></div>
+<section id="automatic-panel" hidden aria-labelledby="automatic-title">
+  <div class="card">
+    <span class="pill">Synchronisation automatique</span>
+    <h2 id="automatic-title">Connecter mon compte</h2>
+    <p>La première connexion se fait ici. L’application actualise ensuite les informations disponibles pendant qu’elle reste ouverte.</p>
+    <p id="auto-options-message" class="muted" role="status">Vérification du connecteur…</p>
+    <form id="auto-setup">
+      <label>Adresse de votre espace PRONOTE<input id="auto-url" type="url" required maxlength="600" placeholder="https://votre-etablissement.index-education.net/pronote/professeur.html" autocomplete="url"></label>
+      <small>Reprenez l’adresse PRONOTE fournie par votre établissement, sans paramètres de connexion.</small>
+      <div class="row">
+        <label>Mon compte<select id="auto-account"><option value="teacher">Enseignant</option><option value="student">Élève</option><option value="parent">Parent</option></select></label>
+        <label>Me connecter avec<select id="auto-auth"><option value="password">Mes identifiants</option><option value="qr">Un QR code PRONOTE</option></select></label>
+      </div>
+      <div id="auto-password-fields">
+        <label>Parcours ENT<select id="auto-ent"><option value="">Connexion PRONOTE directe</option></select></label>
+        <small>Si votre ENT n’est pas proposé, utilisez le parcours « Ouvrir mon PRONOTE » ou un QR code PRONOTE compatible.</small>
+        <label>Identifiant<input id="auto-username" maxlength="300" autocomplete="username"></label>
+        <label>Mot de passe<input id="auto-password" type="password" maxlength="1000" autocomplete="current-password"></label>
+      </div>
+      <div id="auto-qr-fields" hidden>
+        <label>Contenu du QR code PRONOTE<textarea id="auto-qr" rows="4" maxlength="6000" spellcheck="false" autocomplete="off" placeholder="Collez le contenu du QR code de connexion mobile généré depuis votre espace PRONOTE."></textarea></label>
+        <label>Code de protection du QR code<input id="auto-pin" type="password" inputmode="numeric" maxlength="20" autocomplete="off"></label>
+      </div>
+      <p id="auto-account-help" class="muted">Pour les comptes enseignants, ce connecteur lit uniquement le profil. Utilisez « Ouvrir mon PRONOTE » pour lire automatiquement le contenu de la vue ouverte.</p>
+      <label class="check"><input id="auto-remember" type="checkbox"><span>Mémoriser la session sur cet appareil pour essayer de me reconnecter au prochain lancement.</span></label>
+      <small>La reconnexion au prochain lancement est disponible avec un QR code PRONOTE uniquement. Votre mot de passe n’est pas enregistré. Une session mémorisée donne accès au compte jusqu’à son expiration ou sa déconnexion.</small>
+      <label class="check"><input id="auto-enabled" type="checkbox" checked><span>Actualiser automatiquement pendant que l’application est ouverte</span></label>
+      <label>Fréquence d’actualisation<select id="auto-interval"><option value="60">Toutes les minutes</option><option value="300" selected>Toutes les 5 minutes</option><option value="900">Toutes les 15 minutes</option><option value="3600">Toutes les heures</option></select></label>
+      <button id="auto-connect" type="submit" disabled>Connecter et synchroniser</button>
+    </form>
+    <p class="muted">La validation d’un nouvel appareil, un code de sécurité ou une session expirée peuvent demander votre intervention.</p>
+  </div>
+  <div class="card">
+    <h2>Ma connexion</h2>
+    <p id="auto-status" role="status" aria-live="polite">Aucun compte connecté.</p>
+    <small id="auto-sync-detail"></small><p id="auto-warnings" class="muted" style="white-space:pre-line" hidden></p><br>
+    <button id="auto-sync" type="button" disabled>Actualiser maintenant</button>
+    <button id="auto-disconnect" type="button" class="secondary" disabled>Déconnecter et oublier la session</button>
+    <p class="muted">La synchronisation lit les informations accessibles au compte. Elle ne modifie pas les notes ou les messages et n’envoie pas les données à une IA.</p>
+  </div>
+  <section id="auto-results" class="card" hidden aria-labelledby="auto-results-title">
+    <h2 id="auto-results-title">Mes données synchronisées</h2>
+    <p id="auto-capabilities" class="muted"></p>
+    <div id="auto-data"></div>
+  </section>
+</section>
+<small>Pour quitter : fermez cette fenêtre. Le navigateur PRONOTE et le compagnon se fermeront aussi.</small></main><script src="/pilot.js"></script></html>

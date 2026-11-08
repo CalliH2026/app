@@ -1,0 +1,31 @@
+{
+  "provider": "Linkup",
+  "query": "Pythagore au collège : repérer l’hypoténuse et justifier la longueur avec une unité",
+  "seconds": 1.968,
+  "sources": [
+    {
+      "id": "web-1",
+      "title": "Auto-évaluation Théorème de Pythagore",
+      "url": "https://eed.ac-versailles.fr/IMG/pdf/Exemple_d_autoevaluation_en_mathematiques.pdf",
+      "excerpt_characters": 700
+    },
+    {
+      "id": "web-2",
+      "title": "4e - Chap. 8 - Pythagore (1) - Exercices Collège Chapitre 8 - Fiche exercices",
+      "url": "https://anthony_salze.forge.apps.education.fr/officiel/4%C3%A8me/a_telecharger/4_C08/4_C08_Exercices_correction.pdf",
+      "excerpt_characters": 1496
+    },
+    {
+      "id": "web-3",
+      "title": "Le théorème de Pythagore - Collège Jean Monnet",
+      "url": "https://clg-monnet-briis.ac-versailles.fr/Le-theoreme-de-Pythagore",
+      "excerpt_characters": 668
+    },
+    {
+      "id": "web-4",
+      "title": "4e - Chap. 8 - Pythagore (1) - Exercices Collège Chapitre 8 - Fiche exercices",
+      "url": "https://anthony_salze.forge.apps.education.fr/officiel/4%C3%A8me/a_telecharger/4_C08/4_C08_Exercices_correction.pdf",
+      "excerpt_characters": 930
+    }
+  ]
+}

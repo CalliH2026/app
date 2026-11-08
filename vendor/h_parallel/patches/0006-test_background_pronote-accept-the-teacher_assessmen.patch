@@ -1,0 +1,45 @@
+From c3d6459ad3d8a796dd77b999be7692cd5c845e83 Mon Sep 17 00:00:00 2001
+From: "wilfred.dore" <wilfred.dore@telecom-paristech.org>
+Date: Sat, 7 Nov 2026 17:52:46 +0000
+Subject: [PATCH 6/9] test_background_pronote: accept the teacher_assessment
+ argument of open_document
+
+The workspace route now calls open_document(..., teacher_assessment=...).
+The test's stand-in took *args only and failed with a TypeError. It now
+takes the keyword and asserts the exact arguments the route passes; the
+production route is unchanged.
+
+Co-Authored-By: Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>
+---
+ mvp/test_background_pronote.py | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/mvp/test_background_pronote.py b/mvp/test_background_pronote.py
+index c06eb4b..68546a2 100644
+--- a/mvp/test_background_pronote.py
++++ b/mvp/test_background_pronote.py
+@@ -343,14 +343,19 @@ def test_opening_fictional_copy_only_sends_an_independent_trigger(monkeypatch):
+     from . import workspace
+     fixture_result = {'job_id': 'fictional-alex-job', 'source_kind': 'fixture',
+                       'report': {'summary': 'Fictional Alex report'}}
+-    received = []
+-    monkeypatch.setattr(workspace, 'open_document', lambda *args: fixture_result)
++    received, opened = [], []
++
++    def open_document(*args, teacher_assessment=None):
++        opened.append({'args': args, 'teacher_assessment': teacher_assessment})
++        return fixture_result
++    monkeypatch.setattr(workspace, 'open_document', open_document)
+     monkeypatch.setattr(background, 'schedule', lambda **kwargs: received.append(kwargs))
+     # Without context-manager entry, no application lifespan/native bridge runs.
+     response = TestClient(app_module.app).post('/api/workspace/documents/copie/open',
+                                                json={'mode': 'demo'})
+     assert response.status_code == 200 and response.json() == fixture_result
+     assert received == [{'trigger': 'document_open'}]
++    assert opened == [{'args': ('copie', 'points', 'demo', False, 'local'), 'teacher_assessment': None}]
+ 
+ 
+ def test_replay_endpoint_exposes_only_a_valid_run_video(tmp_path, monkeypatch):
+-- 
+2.56.0
+

@@ -1,0 +1,48 @@
+@startuml
+title Calli · New Pronote\nFour roles, four complementary goals
+left to right direction
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam defaultFontColor #17202E
+skinparam defaultFontSize 15
+skinparam roundcorner 16
+skinparam ArrowColor #737B89
+skinparam actorBorderColor #293547
+skinparam actorBackgroundColor white
+skinparam rectangleBorderColor #C9CDD6
+skinparam rectangleBackgroundColor #FAFAFC
+skinparam usecaseBorderColor #7160A8
+skinparam usecaseBackgroundColor #F0ECFA
+skinparam usecaseFontColor #252036
+skinparam nodesep 30
+skinparam ranksep 55
+
+actor "Teacher\nAssess & guide" as Teacher
+actor "Student\nFollow & practise" as Student
+actor "School administration\nCoordinate & follow up" as Admin
+actor "Parents\nFollow & understand" as Parent
+
+rectangle "CALLI / NEW PRONOTE — PRODUCT VISION" {
+  usecase "Record assessments\nand report comments" as Assess
+  usecase "Guide each pupil with\nsourced, personalised support" as Guide
+  usecase "Understand progress\nand learning priorities" as Progress
+  usecase "Practise with feedback\nand targeted exercises" as Practice
+  usecase "Monitor attendance,\nabsences and lateness" as Attendance
+  usecase "Follow up absence records\nand supporting documents" as Absence
+  usecase "Follow every child's progress\nand upcoming deadlines" as Family
+  usecase "Understand results, sources\nand useful next steps" as Understand
+}
+
+Teacher -- Assess
+Teacher -- Guide
+Student -- Progress
+Student -- Practice
+Admin -- Attendance
+Admin -- Absence
+Parent -- Family
+Parent -- Understand
+
+
+footer Product goals, not an implementation checklist.\nCurrent coverage and acceptance criteria: docs/calli-use-cases.md
+@enduml

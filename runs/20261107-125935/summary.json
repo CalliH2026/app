@@ -1,0 +1,21 @@
+{
+  "run_id": "20261107-125935",
+  "target": "moodle",
+  "arm": "calligraphe",
+  "session_id": "ff858d65-cb91-475c-977d-3a9f47a3d7f1",
+  "status": "idle",
+  "outcome": "partial",
+  "error": null,
+  "error_code": null,
+  "answer": "Wrote 1 approved feedback comment: Barbara Gardner in \"Mindful Course Creation\" (Timed Task assignment) — \"Participe bien, doit soigner la rédactation.\" The save was confirmed by Moodle, and the text was visible in the submissions table, but the system recorded it as a mismatch. No further items in the queue.",
+  "elapsed_s": 212.4,
+  "steps": 43,
+  "tokens": 877937,
+  "model": "holo4-27b",
+  "items": {
+    "mismatch": 1
+  },
+  "events": 176,
+  "cost_usd": 0.177,
+  "cost_note": "estimate at Models API list prices from the session's token usage (backfilled)"
+}

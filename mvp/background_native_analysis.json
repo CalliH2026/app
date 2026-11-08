@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-07T14:02:30.048499+00:00",
+  "scope": {
+    "application": "PRONOTE Monoposte 2026.2.8 (64bit)",
+    "bottle": "mvp/data/pronote-demo-bottle",
+    "database_kind": "official_example",
+    "operations": "read_only",
+    "foreground_or_input_operations": false,
+    "screenshots": false,
+    "os_permission_changes": false,
+    "executable_or_auth_changes": false
+  },
+  "verdict": {
+    "native_background_metadata": "verified",
+    "native_background_explicit_attachments": "existing_adapter_with_registered_file_provenance",
+    "native_background_navigation": "not_verified",
+    "native_pedagogical_grid_extraction": "not_verified",
+    "native_background_video": "not_verified",
+    "recommended_execution": "isolated_official_web_session_for_background_navigation"
+  },
+  "live_win32": {
+    "main_class": "TEcranPrincipal",
+    "main_title": "PRONOTE Monoposte 2026.2.8 (64bit) - Version non enregistrée  - Superviseur (Administrateur) en modification - [Base Exemple PRONOTE 2026_Archive.not modifié]",
+    "native_menu_entries": 0,
+    "visible_control_count": 60,
+    "control_ids_equal_runtime_hwnd": 60,
+    "semantic_menu_command_ids": [],
+    "classes": {
+      "TIEFlatBoutonImage": 20,
+      "TIEHTMLViewer": 1,
+      "TIESkinPanel": 15,
+      "TFicheAffichageResultatClasseGraphique": 1,
+      "TIEGrapheBarre": 1,
+      "TIEControlGraphique": 1,
+      "TIEPanelTitre": 2,
+      "TIEBoutonTitre": 2,
+      "TFramePanelNavigationConseilDeClasse": 1,
+      "TPanelOutilsConseilDeClasse": 1,
+      "TFrameComboListeEleve": 1,
+      "TIEComboBox": 4,
+      "TFrameComboListes": 1,
+      "TSelecteurPeriodeDeNotationModulable": 1,
+      "TEcranPrincipalIndex.TSystemeBouton": 8
+    },
+    "readable_noneditable_texts": [
+      {
+        "class": "TIESkinPanel",
+        "text": "Engine"
+      },
+      {
+        "class": "TFicheAffichageResultatClasseGraphique",
+        "text": "FicheAffichageResultatClasseGraphique"
+      },
+      {
+        "class": "TIESkinPanel",
+        "text": "GroupeCommandes"
+      },
+      {
+        "class": "TIEPanelTitre",
+        "text": "Commandes"
+      },
+      {
+        "class": "TEcranPrincipalIndex.TSystemeBouton",
+        "text": "SysBtnConseil"
+      },
+      {
+        "class": "TEcranPrincipalIndex.TSystemeBouton",
+        "text": "SysBtnSMS"
+      },
+      {
+        "class": "TEcranPrincipalIndex.TSystemeBouton",
+        "text": "SysBtnCourrier"
+      },
+      {
+        "class": "TEcranPrincipalIndex.TSystemeBouton",
+        "text": "SysBtnEMail"
+      },
+      {
+        "class": "TEcranPrincipalIndex.TSystemeBouton",
+        "text": "SysBtnPrint"
+      },
+      {
+        "class": "TEcranPrincipalIndex.TSystemeBouton",
+        "text": "SysBtnSave"
+      },
+      {
+        "class": "TEcranPrincipalIndex.TSystemeBouton",
+        "text": "SysBtnReOpen"
+      },
+      {
+        "class": "TEcranPrincipalIndex.TSystemeBouton",
+        "text": "SysBtnOpen"
+      }
+    ],
+    "meaning": "Menu and control inspection found technical view identity, not a stable semantic navigation interface. HWND-valued IDs are not portable route IDs."
+  },
+  "cef": {
+    "wwwroot_contains": "CEF runtime DLLs, PAKs and locale assets; no packaged HTML/JavaScript application routes found",
+    "static_strings": [
+      "FRemoteDebuggingPort",
+      "RemoteDebuggingPort"
+    ],
+    "configured_debug_endpoint": "not_found",
+    "listening_pronote_wine_cef_tcp_endpoint": "not_observed",
+    "example_config": "[Base_1] Chemin=.\\Base Exemple PRONOTE 2026.zip; Archive=-1",
+    "caveat": "Generic embedded CEF symbols do not establish a supported endpoint or DOM access to owner-drawn native views. No debug settings were enabled."
+  },
+  "route_catalog": [
+    {
+      "route": "native.context.read",
+      "state": "verified",
+      "implementation": "mvp/native/win32_bridge.py:read_once",
+      "mechanism": "EnumWindows/EnumChildWindows, process validation, bounded WM_GETTEXT of noneditable controls",
+      "requires_foreground": false,
+      "returns": [
+        "PRONOTE main window title",
+        "technical class and control text"
+      ],
+      "does_not_return": [
+        "grade grid cells",
+        "copy text",
+        "marking rubric"
+      ]
+    },
+    {
+      "route": "native.document_windows.read",
+      "state": "existing",
+      "implementation": "mvp/native/native_documents.py:read_window_snapshot",
+      "mechanism": "Isolated Wine process tree and visible document window metadata",
+      "requires_foreground": false
+    },
+    {
+      "route": "native.attachments.read_registered",
+      "state": "existing",
+      "implementation": "mvp/native/native_documents.py:AttachmentRegistry",
+      "mechanism": "Explicit allowlisted roots, registered exact document path and provenance",
+      "requires_foreground": false,
+      "caveat": "Does not discover an unseen pedagogical association or invent Alex/rubric mapping."
+    },
+    {
+      "route": "native.document_open.detect",
+      "state": "existing",
+      "implementation": "mvp/native/native_documents.py:DocumentOpenDetector",
+      "mechanism": "Viewer window matched to a registered exact attachment, deduplicated event",
+      "requires_foreground": false
+    },
+    {
+      "route": "native.navigate.copy_or_rubric",
+      "state": "not_verified",
+      "reason": "No stable menu IDs; owner-drawn controls expose empty or technical text only; no verified CEF endpoint."
+    }
+  ],
+  "safe_adapter_boundary": {
+    "allow": [
+      "read context metadata in the isolated demo bottle",
+      "read explicitly registered attachments with hashes/provenance",
+      "emit a deduplicated preparation trigger only after exact document match",
+      "use verified isolated Web DOM routes in a separate connector"
+    ],
+    "do_not_expose": [
+      "arbitrary HWND messages",
+      "global input or focus changes as background automation",
+      "raw mutable runtime handles as stable routes",
+      "fabricated native video or full pedagogical data parity"
+    ],
+    "write_actions": "Require a separately verified explicit route and observed result before adding any native write action."
+  },
+  "evidence": {
+    "raw_probe_path": "mvp/data/pronote-demo-bottle/drive_c/H-Demo/background-route-probe.json",
+    "raw_sha256": "deba841ba79de33bbc8d7d4eb97a0cb56b94334400eacc95acdc7523fff7246f",
+    "probe_source": "mvp/data/background-route-probe.c",
+    "probe_source_sha256": "ab4dd72e86cde8bc01a25c7175eb0b148f34f884282540eed458a184841dbef9",
+    "probe_uses": [
+      "GetMenu",
+      "GetMenuItemInfoW",
+      "EnumWindows",
+      "EnumChildWindows",
+      "GetDlgCtrlID",
+      "GetWindowRect",
+      "GetClassNameW",
+      "GetWindowTextW",
+      "bounded WM_GETTEXT excluding edit and combobox classes"
+    ],
+    "probe_does_not_use": [
+      "WM_COMMAND",
+      "WM_LBUTTONDOWN",
+      "BM_CLICK",
+      "SendInput",
+      "SetForegroundWindow",
+      "PrintWindow",
+      "screenshots"
+    ]
+  }
+}

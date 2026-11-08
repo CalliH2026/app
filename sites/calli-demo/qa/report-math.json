@@ -1,0 +1,13 @@
+{
+  "formulasInActualReport": 3,
+  "checks": {
+    "fraction": true,
+    "block": true,
+    "noLinks": true,
+    "fallback": true,
+    "idempotent": true
+  },
+  "mobileOverflow": false,
+  "errors": [],
+  "external": []
+}

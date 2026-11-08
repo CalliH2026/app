@@ -1,0 +1,11 @@
+﻿Nom	Prénom	Classe
+BERNARD	Lucas	3A
+PETIT	Lucas	3A
+LAMBERT	Gaël	3A
+FONTAINE	Gaëlle	3A
+GARNIER	Maximilien	3A
+GIRARD	Léa	3A
+MERCIER	Chloé	3A
+BENALI	Yanis	3A
+DUPUIS	Inès	3A
+LEFÈVRE	Noé	3A

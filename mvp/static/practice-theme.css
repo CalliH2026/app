@@ -1,0 +1,37 @@
+/* New Pronote presentation layer for generated practice activities.
+   Applied by mvp/practice_theme.py to the preview only; the stored artifact,
+   its SHA-256 and the teacher download stay byte-for-byte unchanged.
+   Values come from mvp/static/h-kit/tokens.css and the workspace palette. */
+:root {
+  --bg: #f8f7fa; --card: #fff; --ink: #23222a; --muted: #4a4a58;
+  --accent: #5a04bc; --accent-soft: #f1ecf9; --ok: #1e7a52; --ok-soft: #f0fbf6;
+  --ko: #c0404a; --ko-soft: #fff5f5; --hyp: #c05a18; --border: #e2dfe8;
+}
+html, body, button, input, select, textarea { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+body { background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.55; font-synthesis: none; }
+main { padding: 20px 18px 28px; }
+h1 { font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -.02em; color: var(--ink); }
+h2, h3 { font-size: 17px; line-height: 24px; font-weight: 600; letter-spacing: -.01em; color: var(--ink); }
+header .sub, .hint, #data { color: var(--muted); font-size: 13px; }
+.card, .bar { background: var(--card); border: 1px solid var(--border); border-radius: 12px; box-shadow: none; }
+.card { padding: 18px 20px; }
+.bar { font-size: 13px; }
+.progress { background: var(--accent-soft); }
+.progress span { background: var(--accent); }
+#statement, .prompt { font-weight: 600; }
+button { border-radius: 8px; border: 1px solid var(--border); background: #fff; color: var(--ink); font-size: 14px; font-weight: 600; min-height: 44px; }
+button:hover { background: var(--accent-soft); color: var(--accent); border-color: #c2a0ee; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.primary:hover { background: #5507bb; color: #fff; }
+button:focus-visible, input:focus-visible { outline: 3px solid #9a5bec; outline-offset: 2px; }
+button.choice.good { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); }
+button.choice.bad { border-color: var(--ko); background: var(--ko-soft); color: var(--ko); }
+input { border: 1px solid var(--border); border-radius: 8px; color: var(--ink); background: #fff; }
+.feedback.ok, .feedback.ko { font-size: 14px; border-radius: 8px; }
+.conclusion-line { background: var(--accent-soft); border-radius: 8px; }
+.slot { border-bottom-color: var(--accent); }
+svg#fig { background: #fcfbfe; border: 1px solid var(--border); border-radius: 12px; }
+.tri { fill: #f1ecf9; stroke: var(--ink); }
+.slabel { stroke: #fcfbfe; }
+#restart { border-color: var(--border); color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }

@@ -1,0 +1,154 @@
+From e8c9c3cba131a28fc2219786ef625da3b4f79151 Mon Sep 17 00:00:00 2001
+From: "wilfred.dore" <wilfred.dore@telecom-paristech.org>
+Date: Sat, 7 Nov 2026 17:51:14 +0000
+Subject: [PATCH 3/9] practice: retrieve a finished activity from a session
+ waiting for the user
+
+A real v3 session finished its work, attached activity.html and returned
+the required structured output (math_tests_passed and browser_tested
+true), but GET /sessions/{id} stayed status=running,
+status_detail=waiting_for_user. _run treated waiting_for_user as an
+interruption before looking for the artifact.
+
+- A running session waiting_for_user whose structured output is complete
+  is treated as finished: its single devin activity.html is downloaded
+  and validated as before.
+- Still failures: an incomplete or missing report, waiting_for_approval,
+  no attachment, several activity.html attachments.
+- acus_consumed reported as 0 by a running session is kept as a reading
+  (acus_reported), not shown as the session's cost.
+- validation.provider_state records the provider state used; provider
+  test claims stay distinct from local verification.
+- Tests use the observed response shape.
+
+Co-Authored-By: Devin AI <158243242+devin-ai-integration[bot]@users.noreply.github.com>
+---
+ mvp/practice.py      | 32 ++++++++++++++++++++----------
+ mvp/test_practice.py | 46 +++++++++++++++++++++++++++++++++++++++-----
+ 2 files changed, 63 insertions(+), 15 deletions(-)
+
+diff --git a/mvp/practice.py b/mvp/practice.py
+index f7d7a7a..4f22374 100644
+--- a/mvp/practice.py
++++ b/mvp/practice.py
+@@ -406,27 +406,39 @@ def _run(job_id, generation_id, brief, settings):
+                 if (status, detail) != previous:
+                     with LOCK:
+                         state = _current(job_id, generation_id)
+-                        if isinstance(session.get('acus_consumed'), (int, float)):
+-                            state['acus_consumed'] = session['acus_consumed']
++                        acus = session.get('acus_consumed')
++                        if isinstance(acus, (int, float)) and not isinstance(acus, bool):
++                            # A running session may report 0 before billing settles: keep the reading, not a cost.
++                            state['acus_reported'] = {'value': acus, 'status': status, 'status_detail': detail}
++                            if acus > 0:
++                                state['acus_consumed'] = acus
+                         _event(state, 'Devin a terminé son travail.' if detail == 'finished' or status == 'exit' else
+                                'Devin écrit le code et prépare ses contrôles.' if status in ('new', 'claimed', 'running', 'resuming') else 'La session Devin demande une vérification.')
+                     previous = status, detail
+-                if detail == 'finished' or status == 'exit':
+-                    report = session.get('structured_output') or {}
+-                    if report.get('artifact_name') != 'activity.html' or report.get('math_tests_passed') is not True or report.get('browser_tested') is not True:
++                report = session.get('structured_output') or {}
++                reported = (isinstance(report, dict) and report.get('artifact_name') == 'activity.html'
++                            and report.get('math_tests_passed') is True and report.get('browser_tested') is True)
++                # A session that has done its work can stay running while it waits for a reply. Its required
++                # structured output and its single attachment are then final; anything less is still an interruption.
++                quiescent = status == 'running' and detail == 'waiting_for_user' and reported
++                if detail == 'finished' or status == 'exit' or quiescent:
++                    if not reported:
+                         raise PracticeError('Devin n’a pas fourni le compte rendu attendu des tests mathématiques et navigateur.')
+                     response = client.get(base + '/' + session_id + '/attachments', headers=auth)
+                     response.raise_for_status()
+                     attachments = response.json()
+                     if isinstance(attachments, dict):
+                         attachments = attachments.get('items', [])
+-                    artifact = next((item for item in attachments[:50] if isinstance(item, dict)
+-                                     and item.get('name') == 'activity.html' and item.get('source') == 'devin'), None)
+-                    if not artifact:
++                    matches = [item for item in attachments[:50] if isinstance(item, dict)
++                               and item.get('name') == 'activity.html' and item.get('source') == 'devin']
++                    if not matches:
+                         raise PracticeError('Devin n’a pas joint le fichier activity.html à sa session.')
+-                    content = _download(client, artifact['url'])
++                    if len(matches) > 1:
++                        raise PracticeError('Devin a joint plusieurs fichiers activity.html : vérifiez la session avant de choisir.')
++                    content = _download(client, matches[0]['url'])
+                     _finish(job_id, generation_id, content, {'html_structure_checked': True, 'provider_tests_reported': True,
+-                        'runtime_verified_locally': False, 'teacher_review_required': True, 'simulated': False})
++                        'runtime_verified_locally': False, 'teacher_review_required': True, 'simulated': False,
++                        'provider_state': f'{status}/{detail}'})
+                     return
+                 if status in ('error', 'suspended') or detail in ('waiting_for_user', 'waiting_for_approval'):
+                     raise PracticeError('La session Devin est interrompue ou attend une intervention. Consultez son suivi avant de reprendre.')
+diff --git a/mvp/test_practice.py b/mvp/test_practice.py
+index c95e1bc..53ed3ee 100644
+--- a/mvp/test_practice.py
++++ b/mvp/test_practice.py
+@@ -155,7 +155,8 @@ def test_restart_does_not_recreate_an_uncertain_provider_session(store, monkeypa
+ 
+ 
+ def mock_devin(monkeypatch, *, status_code=200, attachment_body=HTML, provider_tests=True, existing=False, redirect=False,
+-               session_id='devin-' + 'b' * 32, url=None):
++               session_id='devin-' + 'b' * 32, url=None, status='running', detail='finished', acus=.4, report=None,
++               attachments=None):
+     requests = []
+     def handle(request):
+         requests.append(request)
+@@ -170,10 +171,11 @@ def mock_devin(monkeypatch, *, status_code=200, attachment_body=HTML, provider_t
+                 return httpx.Response(status_code, json={'detail': 'secret-api-key private provider detail'})
+             return httpx.Response(200, json={'session_id': session_id, 'status': 'new', **({'url': url} if url else {})})
+         if request.url.path.endswith('/attachments'):
+-            return httpx.Response(200, json=[{'attachment_id': 'file-1', 'name': 'activity.html',
+-                'source': 'devin', 'url': 'https://storage.googleapis.com/devin-files/activity.html?secret=SIGNED'}])
+-        return httpx.Response(200, json={'session_id': session_id, 'status': 'running', 'status_detail': 'finished',
+-            'acus_consumed': .4, 'structured_output': {'artifact_name': 'activity.html',
++            return httpx.Response(200, json=attachments if attachments is not None else [{'attachment_id': 'file-1',
++                'name': 'activity.html', 'source': 'devin',
++                'url': 'https://storage.googleapis.com/devin-files/activity.html?secret=SIGNED'}])
++        return httpx.Response(200, json={'session_id': session_id, 'status': status, 'status_detail': detail,
++            'acus_consumed': acus, 'structured_output': report if report is not None else {'artifact_name': 'activity.html',
+                 'math_tests_passed': provider_tests, 'browser_tested': provider_tests, 'test_summary': 'Tests effectués.'}})
+     transport = httpx.MockTransport(handle)
+     monkeypatch.setattr(practice, '_client', lambda: httpx.Client(transport=transport, follow_redirects=False))
+@@ -357,3 +359,37 @@ def test_unexpected_session_id_is_persisted_and_blocks_a_duplicate_create(store,
+     monkeypatch.setattr(practice, '_client', lambda: pytest.fail('Must not create duplicate session'))
+     with pytest.raises(RuntimeError, match='incertaine'):
+         practice.start(JOB_ID, retry=True, mode='live')
++
++
++# Shape observed on a real v3 session: work done, activity attached, session still running and waiting for a reply.
++DONE_REPORT = {'artifact_name': 'activity.html', 'math_tests_passed': True, 'browser_tested': True,
++               'test_summary': '25 tests Chrome et interaction manuelle effectués.'}
++
++
++def test_waiting_for_user_with_final_report_and_attachment_is_retrieved(store, monkeypatch):
++    mock_devin(monkeypatch, session_id=BARE_ID, detail='waiting_for_user', acus=0, report=DONE_REPORT)
++    practice.start(JOB_ID, mode='live')
++    value = finished()
++    assert value['status'] == 'ready', value['message']
++    assert value['validation']['provider_state'] == 'running/waiting_for_user'
++    assert value['validation']['provider_tests_reported'] is True and value['validation']['runtime_verified_locally'] is False
++    assert 'acus_consumed' not in value
++    saved = json.loads((practice.FOLDER / JOB_ID / 'state-live.json').read_text())
++    assert saved['acus_reported'] == {'value': 0, 'status': 'running', 'status_detail': 'waiting_for_user'}
++
++
++@pytest.mark.parametrize('detail, report, attachments, message', [
++    ('waiting_for_user', {}, None, 'intervention'),
++    ('waiting_for_user', {**DONE_REPORT, 'browser_tested': False}, None, 'intervention'),
++    ('waiting_for_approval', DONE_REPORT, None, 'intervention'),
++    ('waiting_for_user', DONE_REPORT, [], 'pas joint'),
++    ('waiting_for_user', DONE_REPORT, [{'name': 'activity.html', 'source': 'devin', 'url': 'https://storage.googleapis.com/a'},
++                                       {'name': 'activity.html', 'source': 'devin', 'url': 'https://storage.googleapis.com/b'}],
++     'plusieurs'),
++])
++def test_waiting_session_without_a_complete_result_still_fails(store, monkeypatch, detail, report, attachments, message):
++    mock_devin(monkeypatch, session_id=BARE_ID, detail=detail, acus=0, report=report, attachments=attachments)
++    practice.start(JOB_ID, mode='live')
++    value = finished()
++    assert value['status'] == 'failed' and message in value['message']
++
+-- 
+2.56.0
+

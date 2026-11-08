@@ -1,0 +1,23 @@
+{
+  "run_id": "20261107-132407",
+  "target": "moodle",
+  "arm": "calligraphe",
+  "session_id": "bad1d76f-6114-477d-afe6-707e1d9ca2b5",
+  "status": "idle",
+  "outcome": "partial",
+  "error": null,
+  "error_code": null,
+  "answer": "Wrote 6 of 8 approved comments successfully (m01 Carolyn Welch, m02 Joyce Griffin, m03 John Gibson, m04 David Ray, m05 Heather Reyes, m07 William Kim). m06 (Stephanie Adams) reported not_found — field already contained \"Des progrès nets à l'oral. À l'écrit, relis-toi pour éviter les fautes d'inattention.\" with previous_value=null. m08/m08-r1 (Laura Carpenter) reported mismatch twice due to a French accent encoding issue: the write tool produced \"methodique\" instead of \"méthodique\" (acute accent stripped).",
+  "elapsed_s": 778.6,
+  "steps": 160,
+  "tokens": 6637686,
+  "model": "holo4-27b",
+  "items": {
+    "verified": 6,
+    "not_found": 1,
+    "mismatch": 2
+  },
+  "events": 660,
+  "cost_usd": 0.895,
+  "cost_note": "estimate at Models API list prices from the session's token usage (backfilled)"
+}

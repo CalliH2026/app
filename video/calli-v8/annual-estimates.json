@@ -1,0 +1,169 @@
+{
+  "kind": "hypothetical workload and input sensitivity; not measured savings",
+  "seed": 20261108,
+  "samples": 100000,
+  "central": {
+    "entry_reduction_pct": 48.52096496266514,
+    "teacher_hours": 6.482500000000001,
+    "class_hours": 12.965000000000002,
+    "school_hours": 259.3,
+    "parent_household_hours": 3.083333333333333,
+    "teacher_comment_hours": 2.815833333333334,
+    "teacher_meeting_hours": 3.0,
+    "teacher_outing_hours": 1.1666666666666667,
+    "teacher_setup_hours": 0.5,
+    "manual_comment_s": 46.42666666666667,
+    "assisted_comment_s": 23.9
+  },
+  "central_with_assisted_interventions": {
+    "entry_reduction_pct": 45.290063182079265,
+    "teacher_hours": 6.295000000000001,
+    "class_hours": 12.590000000000002,
+    "school_hours": 251.80000000000004,
+    "parent_household_hours": 3.083333333333333,
+    "teacher_comment_hours": 2.628333333333334,
+    "teacher_meeting_hours": 3.0,
+    "teacher_outing_hours": 1.1666666666666667,
+    "teacher_setup_hours": 0.5,
+    "manual_comment_s": 46.42666666666667,
+    "assisted_comment_s": 25.4
+  },
+  "central_with_hypothetical_errors_both_sides": {
+    "entry_reduction_pct": 45.815259901870164,
+    "teacher_hours": 6.351250000000001,
+    "class_hours": 12.702500000000002,
+    "school_hours": 254.05000000000004,
+    "parent_household_hours": 3.083333333333333,
+    "teacher_comment_hours": 2.684583333333334,
+    "teacher_meeting_hours": 3.0,
+    "teacher_outing_hours": 1.1666666666666667,
+    "teacher_setup_hours": 0.5,
+    "manual_comment_s": 46.87666666666667,
+    "assisted_comment_s": 25.4
+  },
+  "model_percentiles_not_confidence_intervals": {
+    "entry_reduction_pct": {
+      "p10": 32.79022000436367,
+      "p50": 43.08089171537105,
+      "p90": 52.32685055669297
+    },
+    "teacher_hours": {
+      "p10": 4.634886847265281,
+      "p50": 6.055537943153573,
+      "p90": 7.534610612727384
+    },
+    "class_hours": {
+      "p10": 9.269773694530562,
+      "p50": 12.111075886307146,
+      "p90": 15.069221225454768
+    },
+    "school_hours": {
+      "p10": 185.39547389061124,
+      "p50": 242.22151772614293,
+      "p90": 301.38442450909537
+    },
+    "parent_household_hours": {
+      "p10": 1.863873743847921,
+      "p50": 3.0526523668961025,
+      "p90": 4.348473832418941
+    }
+  },
+  "annual_workload": {
+    "teacher": {
+      "pupils": 150,
+      "terms": 3,
+      "comments": 450,
+      "meetings": 20,
+      "outings": 2,
+      "setup_minutes": 30
+    },
+    "school": {
+      "teachers": 40,
+      "classes": 20,
+      "pupils_per_class": 30,
+      "subject_reports_per_pupil_per_term": 10
+    },
+    "parent_household": {
+      "children": 2,
+      "weeks": 36,
+      "trip_payments": 4,
+      "setup_minutes": 5
+    }
+  },
+  "assumptions": {
+    "comment_characters": 129.1,
+    "dictated_words_including_name": 21.5,
+    "typing_cpm": [
+      150,
+      225,
+      300
+    ],
+    "dictation_wpm": [
+      85,
+      100,
+      130
+    ],
+    "review_seconds_both_paths": 8,
+    "manual_navigation_seconds": [
+      2,
+      4,
+      7
+    ],
+    "dictation_turn_seconds": [
+      2,
+      3,
+      5
+    ],
+    "meeting_manual_minutes": [
+      10,
+      15,
+      20
+    ],
+    "meeting_assisted_minutes": [
+      4,
+      6,
+      10
+    ],
+    "outing_manual_minutes": [
+      40,
+      60,
+      90
+    ],
+    "outing_assisted_minutes": [
+      15,
+      25,
+      40
+    ],
+    "weekly_family_manual_minutes": [
+      5,
+      8,
+      12
+    ],
+    "weekly_family_assisted_minutes": [
+      2,
+      3,
+      5
+    ],
+    "checkout_manual_minutes": 4,
+    "checkout_assisted_minutes": 1.5,
+    "assisted_intervention_probability": [
+      0.01,
+      0.05,
+      0.15
+    ],
+    "assisted_intervention_seconds": [
+      15,
+      30,
+      90
+    ]
+  },
+  "limits": [
+    "All rates, frequencies and time ranges are authored assumptions except the recorded text length.",
+    "P10/P50/P90 describe the chosen triangular input distributions, not a population study.",
+    "No measured human reference, educational effectiveness, error reduction or monetary ROI is established.",
+    "Teacher/class/school figures overlap and must not be added. Parent figures use household as the unit.",
+    "All eligible occurrences are assumed to use Calli; onboarding is fixed and maintenance is not estimated.",
+    "Active time only. Autonomous agent latency is separate; the user must be able to continue working.",
+    "Comment scope is entry of already-written text; no gain attributed to grading or writing the assessment."
+  ]
+}
