@@ -115,6 +115,7 @@ for (const [dir, prefix] of [['vendor/mvp/static', '/static/'], ['vendor/ui/stat
 }
 
 // 2. Landing (Root's archive, minimally patched) and guide.
+const LANDING_STYLE_REV = createHash('sha256').update(readFileSync(join(ROOT, 'src/landing/styles.css'))).digest('hex').slice(0, 12);
 const VIDEO_BLOCK = /<video[\s\S]*?<\/video>/;
 let en = readFileSync(join(ROOT, 'src/landing/index.html'), 'utf8');
 en = replaceOnce(en, 'href="http://127.0.0.1:18775/">Open the local demo <span aria-hidden="true">↗</span>', 'href="/app">Try the workspace <span aria-hidden="true">→</span>', 'en cta');
@@ -133,7 +134,7 @@ for (const [lang, label] of [['en', 'Watch on YouTube'], ['fr', 'Voir sur YouTub
   const page = lang === 'en' ? en : fr;
   if (!VIDEO_BLOCK.test(page)) throw new Error('no video block in ' + lang);
   const link = `<a class="video-link" href="${VIDEO}" target="_blank" rel="noopener"><img src="/assets/workspace.png" alt="Calli in action" width="1920" height="1080" loading="lazy"><span class="play">▶ ${label}</span></a>`;
-  const patched = replaceOnce(page.replace(VIDEO_BLOCK, link), 'href="styles.css">', 'href="/styles.css"><link rel="stylesheet" href="/preview.css">', lang + ' css')
+  const patched = replaceOnce(page.replace(VIDEO_BLOCK, link), 'href="styles.css">', `href="/styles.css?v=${LANDING_STYLE_REV}"><link rel="stylesheet" href="/preview.css">`, lang + ' css')
     .split('src="assets/').join('src="/assets/');
   put(lang === 'en' ? '/' : '/fr', patched, {kind: 'page', type: TYPES['.html']});
 }

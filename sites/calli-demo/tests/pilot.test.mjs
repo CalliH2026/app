@@ -35,3 +35,11 @@ test('real SQLite migration stores once, parameterizes text, and keeps contacts 
   assert.equal((await handle(new Request(origin+'/pilot/interest'),{DB})).status,405);
   sqlite.close();
 });
+
+test('returning visitors receive a versioned landing stylesheet',async()=>{
+  const server=(await import('../dist/server/index.js')).default;
+  for(const path of ['/','/fr']) {
+    const html=await (await server.fetch(new Request(origin+path))).text();
+    assert.match(html,/href="\/styles\.css\?v=[a-f0-9]{12}"/);
+  }
+});
