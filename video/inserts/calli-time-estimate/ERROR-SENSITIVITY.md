@@ -1,6 +1,6 @@
 # Calli time model: error and repair sensitivity
 
-**Hypothetical scenarios, not observed error rates.** This appendix does not change the ≈ 50 % headline.
+**Hypothetical scenarios, not observed error rates.** This is the historical deterministic ≈ 49% scenario. The current submitted film uses the intervention-adjusted 43% model; see `docs/annual-time-scenarios.md` and `docs/typing-errors-evidence.md`.
 Data: `calli-erreurs-sensibilite.json` (from Root, numbers unchanged); recomputed by `tests/test_calli_time_model.py`.
 
 Repair time is added to **both** arms: typing corrections on the manual side; transcription (ASR) corrections and

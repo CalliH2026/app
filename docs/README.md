@@ -21,3 +21,5 @@ Start with the current product and submission documents below. **New Pronote** i
 Early design notes and the initial SPEC are historical. Current product behavior and demonstration scope are defined in the documents above. In particular, the teacher workspace queues an unambiguous completed dictation automatically; the older standalone approval page is a fallback. The observed context is inside the workspace, not every action on the user's computer.
 
 The estimated active-time reduction is a scenario model. Agent run timings, failed trials and native read-back evidence are recorded separately. Native writing requires the configured PRONOTE desktop environment; the public exploration uses saved outputs and an interactive practice exercise.
+
+Latest estimate review: [typing errors and primary research](typing-errors-evidence.md). The current submitted 43% scenario is unchanged.

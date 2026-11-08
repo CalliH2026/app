@@ -1,0 +1,50 @@
+{
+  "classification": "hypothetical sensitivity, not a human benchmark",
+  "samples": 100000,
+  "seed": 20261108,
+  "extra_manual_repair_seconds_per_comment": [
+    {
+      "extra_seconds": 0,
+      "p10": 32.79022000436367,
+      "p50": 43.08089171537105,
+      "p90": 52.326850556692975
+    },
+    {
+      "extra_seconds": 0.45,
+      "p10": 33.49901397293921,
+      "p50": 43.62868282252159,
+      "p90": 52.72933522598423
+    },
+    {
+      "extra_seconds": 1.5,
+      "p10": 35.072356069573274,
+      "p50": 44.862587639590465,
+      "p90": 53.6405355189952
+    },
+    {
+      "extra_seconds": 3,
+      "p10": 37.20352919689475,
+      "p50": 46.53417088376487,
+      "p90": 54.88069775085292
+    },
+    {
+      "extra_seconds": 6,
+      "p10": 41.082430916555765,
+      "p50": 49.588995502744915,
+      "p90": 57.17697502754857
+    }
+  ],
+  "additional_manual_seconds_needed_for_50pct_median": 6.435174643993378,
+  "published_typing_reference": {
+    "url": "https://userinterfaces.aalto.fi/136Mkeystrokes/resources/chi-18-analysis.pdf",
+    "mean_net_wpm": 51.56,
+    "correction_key_percent": 6.31,
+    "keystrokes_per_character": 1.173,
+    "warning": "Net WPM already includes in-typing corrections. Do not multiply its elapsed-time estimate by KSPC."
+  },
+  "reference_mean_typing_only_illustration": {
+    "manual_seconds_per_comment": 42.04654771140419,
+    "assisted_seconds_per_comment": 25.4,
+    "gain_percent": 39.590759806634935
+  }
+}

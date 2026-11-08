@@ -87,7 +87,7 @@ function sanitizeJson(path, value, pointer = '') {
 }
 
 function injectAdapter(html, path) {
-  html = html.replaceAll('Espace de démonstration', 'Espace de travail').replace('Ma famille (vue parent, démonstration)', 'Ma famille (vue parent)');
+  html = html.replace(/src="\/static\/workspace\.js[^"]*"/, 'src="/static/workspace.js?v=public-11"').replaceAll('Espace de démonstration', 'Espace de travail').replace('Ma famille (vue parent, démonstration)', 'Ma famille (vue parent)');
   const tag = '<link rel="stylesheet" href="/preview/adapter.css"><script src="/preview/adapter.js"></script>';
   const at = html.search(/<head[^>]*>/i);
   if (at < 0) throw new Error('no <head> in ' + path);
