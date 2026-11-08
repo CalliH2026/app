@@ -10,3 +10,6 @@
 .calli-preview-panel a{color:#1f5fbf;font-weight:600;text-decoration:none}
 .calli-preview-toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10000;max-width:min(560px,calc(100vw - 28px));padding:10px 14px;border-radius:10px;background:#1d2433;color:#fff;font:500 13px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 8px 24px rgba(20,30,50,.2)}
 .calli-preview-toast[hidden]{display:none}
+
+/* Details remain available in the persistent About control and testing guide. */
+body .center > .demo-note{display:none}

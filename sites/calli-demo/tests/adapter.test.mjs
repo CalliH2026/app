@@ -40,7 +40,7 @@ test('opening the copy shows the saved H report instead of starting a run', asyn
   const {window, loaded, calls} = sandbox();
   const response = await window.fetch('/api/workspace/documents/copie/open', {method: 'POST', body: '{}'});
   assert.equal(response.status, 403);
-  assert.match((await response.json()).detail, /aucune nouvelle session H/);
+  assert.match((await response.json()).detail, /Rapport enregistré du 7 novembre 2026 chargé/);
   await new Promise((r) => setImmediate(r));
   assert.deepEqual(loaded, ['6b073dfc404f']);
   assert.equal(calls.length, 0);

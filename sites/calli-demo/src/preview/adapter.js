@@ -36,7 +36,7 @@
   function blocked(path) {
     if (path === OPEN_COPY) {
       setTimeout(() => showSavedRun().catch(() => {}), 250);
-      const text = 'Aperçu public : aucune nouvelle session H n’est lancée. Le rapport enregistré du 7 novembre 2026 est affiché.';
+      const text = 'Rapport enregistré du 7 novembre 2026 chargé.';
       toast(text);
       return text;
     }
@@ -98,18 +98,18 @@
   function chip() {
     const box = document.createElement('details');
     box.className = 'calli-preview-status';
-    box.innerHTML = `<summary>Public preview · saved runs</summary>
+    box.innerHTML = `<summary>À propos de cet espace</summary>
       <div class="calli-preview-panel">
         <p>Read-only and fictional. These views replay saved outputs: nothing is generated, sent or written from this page.</p>
         <ul>
           <li><a href="/app?job=${JOB}">H preparation report</a><span>Saved run, 7 Nov 2026</span></li>
           <li><a href="/api/jobs/${JOB}/practice/preview" target="_blank" rel="noopener">Interactive exercise</a><span>Generated through the Devin API, saved output</span></li>
           <li><a href="/app?view=outings&amp;outing_id=${OUTING}">School trip research</a><span>Saved partial draft, no booking or payment</span></li>
-          <li><a href="/app?view=family">Family view · Mme Martin</a><span>Read-only summary from fictional sources</span></li>
-          <li><a href="${VIDEO}?t=33" target="_blank" rel="noopener">Native PRONOTE write</a><span>Recorded run, shown in the demo video</span></li>
+          <li><a href="/app?view=family">Family view · Grégory Martin</a><span>Read-only summary from fictional sources</span></li>
+          <li><a href="${VIDEO}&amp;t=33s" target="_blank" rel="noopener">Native PRONOTE write</a><span>Recorded run, shown in the demo video</span></li>
         </ul>
         <p class="calli-preview-muted">Live only in the full product: dictation, new H runs, native PRONOTE writing, exercise generation, calendar and notifications.</p>
-        <p><a href="/guide">Guide</a> · <a href="${VIDEO}" target="_blank" rel="noopener">Demo video</a></p>
+        <p><a href="/guide">Guide</a> · <a href="${VIDEO}" target="_blank" rel="noopener">Watch Calli</a></p>
       </div>`;
     document.body.append(box);
   }

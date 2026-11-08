@@ -50,7 +50,7 @@ Everything else is refused by the Worker:
 Injected before the product scripts on `/app`, `/workspace` and `/calli/workspace`. It answers every
 non-GET fetch/XHR locally with a 403 and a short French note, disables WebSocket, getUserMedia and sendBeacon,
 preselects the saved outing, and, when the teacher opens the copy (the product's H trigger), attaches the saved
-H run instead of starting one. A small "Public preview · saved runs" chip (bottom left) opens a details panel
+H run instead of starting one. A small "À propos de cet espace" chip (bottom left) opens a details panel
 with the saved runs and the video. No banner, no mandatory dialog.
 
 ## Provenance

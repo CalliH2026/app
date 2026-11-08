@@ -87,6 +87,7 @@ function sanitizeJson(path, value, pointer = '') {
 }
 
 function injectAdapter(html, path) {
+  html = html.replaceAll('Espace de démonstration', 'Espace de travail').replace('Ma famille (vue parent, démonstration)', 'Ma famille (vue parent)');
   const tag = '<link rel="stylesheet" href="/preview/adapter.css"><script src="/preview/adapter.js"></script>';
   const at = html.search(/<head[^>]*>/i);
   if (at < 0) throw new Error('no <head> in ' + path);
@@ -104,7 +105,12 @@ for (const [dir, prefix] of [['vendor/mvp/static', '/static/'], ['vendor/ui/stat
     if (rel === 'workspace.html') continue;
     const type = TYPES[extname(file).toLowerCase()];
     if (!type) throw new Error('unexpected static file type ' + rel);
-    put(prefix + rel, readFileSync(file), {kind: 'static', type});
+    const source = readFileSync(file);
+    // Copy-only polish for the public workspace; execution boundaries are unchanged.
+    const body = prefix === '/static/' && rel === 'workspace.js'
+      ? Buffer.from(source.toString('utf8').replaceAll('Espace de démonstration', 'Espace de travail'))
+      : source;
+    put(prefix + rel, body, {kind: 'static', type});
   }
 }
 
@@ -112,21 +118,21 @@ for (const [dir, prefix] of [['vendor/mvp/static', '/static/'], ['vendor/ui/stat
 const VIDEO_BLOCK = /<video[\s\S]*?<\/video>/;
 let en = readFileSync(join(ROOT, 'src/landing/index.html'), 'utf8');
 en = replaceOnce(en, 'href="http://127.0.0.1:18775/">Open the local demo <span aria-hidden="true">↗</span>', 'href="/app">Try the workspace <span aria-hidden="true">→</span>', 'en cta');
-en = replaceOnce(en, 'fictional students · local preview', 'fictional students · read-only public preview', 'en note');
+en = replaceOnce(en, 'Hackathon prototype · fictional students · local preview', 'Explore New Pronote · <a href="/guide">Testing guide</a>', 'en note');
 en = replaceOnce(en, 'width="1440" height="900"', 'width="1920" height="1080"', 'en hero size');
 en = replaceOnce(en, '<a href="#questions">Questions</a>', '<a href="#questions">Questions</a><a href="/guide">Guide</a>', 'en nav');
 en = replaceOnce(en, 'href="index.fr.html"', 'href="/fr"', 'en lang');
 en = replaceOnce(en, 'href="assets/calli-demo.mp4"', `href="${VIDEO}" target="_blank" rel="noopener"`, 'en video link');
 let fr = readFileSync(join(ROOT, 'src/landing/index.fr.html'), 'utf8');
 fr = replaceOnce(fr, 'href="http://127.0.0.1:18775/">Ouvrir la démo locale', 'href="/app">Essayer l’espace de travail', 'fr cta');
-fr = replaceOnce(fr, 'élèves fictifs · aperçu local', 'élèves fictifs · aperçu public en lecture seule', 'fr note');
+fr = replaceOnce(fr, 'Prototype de hackathon · élèves fictifs · aperçu local', 'Explorez New Pronote · <a href="/guide">Guide de prise en main</a>', 'fr note');
 fr = replaceOnce(fr, 'href="index.html"', 'href="/"', 'fr lang');
 fr = replaceOnce(fr, 'href="assets/calli-demo.mp4"', `href="${VIDEO}" target="_blank" rel="noopener"`, 'fr video link');
 if (fr.includes('width="1440" height="900"')) fr = fr.split('width="1440" height="900"').join('width="1920" height="1080"');
 for (const [lang, label] of [['en', 'Watch on YouTube'], ['fr', 'Voir sur YouTube']]) {
   const page = lang === 'en' ? en : fr;
   if (!VIDEO_BLOCK.test(page)) throw new Error('no video block in ' + lang);
-  const link = `<a class="video-link" href="${VIDEO}" target="_blank" rel="noopener"><img src="/assets/workspace.png" alt="Calli demo video" width="1920" height="1080" loading="lazy"><span class="play">▶ ${label}</span></a>`;
+  const link = `<a class="video-link" href="${VIDEO}" target="_blank" rel="noopener"><img src="/assets/workspace.png" alt="Calli in action" width="1920" height="1080" loading="lazy"><span class="play">▶ ${label}</span></a>`;
   const patched = replaceOnce(page.replace(VIDEO_BLOCK, link), 'href="styles.css">', 'href="/styles.css"><link rel="stylesheet" href="/preview.css">', lang + ' css')
     .split('src="assets/').join('src="/assets/');
   put(lang === 'en' ? '/' : '/fr', patched, {kind: 'page', type: TYPES['.html']});
